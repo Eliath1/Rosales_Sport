@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cotizacion mayoreo - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="quote.banner">Demo</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="quote.bulk.title">Cotizacion mayoreo / equipo</h1>
+      <p data-i18n="quote.bulk.intro">Ligas, escuelas y revendedores.</p>
+    </div>
+    <form class="form-card" data-demo-form>
+      <div class="form-group"><label for="org" data-i18n="quote.bulk.org">Equipo o negocio</label><input type="text" id="org" required></div>
+      <div class="form-group"><label for="contact" data-i18n="quote.bulk.contact">Contacto</label><input type="text" id="contact" required></div>
+      <div class="form-group"><label for="email" data-i18n="quote.email">Correo</label><input type="email" id="email" required></div>
+      <div class="form-group"><label for="qty" data-i18n="quote.bulk.qty">Cantidad</label><input type="number" id="qty" min="1"></div>
+      <div class="form-group"><label for="details" data-i18n="quote.bulk.details">Detalle</label><textarea id="details" required></textarea></div>
+      <div class="form-group checkbox-group"><input type="checkbox" id="consent" required><label for="consent" data-i18n="quote.bulk.consent">Privacidad</label></div>
+      <button type="submit" class="btn btn-primary" data-i18n="quote.bulk.submit">Solicitar B2B</button>
+      <div class="form-success" data-i18n="quote.bulk.success">Registrado.</div>
+    </form>
+  </main>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

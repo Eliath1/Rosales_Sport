@@ -1,0 +1,24 @@
+---
+description: Product images, video, and static asset guidelines
+globs: "**/{public,components}/**/*.{tsx,ts,svg,png,jpg,webp,mp4}"
+alwaysApply: false
+---
+
+# Multimedia Assets
+
+- Product images in `public/products/{sku}/`; use WebP with PNG fallback via `<picture>`.
+- Alt text bilingual via i18n: describe bat model, color, and league (LMB Sultanes jersey).
+- Max hero ~200KB; thumbnails ~40KB; lazy-load below fold with `loading="lazy"`.
+
+```tsx
+<Image
+  src={`/products/${sku}/main.webp`}
+  alt={t('product.imageAlt', { name: product.name })}
+  width={800}
+  height={800}
+  sizes="(max-width: 768px) 100vw, 50vw"
+/>
+```
+
+- No EXIF GPS or staff metadata in uploads; strip on server if user-generated.
+- Video: short loops for glove web patterns; host on Netlify CDN or signed URL, not hotlinked.

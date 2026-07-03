@@ -1,0 +1,45 @@
+---
+description: Human developer writing style for docs, rules, templates, and comments
+alwaysApply: true
+---
+
+# Human Writing Style
+
+Write like a developer explaining things to another developer on the team. Avoid patterns that read as AI-generated boilerplate.
+
+## Do not use
+
+- Em dashes or en dashes. Use a hyphen with spaces, or split into two sentences.
+- Section symbols (the legal section sign). Write "Section" or rephrase.
+- Decorative emoji or icon markers in docs, rules, templates, or ADRs.
+- Unicode bullets or status dots in prose or tables. Use `-`, `*`, or plain words (Yes / No / Optional).
+- Fancy Unicode arrows in prose. Use `->`, `<-`, `=>`, or words ("then", "leads to").
+- Curly/smart quotes. Use straight quotes.
+- The single-character ellipsis. Use three periods.
+
+## Prefer
+
+- Short, direct sentences.
+- Plain markdown: headers, bullets, tables without ornament.
+- Technical terms when accurate; plain language when teaching.
+- ASCII in diagrams when needed.
+
+## Code comment examples
+
+```typescript
+// BAD: business logic in the route handler
+export async function POST(req: Request) {
+  const body = await req.json();
+  await prisma.order.create({ data: body });
+}
+
+// GOOD: parse input, call service
+export async function POST(req: Request) {
+  const input = createOrderSchema.parse(await req.json());
+  return NextResponse.json(await orderService.create(input));
+}
+```
+
+## Applies to
+
+All files under `docs/`, `templates/`, `AGENTS.md`, `README.md`, `.cursor/rules/`, `.cursor/skills/`, and `.cursor/agents/` unless a legal template explicitly requires formal statutory wording from a lawyer.

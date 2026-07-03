@@ -1,0 +1,22 @@
+---
+description: Security rules for AI chatbot and RAG product assistant
+globs: "**/{lib/ai,app/api/chat,components/chat}/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# AI Chatbot Security
+
+- Treat all user input as untrusted; system prompt fixed server-side, never from client.
+- RAG context: product catalog + public FAQs only; **no** customer orders/PII unless authenticated staff tool.
+
+```typescript
+// GOOD: scoped tool with auth
+if (toolName === 'lookupOrder') {
+  if (!session?.roles.includes('staff')) throw new ForbiddenError();
+  return orderService.getSummaryForStaff(orderId);
+}
+```
+
+- Rate-limit by IP/session; cap tokens; log prompts without storing full chat indefinitely (LFPDPPP).
+- Block prompt injection patterns in middleware; refuse requests for secrets, keys, or other customers' data.
+- Human handoff button for checkout disputes and warranty claims.

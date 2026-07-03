@@ -1,0 +1,23 @@
+---
+description: TypeScript conventions for baseball store codebase
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+- Enable strict mode; no `any` without a one-line justification comment.
+- Prefer `interface` for object shapes; use `type` for unions and Zod inferred types.
+- Export shared types from `lib/types/`; don't duplicate API shapes in components.
+
+```typescript
+// BAD
+const product: any = await getProduct(slug);
+
+// GOOD
+const product: ProductWithVariants = await productService.getBySlug(slug);
+```
+
+- Use `satisfies` for config objects; narrow errors with custom classes (`OrderNotFoundError`).
+- Async: always handle rejection; never floating promises in event handlers.
+- Import order: external -> `@/` aliases -> relative.

@@ -1,0 +1,24 @@
+---
+description: Netlify deployment and environment configuration
+globs: "**/{netlify.toml,netlify/**,.env.example}"
+alwaysApply: false
+---
+
+# Netlify Deploy
+
+- Build: `npm run build`; publish `.next` via `@netlify/plugin-nextjs`.
+- Set env vars in Netlify UI (never in repo): `DATABASE_URL`, payment keys, webhook secrets.
+- Use **Deploy Previews** for PRs; run smoke test on `/`, `/es-MX/bats`, checkout sandbox.
+
+```toml
+# netlify.toml excerpt
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+```
+
+- Branch deploys: `main` -> production; feature branches -> preview URLs for stakeholder review.
+- Functions timeout: keep webhooks under 10s; offload heavy work to background job or queue.

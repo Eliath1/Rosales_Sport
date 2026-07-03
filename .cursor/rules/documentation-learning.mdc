@@ -1,0 +1,21 @@
+---
+description: Documentation and learning standards for the team
+alwaysApply: true
+---
+
+# Documentation & Learning
+
+- Every non-trivial feature updates `docs/` or README section: purpose, env vars, run commands.
+- ADRs for architecture choices (payments provider, auth) in `docs/adr/NNN-title.md`.
+- Explain **why**, not just what; link to Jira/Notion ticket when available.
+
+```markdown
+## Order webhooks
+- Env: `CONEKTA_WEBHOOK_SECRET`
+- Run locally: `stripe listen` or Conekta sandbox dashboard
+- Failure mode: orders stay `pending_payment` until webhook retries
+```
+
+- Code comments only for non-obvious business rules (e.g., bat drop calculation for youth leagues).
+- New env vars -> `.env.example` + learner-documenter note in PR description.
+- Follow [human-writing-style.mdc](./human-writing-style.mdc): no em dashes, section symbols, emoji markers, or decorative Unicode in docs.

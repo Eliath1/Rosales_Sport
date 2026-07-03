@@ -1,0 +1,24 @@
+---
+description: Security baseline for baseball store CRM and storefront
+alwaysApply: true
+---
+
+# Security Baseline
+
+- **Secrets:** Only in env vars; reference in `.env.example` without values. Rotate on leak.
+- **Auth:** Staff CRM routes require role check server-side (`admin`, `staff`, `readonly`).
+- **Input:** Parameterize DB queries (Prisma); sanitize user HTML in product descriptions.
+- **Headers:** CSP, HSTS on Netlify; `Secure` + `HttpOnly` cookies for sessions.
+
+```typescript
+// BAD: trust client role
+if (body.role === 'admin') await deleteProduct(id);
+
+// GOOD: session from server
+const session = await getServerSession();
+if (!session?.user.roles.includes('admin')) throw new ForbiddenError();
+await productService.softDelete(id, session.user.id);
+```
+
+- Rate-limit login, checkout, and chat endpoints.
+- Dependabot/npm audit for critical CVEs before deploy.

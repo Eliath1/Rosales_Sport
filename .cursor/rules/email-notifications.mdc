@@ -1,0 +1,23 @@
+---
+description: Transactional email and notification patterns
+globs: "**/{lib/emails,lib/notifications,templates}/**/*.{ts,tsx,html}"
+alwaysApply: false
+---
+
+# Email & Notifications
+
+- Use Resend/SendGrid templates; bilingual subjects via locale param (`es-MX`, `en`).
+- Trigger: order confirmed, OXXO voucher, shipment (Estafeta tracking), password reset, CRM assignment.
+
+```typescript
+await sendEmail({
+  to: order.customer.email,
+  template: 'order-confirmed',
+  locale: order.locale,
+  data: { orderNumber: order.id, totalMxn: formatMxn(order.total) },
+});
+```
+
+- Include unsubscribe only for marketing; transactional emails need no marketing opt-out.
+- No PII in logs; retry with exponential backoff; dead-letter failed sends for ops review.
+- Test with sandbox inboxes before production; preview templates in both locales.

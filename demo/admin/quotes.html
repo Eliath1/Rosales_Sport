@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cotizaciones - RS Admin</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner">Admin demo</div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <ul class="admin-nav">
+        <li><a href="/admin/">Dashboard</a></li>
+        <li><a href="/admin/quotes.html" class="active">Cotizaciones</a></li>
+        <li><a href="/">Ver tienda</a></li>
+      </ul>
+    </aside>
+    <div class="admin-main">
+      <h1 style="margin:0 0 1rem;text-transform:uppercase;">Cotizaciones</h1>
+      <p style="margin-bottom:1rem;"><a href="/admin/quotes/detail.html" class="btn btn-primary">Nueva cotizacion</a></p>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Vigencia</th></tr></thead>
+        <tbody>
+          <tr><td><a href="/admin/quotes/detail.html">COT-1042</a></td><td>Liga Norte CDMX</td><td>$28,800.00</td><td><span class="status status-sent">enviada</span></td><td>15 jul</td></tr>
+          <tr><td><a href="/admin/quotes/detail.html">COT-1041</a></td><td>Roberto M.</td><td>$3,798.00</td><td><span class="status status-accepted">aceptada</span></td><td>10 jul</td></tr>
+          <tr><td><a href="/admin/quotes/detail.html">COT-1040</a></td><td>Ana G.</td><td>$1,899.00</td><td><span class="status status-draft">borrador</span></td><td>14 jul</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

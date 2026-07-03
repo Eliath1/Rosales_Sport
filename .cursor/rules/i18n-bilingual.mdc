@@ -1,0 +1,22 @@
+---
+description: Bilingual es-MX and en internationalization rules
+globs: "**/{app,components,messages}/**/*.{ts,tsx,json}"
+alwaysApply: false
+---
+
+# i18n Bilingual (es-MX / en)
+
+- All user-facing strings via `next-intl`; keys in `messages/es-MX.json` and `messages/en.json`.
+- Default locale: **es-MX**; English for expats and MLB import catalog pages.
+- Never concatenate translated fragments; use ICU placeholders.
+
+```tsx
+// BAD
+<p>{t('price')}: ${product.price}</p>
+
+// GOOD
+<p>{t('product.price', { amount: formatMxn(product.priceMxn) })}</p>
+```
+
+- Format dates with `Intl.DateTimeFormat('es-MX')`; phones as +52; addresses use CP/estado/colonia labels.
+- Keep key parity: add both locales in the same PR; run i18n-reviewer for tone (Mexico Spanish, not Spain).

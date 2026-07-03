@@ -1,0 +1,23 @@
+---
+description: Payment security and PCI scope minimization for Mexico
+globs: "**/{lib/integrations,app/api}/**/*{payment,checkout,conekta,stripe}*"
+alwaysApply: false
+---
+
+# Payments Security
+
+- **Never** store PAN, CVV, or magnetic data; use Conekta/Stripe tokenization only.
+- Checkout UI loads provider-hosted fields; our server receives `token_id` or `payment_intent_id` only.
+
+```typescript
+// GOOD: token only, no raw card data
+await conekta.orders.create({
+  line_items: [{ name: sku, unit_price: priceMxn * 100, quantity: 1 }],
+  customer_info: { email },
+  charges: [{ payment_method: { type: 'card', token_id: clientToken } }],
+});
+```
+
+- Verify webhook signatures before updating `order.status`.
+- Staff CRM: mask card last4 only; no full payment method export to CSV.
+- PCI changes -> mandatory review with payments-integration-mexico + security-reviewer (Opus).

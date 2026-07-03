@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="custom.meta.title">Uniformes y gorras personalizados - RS</title>
+  <meta name="description" data-i18n-content="custom.meta.description" content="Cotiza uniformes y gorras con bordado, DTF, TPU o 3D DTF.">
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="quote.banner">Formulario de demostracion</div>
+  <div class="promo-bar" data-i18n="custom.promo">Uniformes y gorras a tu medida - ligas, escuelas y equipos</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/collections/jerseys.html" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:11px;" data-i18n="quote.continue">Seguir comprando</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="custom.title">Uniformes y gorras personalizados</h1>
+      <p data-i18n="custom.intro">Selecciona tu diseno, cantidades, tallas, nombres y numeros, y el tipo de estampado o bordado que necesitas.</p>
+    </div>
+
+    <form class="form-card form-card-wide" data-demo-form>
+      <section class="form-section">
+        <h2 data-i18n="custom.section.product">Producto y diseno</h2>
+        <div class="form-group">
+          <label for="product-type" data-i18n="custom.product_type">Tipo de producto</label>
+          <select id="product-type" required>
+            <option value="" data-i18n="custom.product_type.placeholder">Selecciona...</option>
+            <option value="uniform" data-i18n="custom.product_type.uniform">Uniforme (jersey + pantalon)</option>
+            <option value="jersey" data-i18n="custom.product_type.jersey">Jersey solamente</option>
+            <option value="cap" data-i18n="custom.product_type.cap">Gorra</option>
+            <option value="set" data-i18n="custom.product_type.set">Uniforme + gorras</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="design" data-i18n="custom.design">Diseno o modelo base</label>
+          <input type="text" id="design" placeholder="Ej. Diablos borgona, Mexico estrellas" data-i18n-placeholder="custom.design.placeholder" required>
+        </div>
+        <div class="form-group">
+          <label for="team" data-i18n="custom.team">Equipo, liga o negocio</label>
+          <input type="text" id="team" required>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2 data-i18n="custom.section.qty">Cantidad y tallas</h2>
+        <div class="form-group">
+          <label for="total-qty" data-i18n="custom.total_qty">Cantidad total de piezas</label>
+          <input type="number" id="total-qty" min="1" required>
+        </div>
+        <p class="form-hint" data-i18n="custom.size_hint">Indica cuantas piezas por talla. Minimo sugerido para equipos: 12 unidades.</p>
+        <div class="size-grid-wrap">
+          <table class="size-grid" aria-label="Tallas">
+            <thead>
+              <tr>
+                <th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="number" min="0" name="size-xs" aria-label="XS"></td>
+                <td><input type="number" min="0" name="size-s" aria-label="S"></td>
+                <td><input type="number" min="0" name="size-m" aria-label="M"></td>
+                <td><input type="number" min="0" name="size-l" aria-label="L"></td>
+                <td><input type="number" min="0" name="size-xl" aria-label="XL"></td>
+                <td><input type="number" min="0" name="size-xxl" aria-label="XXL"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2 data-i18n="custom.section.roster">Nombres y numeros</h2>
+        <p class="form-hint" data-i18n="custom.roster_hint">Un jugador por linea. Formato: Nombre Apellido | Numero (ej. Garcia Lopez | 12)</p>
+        <div class="form-group">
+          <label for="roster" data-i18n="custom.roster">Lista de jugadores</label>
+          <textarea id="roster" rows="6" placeholder="Garcia Lopez | 12&#10;Martinez Ruiz | 7" data-i18n-placeholder="custom.roster.placeholder"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="logo-note" data-i18n="custom.logo">Logo o escudo (opcional)</label>
+          <textarea id="logo-note" rows="2" placeholder="Adjuntaremos archivo en produccion" data-i18n-placeholder="custom.logo.placeholder"></textarea>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2 data-i18n="custom.section.decoration">Tipo de estampado / bordado</h2>
+        <div class="market-hint">
+          <p data-i18n="custom.market.mx"><strong>Mexico:</strong> Bordado es la opcion mas solicitada para ligas y escuelas.</p>
+          <p data-i18n="custom.market.us"><strong>EE.UU.:</strong> DTF, TPU y acabado 3D DTF son mas comunes para pedidos al mayoreo.</p>
+        </div>
+        <fieldset class="deco-fieldset">
+          <legend class="sr-only" data-i18n="custom.section.decoration">Tipo de estampado</legend>
+          <div class="deco-grid">
+            <div class="deco-option">
+              <input type="radio" name="decoration" id="deco-embroidery" value="embroidery" required>
+              <label for="deco-embroidery">
+                <span class="deco-name" data-i18n="custom.deco.embroidery">Bordado</span>
+                <span class="deco-sub" data-i18n="custom.deco.embroidery.sub">Embroidery</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.mx">Popular en Mexico</span>
+              </label>
+            </div>
+            <div class="deco-option">
+              <input type="radio" name="decoration" id="deco-dtf" value="dtf">
+              <label for="deco-dtf">
+                <span class="deco-name">DTF</span>
+                <span class="deco-sub" data-i18n="custom.deco.dtf.sub">Direct to film</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+              </label>
+            </div>
+            <div class="deco-option">
+              <input type="radio" name="decoration" id="deco-tpu" value="tpu">
+              <label for="deco-tpu">
+                <span class="deco-name">TPU</span>
+                <span class="deco-sub" data-i18n="custom.deco.tpu.sub">Parches termoplasticos</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+              </label>
+            </div>
+            <div class="deco-option">
+              <input type="radio" name="decoration" id="deco-3d-dtf" value="3d_dtf">
+              <label for="deco-3d-dtf">
+                <span class="deco-name" data-i18n="custom.deco.3d_dtf">3D DTF</span>
+                <span class="deco-sub" data-i18n="custom.deco.3d_dtf.sub">Acabado elevado</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="form-section">
+        <h2 data-i18n="custom.section.contact">Contacto</h2>
+        <div class="form-group"><label for="contact-name" data-i18n="quote.name">Nombre</label><input type="text" id="contact-name" required></div>
+        <div class="form-group"><label for="contact-email" data-i18n="quote.email">Correo</label><input type="email" id="contact-email" required></div>
+        <div class="form-group"><label for="contact-phone" data-i18n="quote.phone">Telefono / WhatsApp</label><input type="tel" id="contact-phone"></div>
+        <div class="form-group"><label for="notes" data-i18n="quote.notes">Notas adicionales</label><textarea id="notes"></textarea></div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="consent" required>
+          <label for="consent" data-i18n="quote.consent">Acepto aviso de privacidad.</label>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="custom.submit">Solicitar cotizacion personalizada</button>
+        <div class="form-success" data-i18n="custom.success">Gracias. En produccion, ventas recibe tu pedido con todos los detalles de personalizacion en el CRM.</div>
+      </section>
+    </form>
+
+    <p style="margin-bottom:3rem;font-size:13px;">
+      <a href="/quote/" data-i18n="custom.link.simple">Cotizacion simple (sin personalizacion detallada)</a>
+      &nbsp;|&nbsp;
+      <a href="/quote/bulk.html" data-i18n="quote.bulk.link">Cotizacion mayoreo</a>
+    </p>
+  </main>
+
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

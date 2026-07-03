@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jerseys - RS Mexico</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <div class="promo-bar" data-i18n="promo.bar">Cotiza mayoreo y equipos - respuesta en 24 horas habiles</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="menu-toggle" type="button" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="icon-btn" type="button" data-demo-icon="Busqueda en produccion" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-demo-icon="Cuenta en etapa 1" aria-label="Cuenta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-demo-icon="Carrito en etapa 1" aria-label="Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="header-nav container">
+      <a href="/collections/jerseys.html">Jerseys</a>
+      <a href="#" data-demo-action="Gorras - proximamente">Gorras</a>
+      <a href="#" data-demo-action="Sudaderas - proximamente">Sudaderas</a>
+      <a href="#" data-demo-action="Accesorios - proximamente">Accesorios</a>
+    </nav>
+    <nav class="nav-mobile">
+      <a href="/collections/jerseys.html">Jerseys</a>
+      <a href="/quote/">Cotizacion</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb"><a href="/" data-i18n="breadcrumb.home">Inicio</a> / <span data-i18n="collection.title">Jerseys</span></nav>
+
+    <div class="collection-header">
+      <h1 data-i18n="collection.title">Jerseys</h1>
+      <p class="collection-meta"><span data-product-count data-i18n="collection.count" data-i18n-n="8">8 productos</span></p>
+    </div>
+
+    <div class="filters-mobile-bar">
+      <button type="button" class="btn btn-outline" data-open-filters data-i18n="collection.filter">Filtrar</button>
+    </div>
+
+    <div class="collection-layout">
+      <aside class="filters-sidebar">
+        <button type="button" class="filter-close" data-i18n-aria="aria.close" aria-label="Cerrar">&times;</button>
+        <h3 data-i18n="collection.filter.title">Filtrar</h3>
+
+        <div class="filter-group">
+          <div class="filter-group-title" data-i18n="collection.filter.team">Equipo</div>
+          <div class="filter-options">
+            <label><input type="checkbox" data-filter-team value="diablos"> Diablos Rojos</label>
+            <label><input type="checkbox" data-filter-team value="mexico"> Seleccion Mexico</label>
+            <label><input type="checkbox" data-filter-team value="sultanes"> Sultanes</label>
+            <label><input type="checkbox" data-filter-team value="tigres"> Tigres QRoo</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title" data-i18n="collection.filter.league">Liga</div>
+          <div class="filter-options">
+            <label><input type="checkbox" data-filter-liga value="lmb"> LMB</label>
+            <label><input type="checkbox" data-filter-liga value="mlb"> MLB</label>
+            <label><input type="checkbox" data-filter-liga value="seleccion"> Seleccion</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title" data-i18n="collection.filter.size">Talla</div>
+          <div class="filter-options">
+            <label><input type="checkbox" disabled> S</label>
+            <label><input type="checkbox" disabled> M</label>
+            <label><input type="checkbox" disabled> L</label>
+            <label><input type="checkbox" disabled> XL</label>
+          </div>
+          <p style="font-size:11px;color:#525252;" data-i18n="collection.filter.size.note">Filtro por talla en etapa 1</p>
+        </div>
+      </aside>
+
+      <div>
+        <div class="collection-toolbar">
+          <span style="font-size:13px;color:#525252;" data-i18n="collection.showing">Mostrando jerseys licenciados</span>
+          <select class="sort-select" data-sort data-i18n-aria="collection.sort.featured" aria-label="Ordenar">
+            <option value="featured" data-i18n="collection.sort.featured">Destacado</option>
+            <option value="price-asc" data-i18n="collection.sort.price_asc">Precio, menor a mayor</option>
+            <option value="price-desc" data-i18n="collection.sort.price_desc">Precio, mayor a menor</option>
+          </select>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card" data-team="diablos" data-liga="lmb" data-price="2499">
+            <a href="/products/jersey-diablos-borgona.html">
+              <span class="product-badge" data-i18n="badge.new">Nuevo</span>
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Alternativo Diablos Rojos del Mexico LMB 2026 Borgona</h3>
+                <p class="product-price">$ 2,499.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="mexico" data-liga="seleccion" data-price="2699">
+            <a href="/products/jersey-mexico-estrellas.html">
+              <span class="product-badge" data-i18n="badge.new">Nuevo</span>
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Mexico LMB Juego de Estrellas 2026</h3>
+                <p class="product-price">$ 2,699.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="diablos" data-liga="lmb" data-price="2499">
+            <a href="/products/jersey-diablos-borgona.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Alternativo Diablos Rojos LMB 2026 Verde</h3>
+                <p class="product-price">$ 2,499.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="mexico" data-liga="seleccion" data-price="1499">
+            <a href="/products/jersey-mexico-emblem.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Mexico Emblem Rojo</h3>
+                <p class="product-price">$ 1,499.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="sultanes" data-liga="lmb" data-price="2499">
+            <a href="/products/jersey-sultanes-navy.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Alternativo Sultanes de Monterrey LMB 2026 Navy</h3>
+                <p class="product-price">$ 2,499.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="tigres" data-liga="lmb" data-price="2499">
+            <a href="/products/jersey-diablos-borgona.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Home Tigres de Quintana Roo LMB 2026</h3>
+                <p class="product-price">$ 2,499.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="mexico" data-liga="seleccion" data-price="1599">
+            <a href="/products/jersey-mexico-emblem.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Mexico M Blanco</h3>
+                <p class="product-price">$ 1,599.00</p>
+              </div>
+            </a>
+          </article>
+          <article class="product-card" data-team="diablos" data-liga="lmb" data-price="2499">
+            <a href="/products/jersey-diablos-borgona.html">
+              <div class="product-image"><div class="placeholder-jersey">Jersey</div></div>
+              <div class="product-info">
+                <h3>Jersey Home Diablos Rojos del Mexico LMB 2026</h3>
+                <p class="product-price">$ 2,499.00</p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <p style="margin-top:2rem;font-size:13px;color:#525252;max-width:640px;" data-i18n="collection.footer.note">
+          Apoya a tu equipo con jerseys de Mexico, LMB y MLB. Producto licenciado. Envio a todo el pais (etapa 1).
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-copy">RS Beisbol Mexico - Demo</p>
+  </footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

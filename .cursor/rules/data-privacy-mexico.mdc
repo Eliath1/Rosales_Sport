@@ -1,0 +1,21 @@
+---
+description: LFPDPPP and Mexico data privacy requirements for customer and CRM data
+alwaysApply: true
+---
+
+# Data Privacy (Mexico)
+
+- Comply with **LFPDPPP**: lawful basis, privacy notice (aviso de privacidad), consent for marketing.
+- Collect minimum data: name, email, shipping, optional RFC for invoicing (CFDI) - document purpose in UI.
+
+```tsx
+// GOOD: consent checkbox for promos, not for order fulfillment
+<Checkbox {...register('marketingConsent')} />
+<label>{t('privacy.marketingConsent')}</label>
+<p>{t('privacy.noticeLink')}</p>
+```
+
+- Honor ARCO requests: access, rectification, cancellation, opposition - CRM admin workflow within 20 days SLA target.
+- Retention: delete/anonymize inactive accounts per policy; keep invoices per SAT requirements separately.
+- Cross-border: if US-hosted (Netlify, Stripe), disclose in aviso; use DPAs with processors.
+- No selling customer lists; analytics must be anonymized or consented.

@@ -1,0 +1,64 @@
+[build]
+  publish = "demo"
+
+[[redirects]]
+  from = "/collections/jerseys"
+  to = "/collections/jerseys.html"
+  status = 200
+
+[[redirects]]
+  from = "/quote"
+  to = "/quote/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/quote/bulk"
+  to = "/quote/bulk.html"
+  status = 200
+
+[[redirects]]
+  from = "/custom/uniform"
+  to = "/custom/uniform.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/quotes"
+  to = "/admin/quotes.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/quotes/detail"
+  to = "/admin/quotes/detail.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-diablos-borgona"
+  to = "/products/jersey-diablos-borgona.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-mexico-estrellas"
+  to = "/products/jersey-mexico-estrellas.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-sultanes-navy"
+  to = "/products/jersey-sultanes-navy.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-mexico-emblem"
+  to = "/products/jersey-mexico-emblem.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

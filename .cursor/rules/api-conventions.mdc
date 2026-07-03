@@ -1,0 +1,27 @@
+---
+description: API route and webhook conventions
+globs: "**/api/**"
+alwaysApply: false
+---
+
+# API Conventions
+
+- Prefix versioned routes: `/api/v1/products`, `/api/v1/webhooks/conekta`.
+- Validate every body/query with Zod; return `{ error: { code, message } }` on failure.
+- Auth: verify session or HMAC before business logic; return 401/403 without leaking details.
+
+```typescript
+// GOOD: webhook handler with signature check
+export async function POST(req: Request) {
+  const raw = await req.text();
+  if (!verifyConektaSignature(req.headers, raw)) {
+    return NextResponse.json({ error: { code: 'UNAUTHORIZED' } }, { status: 401 });
+  }
+  const event = conektaEventSchema.parse(JSON.parse(raw));
+  await paymentService.handleWebhook(event);
+  return NextResponse.json({ received: true });
+}
+```
+
+- Use idempotency keys for payment and order creation.
+- Log `requestId`, never log full card numbers, RFC, or passwords.

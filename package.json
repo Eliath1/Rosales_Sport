@@ -1,0 +1,9 @@
+{
+  "name": "baseball-store-crm",
+  "private": true,
+  "scripts": {
+    "demo": "npx serve demo -l 3456",
+    "demo:build-check": "node scripts/verify-demo.js",
+    "demo:package": "node scripts/package-demo-netlify.js"
+  }
+}

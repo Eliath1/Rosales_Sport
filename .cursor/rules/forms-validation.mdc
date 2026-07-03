@@ -1,0 +1,23 @@
+---
+description: Form validation with Zod and accessible UX for checkout and CRM
+globs: "**/{components,lib}/**/*{form,Form,schema}*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Forms & Validation
+
+- Shared Zod schemas in `lib/schemas/`; reuse on client (react-hook-form) and server (API/actions).
+- Show field-level errors in es-MX; associate `aria-describedby` with inputs.
+
+```typescript
+export const checkoutSchema = z.object({
+  email: z.string().email(),
+  rfc: z.string().regex(/^([A-ZÑ&]{3,4})\d{6}[A-Z0-9]{3}$/i).optional(),
+  cp: z.string().regex(/^\d{5}$/),
+  phone: z.string().regex(/^\+52\d{10}$/),
+});
+```
+
+- Disable submit while pending; prevent double-submit on payment forms.
+- CRM forms: audit who changed customer RFC or shipping address (`updatedById`).
+- Never trust client-only validation for prices, discounts, or inventory.

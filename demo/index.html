@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="meta.home.title">RS - Jerseys y gorras de beisbol en Mexico</title>
+  <meta name="description" data-i18n-content="meta.home.description" content="Jerseys MLB, LMB y Seleccion Mexicana. Cotiza en linea.">
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente - sin pagos ni envio real</div>
+  <div class="promo-bar" data-i18n="promo.bar">Cotiza mayoreo y equipos - respuesta en 24 horas habiles</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="menu-toggle" type="button" data-i18n-aria="aria.menu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="icon-btn" type="button" data-i18n-toast="toast.search" data-demo-icon="Busqueda" data-i18n-aria="aria.search" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-i18n-toast="toast.account" data-demo-icon="Cuenta" data-i18n-aria="aria.account" aria-label="Cuenta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-i18n-toast="toast.cart" data-demo-icon="Carrito" data-i18n-aria="aria.cart" aria-label="Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          <span class="badge">0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="header-nav container">
+      <a href="/collections/jerseys.html" data-i18n="nav.jerseys">Jerseys</a>
+      <a href="/custom/uniform.html" data-i18n="nav.custom">Personalizar</a>
+      <a href="#" data-i18n-toast="toast.gorras" data-demo-action="Gorras" data-i18n="nav.caps">Gorras</a>
+      <a href="#" data-i18n-toast="toast.hoodies" data-demo-action="Sudaderas" data-i18n="nav.hoodies">Sudaderas</a>
+      <a href="#" data-i18n-toast="toast.accessories" data-demo-action="Accesorios" data-i18n="nav.accessories">Accesorios</a>
+    </nav>
+    <nav class="nav-mobile">
+      <a href="/collections/jerseys.html" data-i18n="nav.jerseys">Jerseys</a>
+      <a href="/quote/" data-i18n="nav.quote">Cotizacion</a>
+      <a href="/admin/" data-i18n="nav.admin">Admin (demo)</a>
+    </nav>
+  </header>
+
+  <section class="hero-rs">
+    <img src="/assets/rs-logo.png" alt="" style="height:72px;margin:0 auto 1rem;">
+    <h1 data-i18n="home.hero.title">Uniformes y gorras personalizados para tu equipo</h1>
+    <p data-i18n="home.hero.sub">Bordado, DTF, TPU y 3D DTF. Tambien jerseys licenciados MLB, LMB y Seleccion Mexicana.</p>
+    <p style="font-size:12px;opacity:0.9;margin-bottom:1rem;" data-i18n="market.note">Mexico y envios internacionales (EE.UU. proximamente)</p>
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+      <a href="/custom/uniform.html" class="btn btn-primary" data-i18n="home.hero.cta.custom">Personalizar uniforme</a>
+      <a href="/collections/jerseys.html" class="btn btn-outline" style="border-color:#fff;color:#fff;" data-i18n="home.hero.cta.shop">Ver jerseys</a>
+      <a href="/quote/" class="btn btn-outline" style="border-color:#fff;color:#fff;" data-i18n="home.hero.cta.quote">Solicitar cotizacion</a>
+    </div>
+  </section>
+
+  <section class="custom-cta-band container" style="max-width:100%;padding-left:0;padding-right:0;">
+    <div style="max-width:1400px;margin:0 auto;padding:0 1.25rem;">
+      <h2 data-i18n="home.custom.title">Uniformes y gorras a tu medida</h2>
+      <p data-i18n="home.custom.sub">Captura cantidad, tallas, nombres, numeros y el tipo de estampado que necesitas.</p>
+      <a href="/custom/uniform.html" class="btn btn-outline" data-i18n="home.custom.cta">Armar pedido personalizado</a>
+    </div>
+  </section>
+
+  <main class="container" style="padding:2.5rem 1.25rem;">
+    <h2 class="section-title" data-i18n="home.featured">Destacados</h2>
+    <div class="product-grid">
+      <article class="product-card">
+        <a href="/products/jersey-diablos-borgona.html">
+          <span class="product-badge" data-i18n="badge.new">Nuevo</span>
+          <div class="product-image"><div class="placeholder-jersey" data-i18n="placeholder.jersey">Jersey</div></div>
+          <div class="product-info">
+            <h3>Jersey Alternativo Diablos Rojos LMB 2026 Borgona</h3>
+            <p class="product-price">$ 2,499.00 MXN</p>
+          </div>
+        </a>
+      </article>
+      <article class="product-card">
+        <a href="/products/jersey-mexico-estrellas.html">
+          <span class="product-badge" data-i18n="badge.new">Nuevo</span>
+          <div class="product-image"><div class="placeholder-jersey" data-i18n="placeholder.jersey">Jersey</div></div>
+          <div class="product-info">
+            <h3>Jersey Mexico LMB Juego de Estrellas 2026</h3>
+            <p class="product-price">$ 2,699.00 MXN</p>
+          </div>
+        </a>
+      </article>
+      <article class="product-card">
+        <a href="/products/jersey-sultanes-navy.html">
+          <div class="product-image"><div class="placeholder-jersey" data-i18n="placeholder.jersey">Jersey</div></div>
+          <div class="product-info">
+            <h3>Jersey Alternativo Sultanes de Monterrey LMB 2026 Navy</h3>
+            <p class="product-price">$ 2,499.00 MXN</p>
+          </div>
+        </a>
+      </article>
+      <article class="product-card">
+        <a href="/products/jersey-mexico-emblem.html">
+          <div class="product-image"><div class="placeholder-jersey" data-i18n="placeholder.jersey">Jersey</div></div>
+          <div class="product-info">
+            <h3>Jersey Mexico Emblem Rojo</h3>
+            <p class="product-price">$ 1,499.00 MXN</p>
+          </div>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid container">
+      <div class="newsletter-box">
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p style="font-size:13px;opacity:0.85;margin:0 0 1rem;" data-i18n="footer.newsletter.sub">Lanzamientos y promociones RS.</p>
+        <input type="email" data-i18n-placeholder="footer.email.placeholder" placeholder="Tu correo" data-i18n-aria="footer.email.placeholder" aria-label="Correo">
+        <button type="button" class="btn btn-primary" data-i18n-toast="toast.newsletter" data-demo-action="Newsletter" data-i18n="footer.subscribe">Suscribirme</button>
+      </div>
+      <div>
+        <h4 data-i18n="footer.shop">Tienda</h4>
+        <ul>
+          <li><a href="/collections/jerseys.html" data-i18n="nav.jerseys">Jerseys</a></li>
+          <li><a href="/quote/" data-i18n="nav.quote">Cotizacion</a></li>
+          <li><a href="/quote/bulk.html" data-i18n="nav.wholesale">Mayoreo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.help">Ayuda</h4>
+        <ul>
+          <li><a href="#" data-i18n-toast="toast.shipping" data-demo-action="Envios" data-i18n="footer.shipping">Envios</a></li>
+          <li><a href="#" data-i18n-toast="toast.returns" data-demo-action="Devoluciones" data-i18n="footer.returns">Devoluciones</a></li>
+          <li><a href="/admin/" data-i18n="footer.admin">Admin demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footer.legal">Legal</h4>
+        <ul>
+          <li><a href="#" data-i18n-toast="toast.privacy" data-demo-action="Privacidad" data-i18n="footer.privacy">Aviso de privacidad</a></li>
+          <li><a href="#" data-i18n-toast="toast.terms" data-demo-action="Terminos" data-i18n="footer.terms">Terminos y condiciones</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico - Demo estatica 2026</p>
+  </footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

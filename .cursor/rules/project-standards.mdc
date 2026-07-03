@@ -1,0 +1,27 @@
+---
+description: Core project standards for the Mexico baseball store CRM (Next.js, Prisma, Netlify)
+alwaysApply: true
+---
+
+# Project Standards
+
+- **Stack:** Next.js App Router, TypeScript, Prisma, PostgreSQL, Netlify deploy, es-MX + en i18n.
+- **Structure:** `app/` routes, `components/`, `lib/services/`, `lib/integrations/`, `prisma/schema.prisma`.
+- **Naming:** PascalCase components, camelCase functions, kebab-case API paths (`/api/v1/orders`).
+
+```typescript
+// BAD: logic in route handler
+export async function POST(req: Request) {
+  const body = await req.json();
+  await prisma.order.create({ data: body });
+}
+
+// GOOD: validated service call
+export async function POST(req: Request) {
+  const input = createOrderSchema.parse(await req.json());
+  return NextResponse.json(await orderService.create(input));
+}
+```
+
+- **Currency:** Store and display prices in MXN unless explicitly dual-currency.
+- **Commits:** Small, focused; never commit `.env`, keys, or customer exports.

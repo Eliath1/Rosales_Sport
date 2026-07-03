@@ -1,0 +1,22 @@
+---
+description: Prisma schema and database access patterns
+globs: "**/{prisma,lib}/**/*.{ts,prisma}"
+alwaysApply: false
+---
+
+# Prisma & Database
+
+- Single source of truth: `prisma/schema.prisma`; migrations committed, never edit prod DB manually.
+- Use transactions for order + inventory decrement + payment record.
+
+```typescript
+// GOOD: atomic order placement
+await prisma.$transaction(async (tx) => {
+  await tx.inventory.updateMany({ where: { sku, qty: { gte: 1 } }, data: { qty: { decrement: 1 } } });
+  return tx.order.create({ data: orderData });
+});
+```
+
+- Index foreign keys and filters: `teamId`, `league`, `status`, `createdAt`.
+- Soft-delete customers (`deletedAt`) for LFPDPPP retention policies; hard-delete only after legal hold clears.
+- Seed realistic LMB/MLB sample data in `prisma/seed.ts`; no production PII in seeds.

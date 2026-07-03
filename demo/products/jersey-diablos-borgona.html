@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jersey Diablos Rojos LMB 2026 Borgona - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <div class="promo-bar" data-i18n="promo.bar">Cotiza mayoreo y equipos</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button class="menu-toggle" type="button" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="icon-btn" type="button" data-demo-icon="Busqueda en produccion" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+        </button>
+        <button class="icon-btn" type="button" data-demo-icon="Carrito en etapa 1" aria-label="Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="header-nav container">
+      <a href="/collections/jerseys.html">Jerseys</a>
+      <a href="#" data-demo-action="Gorras - proximamente">Gorras</a>
+    </nav>
+    <nav class="nav-mobile"><a href="/collections/jerseys.html">Jerseys</a></nav>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb"><a href="/" data-i18n="breadcrumb.home">Inicio</a> / <a href="/collections/jerseys.html" data-i18n="collection.title">Jerseys</a> / Diablos Rojos Borgona</nav>
+
+    <div class="pdp-layout">
+      <div>
+        <div class="pdp-gallery-main">
+          <div class="placeholder-jersey" style="width:75%;height:85%;font-size:14px;" data-i18n="pdp.view.front">Vista frontal</div>
+        </div>
+        <div class="pdp-thumbs">
+          <button type="button" class="pdp-thumb active" data-i18n-key="pdp.view.front"><div class="placeholder-jersey" style="width:100%;height:100%;font-size:9px;" data-i18n="pdp.view.front">Frente</div></button>
+          <button type="button" class="pdp-thumb" data-i18n-key="pdp.view.back"><div class="placeholder-jersey" style="width:100%;height:100%;font-size:9px;" data-i18n="pdp.view.back">Espalda</div></button>
+          <button type="button" class="pdp-thumb" data-i18n-key="pdp.view.detail"><div class="placeholder-jersey" style="width:100%;height:100%;font-size:9px;" data-i18n="pdp.view.detail">Detalle</div></button>
+        </div>
+      </div>
+
+      <div class="pdp-details">
+        <h1>Jersey Alternativo Diablos Rojos del Mexico LMB 2026 Borgona</h1>
+        <p class="pdp-sku">SKU: RS-JER-DIA-26-BOR</p>
+        <p class="pdp-price">$ 2,499.00 MXN</p>
+        <p data-i18n="pdp.desc.body">Jersey de juego licenciado LMB.</p>
+
+        <label class="size-label" data-i18n="pdp.size">Talla</label>
+        <div class="size-options">
+          <button type="button" class="size-btn">S</button>
+          <button type="button" class="size-btn">M</button>
+          <button type="button" class="size-btn">L</button>
+          <button type="button" class="size-btn">XL</button>
+          <button type="button" class="size-btn" disabled>XXL</button>
+        </div>
+        <a href="#" class="size-guide" data-i18n-toast="toast.sizeguide" data-demo-action="Guia" data-i18n="pdp.sizeguide">Guia de tallas</a>
+
+        <div class="pdp-actions">
+          <a href="/quote/?sku=RS-JER-DIA-26-BOR&name=Jersey%20Diablos%20Borgona" class="btn btn-primary" data-i18n="pdp.cta.quote">Solicitar cotizacion</a>
+          <a href="#" class="btn btn-outline" data-i18n-toast="toast.whatsapp" data-demo-action="WhatsApp" data-i18n="pdp.cta.whatsapp">WhatsApp</a>
+        </div>
+
+        <div class="pdp-section">
+          <h2 data-i18n="pdp.desc.title">Descripcion</h2>
+          <p data-i18n="pdp.desc.body">Producto licenciado.</p>
+        </div>
+        <div class="pdp-section">
+          <h2 data-i18n="pdp.related.title">Completa tu outfit</h2>
+          <p><a href="/collections/jerseys.html" data-i18n="pdp.related.link">Ver mas jerseys del equipo</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="pdp-sticky-bar">
+    <span class="pdp-price">$ 2,499.00 MXN</span>
+    <a href="/quote/?sku=RS-JER-DIA-26-BOR&name=Jersey%20Diablos%20Borgona" class="btn btn-primary" style="flex:2;" data-i18n="pdp.cta.mobile">Cotizar</a>
+  </div>
+
+  <footer class="site-footer"><p class="footer-copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

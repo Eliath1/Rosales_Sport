@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+dist/
+build/
+.netlify/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test
+coverage/
+playwright-report/
+test-results/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# Misc
+*.tsbuildinfo
+.turbo/
+.vercel/
+
+# Netlify drag-drop build artifacts (regenerate with npm run demo:package)
+dist-netlify-upload/
+rs-demo-netlify.zip
+rs-demo-netlify-tar.zip
+
+# Local secrets - never commit
+*.pem
+credentials.json
+secrets/
