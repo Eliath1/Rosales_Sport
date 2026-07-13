@@ -1,0 +1,135 @@
+{
+  "version": 2,
+  "mode": "curated-photo",
+  "generatedAt": "2026-07-04T10:37:24.687Z",
+  "zones": [
+    "pants",
+    "pants_stripe"
+  ],
+  "bank": [
+    {
+      "id": "wht",
+      "hex": "#FFFFFF",
+      "label": "Blanco"
+    },
+    {
+      "id": "blk",
+      "hex": "#000000",
+      "label": "Negro"
+    },
+    {
+      "id": "red",
+      "hex": "#ED090D",
+      "label": "Rojo RS"
+    },
+    {
+      "id": "nav",
+      "hex": "#1e3a8a",
+      "label": "Navy"
+    },
+    {
+      "id": "roy",
+      "hex": "#2563eb",
+      "label": "Royal"
+    },
+    {
+      "id": "grn",
+      "hex": "#4a5d23",
+      "label": "Verde militar"
+    },
+    {
+      "id": "gry",
+      "hex": "#525252",
+      "label": "Gris"
+    }
+  ],
+  "paletteMap": {
+    "#FFFFFF": "wht",
+    "#000000": "blk",
+    "#525252": "gry",
+    "#d4d4d4": "wht",
+    "#ED090D": "red",
+    "#8B0000": "red",
+    "#ea580c": "red",
+    "#1e3a8a": "nav",
+    "#2563eb": "roy",
+    "#38bdf8": "roy",
+    "#4a5d23": "grn",
+    "#166534": "grn"
+  },
+  "curatedCount": 8,
+  "variants": {
+    "wht_wht": {
+      "label": "Blanco solido",
+      "pants": "wht",
+      "pantsHex": "#FFFFFF",
+      "pants_stripe": "wht",
+      "pants_stripeHex": "#FFFFFF",
+      "front": "front/wht_wht.png",
+      "back": "back/wht_wht.png"
+    },
+    "blk_blk": {
+      "label": "Negro solido",
+      "pants": "blk",
+      "pantsHex": "#000000",
+      "pants_stripe": "blk",
+      "pants_stripeHex": "#000000",
+      "front": "front/blk_blk.png",
+      "back": "back/blk_blk.png"
+    },
+    "gry_gry": {
+      "label": "Gris solido",
+      "pants": "gry",
+      "pantsHex": "#525252",
+      "pants_stripe": "gry",
+      "pants_stripeHex": "#525252",
+      "front": "front/gry_gry.png",
+      "back": "back/gry_gry.png"
+    },
+    "nav_nav": {
+      "label": "Navy solido",
+      "pants": "nav",
+      "pantsHex": "#1e3a8a",
+      "pants_stripe": "nav",
+      "pants_stripeHex": "#1e3a8a",
+      "front": "front/nav_nav.png",
+      "back": "back/nav_nav.png"
+    },
+    "wht_red": {
+      "label": "Blanco con franja roja",
+      "pants": "wht",
+      "pantsHex": "#FFFFFF",
+      "pants_stripe": "red",
+      "pants_stripeHex": "#ED090D",
+      "front": "front/wht_red.png",
+      "back": "back/wht_red.png"
+    },
+    "wht_nav": {
+      "label": "Blanco con franja navy",
+      "pants": "wht",
+      "pantsHex": "#FFFFFF",
+      "pants_stripe": "nav",
+      "pants_stripeHex": "#1e3a8a",
+      "front": "front/wht_nav.png",
+      "back": "back/wht_nav.png"
+    },
+    "gry_red": {
+      "label": "Gris con franja roja",
+      "pants": "gry",
+      "pantsHex": "#525252",
+      "pants_stripe": "red",
+      "pants_stripeHex": "#ED090D",
+      "front": "front/gry_red.png",
+      "back": "back/gry_red.png"
+    },
+    "blk_red": {
+      "label": "Negro con franja roja",
+      "pants": "blk",
+      "pantsHex": "#000000",
+      "pants_stripe": "red",
+      "pants_stripeHex": "#ED090D",
+      "front": "front/blk_red.png",
+      "back": "back/blk_red.png"
+    }
+  }
+}

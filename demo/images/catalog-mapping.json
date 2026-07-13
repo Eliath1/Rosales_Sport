@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "notes": "Maps demo/images/jersey* filenames to source files under images/. Run npm run demo:assets:sync.",
+  "catalog": {
+    "jersey1.webp": {
+      "source": "catalog/jersey1-borgona-front.png",
+      "maxWidth": 900,
+      "quality": 85
+    },
+    "jersey2.jpg": {
+      "source": "catalog/jersey2-mexico-stars-front.png",
+      "maxWidth": 900,
+      "quality": 88
+    },
+    "jersey3.webp": {
+      "source": "catalog/jersey3-borgona-back.png",
+      "maxWidth": 900,
+      "quality": 85
+    },
+    "jersey4.jpg": {
+      "source": "catalog/jersey4-mexico-emblem-front.png",
+      "maxWidth": 900,
+      "quality": 88
+    },
+    "jersey5.jpg": {
+      "source": "catalog/jersey5-navy-pinstripe-front.png",
+      "maxWidth": 900,
+      "quality": 88
+    },
+    "jersey6.jpg": {
+      "source": "catalog/jersey6-detail-macro.png",
+      "maxWidth": 800,
+      "quality": 90
+    }
+  },
+  "mockupPack": "mockup-mapping.json"
+}

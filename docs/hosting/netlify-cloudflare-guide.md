@@ -1,6 +1,7 @@
 # Netlify + Cloudflare Setup Guide
 
 > **Goal:** Production-ready hosting with edge security for the Mexico baseball store CRM.
+> **Status: target state for Stage 0+, not applied yet.** The live site today is the Stage D static demo (`demo/`), deployed via plain Netlify drag-and-drop zip upload - no GitHub CI, no Cloudflare, no Next.js runtime, no Neon, no Resend. Follow [demo-dns-netlify-setup.md](./demo-dns-netlify-setup.md) for how the demo is actually hosted today. Use this guide when Stage 0 (`app/`) is ready to deploy.
 
 ## Architecture Recap
 

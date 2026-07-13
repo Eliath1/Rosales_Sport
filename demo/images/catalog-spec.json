@@ -1,0 +1,26 @@
+{
+  "version": 3,
+  "notes": "Finished product photos only. No compose/tint. Sources in images/catalog/ or demo/images/.",
+  "products": [
+    { "slug": "jersey-rs-blank-blanco", "type": "photo", "source": "images/catalog/catalog-jersey-blank-front.png", "dest": "catalog-jersey-blank-front.png", "title": "Jersey RS Blank Blanco", "sku": "RS-JER-CUS-BLANCO", "team": "rs" },
+    { "slug": "jersey-rs-borgona-negro", "type": "photo", "source": "images/catalog/catalog-jersey-borgona-front.png", "dest": "catalog-jersey-borgona-front.png", "title": "Jersey RS Combinado Borgona y Negro", "sku": "RS-JER-CUS-BOR-NEG", "team": "rs" },
+    { "slug": "jersey-rs-estrellas-rojo", "type": "photo", "source": "images/catalog/catalog-jersey-estrellas-front.png", "dest": "catalog-jersey-estrellas-front.png", "title": "Jersey RS Estrellas Blanco y Rojo", "sku": "RS-JER-CUS-EST-ROJ", "team": "rs" },
+    { "slug": "jersey-rs-navy-pinstripe", "type": "photo", "source": "images/catalog/catalog-jersey-navy-pinstripe-front.png", "dest": "catalog-jersey-navy-pinstripe-front.png", "title": "Jersey RS Navy Pinstripe", "sku": "RS-JER-CUS-NAV-PIN", "team": "rs" },
+    { "slug": "jersey-rs-royal-azul", "type": "photo", "source": "images/catalog/catalog-jersey-royal-azul-front.png", "dest": "catalog-jersey-royal-azul-front.png", "title": "Jersey RS Royal Blanco y Azul", "sku": "RS-JER-CUS-ROY-AZU", "team": "rs" },
+    { "slug": "jersey-rs-verde-militar", "type": "photo", "source": "images/catalog/catalog-jersey-verde-militar-front.png", "dest": "catalog-jersey-verde-militar-front.png", "title": "Jersey RS Verde Militar y Negro", "sku": "RS-JER-CUS-VER-MIL", "team": "rs" },
+    { "slug": "jersey-rs-negro-solido", "type": "photo", "source": "images/catalog/catalog-jersey-negro-solido-front.png", "dest": "catalog-jersey-negro-solido-front.png", "title": "Jersey RS Negro Solido", "sku": "RS-JER-CUS-NEG-SOL", "team": "rs" },
+    { "slug": "jersey-rs-navy-blanco", "type": "photo", "source": "images/catalog/catalog-jersey-navy-blanco-front.png", "dest": "catalog-jersey-navy-blanco-front.png", "title": "Jersey RS Navy y Blanco", "sku": "RS-JER-CUS-NAV-BLA", "team": "rs" },
+    { "slug": "jersey-rs-naranja-negro", "type": "photo", "source": "images/catalog/catalog-jersey-naranja-negro-front.png", "dest": "catalog-jersey-naranja-negro-front.png", "title": "Jersey RS Naranja y Negro", "sku": "RS-JER-CUS-NAR-NEG", "team": "rs" },
+    { "slug": "jersey-rs-celeste-blanco", "type": "photo", "source": "images/catalog/catalog-jersey-celeste-blanco-front.png", "dest": "catalog-jersey-celeste-blanco-front.png", "title": "Jersey RS Celeste y Blanco", "sku": "RS-JER-CUS-CEL-BLA", "team": "rs" },
+    { "slug": "pants-rs-blanco", "type": "photo", "source": "images/catalog/catalog-pants-blanco-front.png", "dest": "catalog-pants-blanco-front.png", "title": "Pantalon RS Classic Blanco", "sku": "RS-PAN-CUS-BLANCO", "team": "rs-pants" },
+    { "slug": "pants-rs-negro", "type": "photo", "source": "images/catalog/catalog-pants-negro-front.png", "dest": "catalog-pants-negro-front.png", "title": "Pantalon RS Classic Negro", "sku": "RS-PAN-CUS-NEGRO", "team": "rs-pants" },
+    { "slug": "pants-rs-navy-franja", "type": "photo", "source": "images/catalog/catalog-pants-navy-franja-front.png", "dest": "catalog-pants-navy-franja-front.png", "title": "Pantalon RS Navy con Franja Roja", "sku": "RS-PAN-CUS-NAV-FRA", "team": "rs-pants" },
+    { "slug": "pants-rs-gris-rayas", "type": "photo", "source": "images/catalog/catalog-pants-gris-rayas-front.png", "dest": "catalog-pants-gris-rayas-front.png", "title": "Pantalon RS Gris con Rayas", "sku": "RS-PAN-CUS-GRIS-RAY", "team": "rs-pants" },
+    { "slug": "pants-rs-royal-franja", "type": "photo", "source": "images/catalog/catalog-pants-royal-franja-front.png", "dest": "catalog-pants-royal-franja-front.png", "title": "Pantalon RS Royal con Franja Blanca", "sku": "RS-PAN-CUS-ROY-FRA", "team": "rs-pants" },
+    { "slug": "pants-rs-verde-militar", "type": "photo", "source": "images/catalog/catalog-pants-verde-militar-front.png", "dest": "catalog-pants-verde-militar-front.png", "title": "Pantalon RS Verde Militar", "sku": "RS-PAN-CUS-VER-MIL", "team": "rs-pants" },
+    { "slug": "pants-rs-borgona", "type": "photo", "source": "images/catalog/catalog-pants-borgona-front.png", "dest": "catalog-pants-borgona-front.png", "title": "Pantalon RS Borgona con Franja Negra", "sku": "RS-PAN-CUS-BOR-FRA", "team": "rs-pants" },
+    { "slug": "pants-rs-rojo-franja", "type": "photo", "source": "images/catalog/catalog-pants-rojo-franja-front.png", "dest": "catalog-pants-rojo-franja-front.png", "title": "Pantalon RS Rojo con Franja Blanca", "sku": "RS-PAN-CUS-ROJ-FRA", "team": "rs-pants" },
+    { "slug": "pants-rs-naranja-franja", "type": "photo", "source": "images/catalog/catalog-pants-naranja-franja-front.png", "dest": "catalog-pants-naranja-franja-front.png", "title": "Pantalon RS Naranja con Franja Negra", "sku": "RS-PAN-CUS-NAR-FRA", "team": "rs-pants" },
+    { "slug": "pants-rs-navy-pinstripe", "type": "photo", "source": "images/catalog/catalog-pants-navy-pinstripe-front.png", "dest": "catalog-pants-navy-pinstripe-front.png", "title": "Pantalon RS Navy Pinstripe", "sku": "RS-PAN-CUS-NAV-PIN", "team": "rs-pants" }
+  ]
+}

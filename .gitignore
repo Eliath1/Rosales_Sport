@@ -52,3 +52,6 @@ rs-demo-netlify-tar.zip
 *.pem
 credentials.json
 secrets/
+
+# Playwright MCP debug snapshots - never commit (see no-browser-doc-mcp.mdc)
+.playwright-mcp/

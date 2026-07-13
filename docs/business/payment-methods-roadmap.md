@@ -7,9 +7,9 @@
 | Wave | Methods | Provider |
 |------|---------|----------|
 | **Zero** | None (quotes only); manual SPEI/ cash in store | - |
-| **One MVP** | Tarjeta crédito/débito, OXXO | Mercado Pago primary |
+| **One MVP (Priority 2)** | Tarjeta crédito/débito, OXXO; **split payment plan** (100% under 6 pieces, 50% deposit + balance for 6+, per [ADR-013](../architecture/decisions/ADR-013-split-payments.md)) | Mercado Pago primary |
 | **One.b** | SPEI, Mercado Pago wallet | Mercado Pago |
-| **Two** | MSI 3/6/9 meses, Apple Pay | MP + Stripe optional |
+| **Two** | MSI 3/6/9 meses, Apple Pay, saved payment methods for distributors ([ADR-012](../architecture/decisions/ADR-012-customer-accounts.md)) | MP + Stripe optional |
 | **Three** | Wholesale credit terms (manual), PayPal intl | Process + admin |
 
 ## Method Details
@@ -64,6 +64,8 @@
 - [ ] Email template per status (pending OXXO vs paid)
 - [ ] Admin view: payment method + provider ID
 - [ ] Reconciliation export CSV for accounting
+- [ ] Capture `feeCents` from webhook payload where the provider exposes it (Mercado Pago does per-payment) - feeds the commission report in [mexico-pricing-reference.md](./mexico-pricing-reference.md)
+- [ ] Deposit/balance split: `deposit` payment at checkout for 6+ pieces, `balance` payment request emailed on `ready_to_ship`
 
 Template: [../../templates/feature/payment-rollout-template.md](../../templates/feature/payment-rollout-template.md)
 

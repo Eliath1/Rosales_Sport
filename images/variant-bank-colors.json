@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "mode": "curated-photo",
+  "notes": "Curated combinations use real AI-generated product photos (not algorithmic tint). Combinations outside this curated list fall back to live tint over the grey mockup base at runtime.",
+  "bank": [
+    { "id": "wht", "hex": "#FFFFFF", "label": "Blanco" },
+    { "id": "blk", "hex": "#000000", "label": "Negro" },
+    { "id": "red", "hex": "#ED090D", "label": "Rojo RS" },
+    { "id": "nav", "hex": "#1e3a8a", "label": "Navy" },
+    { "id": "roy", "hex": "#2563eb", "label": "Royal" },
+    { "id": "grn", "hex": "#4a5d23", "label": "Verde militar" },
+    { "id": "gry", "hex": "#525252", "label": "Gris" }
+  ],
+  "paletteMap": {
+    "#FFFFFF": "wht",
+    "#000000": "blk",
+    "#525252": "gry",
+    "#d4d4d4": "wht",
+    "#ED090D": "red",
+    "#8B0000": "red",
+    "#ea580c": "red",
+    "#1e3a8a": "nav",
+    "#2563eb": "roy",
+    "#38bdf8": "roy",
+    "#4a5d23": "grn",
+    "#166534": "grn"
+  },
+  "garments": {
+    "classic-button": {
+      "zones": ["body", "sleeve", "collar"],
+      "baseFront": "demo/assets/mockups/classic-button/front-base.png",
+      "baseBack": "demo/assets/mockups/classic-button/back-base.png",
+      "stagingDir": "images/variant-photos/classic-button",
+      "outDir": "demo/assets/variant-bank/classic-button",
+      "curatedCombos": [
+        { "key": "wht_wht_wht", "body": "wht", "sleeve": "wht", "collar": "wht", "label": "Blanco solido" },
+        { "key": "blk_blk_blk", "body": "blk", "sleeve": "blk", "collar": "blk", "label": "Negro solido" },
+        { "key": "red_red_red", "body": "red", "sleeve": "red", "collar": "red", "label": "Rojo solido" },
+        { "key": "nav_nav_nav", "body": "nav", "sleeve": "nav", "collar": "nav", "label": "Navy solido" },
+        { "key": "roy_roy_roy", "body": "roy", "sleeve": "roy", "collar": "roy", "label": "Royal solido" },
+        { "key": "grn_grn_grn", "body": "grn", "sleeve": "grn", "collar": "grn", "label": "Verde militar solido" },
+        { "key": "gry_gry_gry", "body": "gry", "sleeve": "gry", "collar": "gry", "label": "Gris solido" },
+        { "key": "wht_red_red", "body": "wht", "sleeve": "red", "collar": "red", "label": "Blanco con mangas y cuello rojo" },
+        { "key": "wht_nav_nav", "body": "wht", "sleeve": "nav", "collar": "nav", "label": "Blanco con mangas y cuello navy" },
+        { "key": "wht_blk_blk", "body": "wht", "sleeve": "blk", "collar": "blk", "label": "Blanco con mangas y cuello negro" },
+        { "key": "red_wht_wht", "body": "red", "sleeve": "wht", "collar": "wht", "label": "Rojo con mangas y cuello blanco" },
+        { "key": "blk_red_red", "body": "blk", "sleeve": "red", "collar": "red", "label": "Negro con mangas y cuello rojo" }
+      ]
+    },
+    "pants-classic": {
+      "zones": ["pants", "pants_stripe"],
+      "baseFront": "demo/assets/mockups/pants-classic/front-base.png",
+      "baseBack": "demo/assets/mockups/pants-classic/back-base.png",
+      "stagingDir": "images/variant-photos/pants-classic",
+      "outDir": "demo/assets/variant-bank/pants-classic",
+      "curatedCombos": [
+        { "key": "wht_wht", "pants": "wht", "pants_stripe": "wht", "label": "Blanco solido" },
+        { "key": "blk_blk", "pants": "blk", "pants_stripe": "blk", "label": "Negro solido" },
+        { "key": "gry_gry", "pants": "gry", "pants_stripe": "gry", "label": "Gris solido" },
+        { "key": "nav_nav", "pants": "nav", "pants_stripe": "nav", "label": "Navy solido" },
+        { "key": "wht_red", "pants": "wht", "pants_stripe": "red", "label": "Blanco con franja roja" },
+        { "key": "wht_nav", "pants": "wht", "pants_stripe": "nav", "label": "Blanco con franja navy" },
+        { "key": "gry_red", "pants": "gry", "pants_stripe": "red", "label": "Gris con franja roja" },
+        { "key": "blk_red", "pants": "blk", "pants_stripe": "red", "label": "Negro con franja roja" }
+      ]
+    }
+  }
+}

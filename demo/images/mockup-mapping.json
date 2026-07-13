@@ -1,0 +1,13 @@
+{
+  "verified": true,
+  "verifiedAt": "2026-07-04",
+  "notes": "Grey blank bases only. Jersey and pants masks auto-derived at ingest.",
+  "classic-button": {
+    "front-base.png": "mockup-classic-front-base.png",
+    "back-base.png": "mockup-classic-back-base.png"
+  },
+  "pants-classic": {
+    "front-base.png": "mockup-pants-front-base.png",
+    "back-base.png": "mockup-pants-back-base.png"
+  }
+}

@@ -2,7 +2,9 @@
 
 > **Audience:** Developers, stakeholders, and anyone new to the project.  
 > **Last updated:** 2026-07  
-> **Status:** Wave Zero (quote + CRM foundation)
+> **Status:** Target architecture for Wave Zero and beyond. **Not yet deployed** - see callout below for what is actually live today.
+
+> **Currently deployed: Stage D static demo only.** The diagram and modules below describe the target Stage 0+ architecture (Next.js, Prisma, Neon, Cloudflare, REST API). As of 2026-07, none of it is live - the only deployed artifact is the static HTML/CSS/JS demo in `demo/` (Netlify, no build step, no database, no auth). The `app/` Next.js scaffold referenced throughout this document exists in the repo but has not been deployed anywhere. See [stage-demo-static.md](./stage-demo-static.md) for what's actually running and [03-staged-delivery-roadmap.md](./03-staged-delivery-roadmap.md) for the gap between stages.
 
 ## What We Are Building
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="mycuenta.orders.title">Pedido - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/cart/" class="icon-btn" data-i18n-aria="aria.cart" aria-label="Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          <span class="badge" data-cart-badge>0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div id="order-detail-root"></div>
+  </main>
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

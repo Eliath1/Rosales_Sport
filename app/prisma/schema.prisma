@@ -1,0 +1,379 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum CustomerType {
+  retail
+  wholesale
+  equipo
+}
+
+enum QuoteStatus {
+  draft
+  sent
+  accepted
+  expired
+  rejected
+}
+
+enum UserRole {
+  admin
+  sales
+  readonly
+}
+
+enum LeadSource {
+  quote_form
+  bulk_form
+  custom_uniform
+  manual
+}
+
+enum DecorationType {
+  embroidery
+  dtf
+  tpu
+  three_d_dtf
+  sublimation
+}
+
+enum Gender {
+  unisex
+  dama
+  caballero
+}
+
+// Mirrors the fulfillment pipeline already shown in the admin demo
+// (demo/js/mock-crm-data.js, demo/css/styles.css .status-* classes):
+// pending_payment -> payment_received -> in_progress -> preparing_shipment
+// -> shipped -> delivered, with cancelled as the exception exit.
+enum OrderStatus {
+  pending_payment
+  payment_received
+  in_progress
+  preparing_shipment
+  shipped
+  delivered
+  cancelled
+}
+
+enum TestimonialStatus {
+  pending
+  approved
+  hidden
+}
+
+// ADR-013: full for orders under the 6-piece minimum (kept for completeness -
+// in practice the store enforces a 6-piece minimum on every order today, so
+// this branch may be effectively unused until a smaller/no-minimum order
+// type exists), deposit_50 for 6+.
+enum PaymentPlan {
+  full
+  deposit_50
+}
+
+enum PaymentKind {
+  full
+  deposit
+  balance
+}
+
+enum PaymentStatus {
+  pending
+  succeeded
+  failed
+  refunded
+}
+
+model Customer {
+  id               String       @id @default(uuid()) @db.Uuid
+  name             String
+  email            String
+  phone            String?
+  customerType     CustomerType @default(retail) @map("customer_type")
+  notes            String?
+  marketingConsent Boolean      @default(false) @map("marketing_consent")
+  consentAt        DateTime?    @map("consent_at") @db.Timestamptz(6)
+  // Priority 3 (ADR-012): nullable so every existing guest/lead Customer row
+  // stays valid. A guest row has passwordHash = null until they register at
+  // /mi-cuenta/registro, which claims the row by email instead of duplicating it.
+  passwordHash     String?      @map("password_hash")
+  emailVerifiedAt  DateTime?    @map("email_verified_at") @db.Timestamptz(6)
+  // Convenience flag (ADR-012) in addition to customerType - staff-set via
+  // /admin/customers, gates SavedPaymentMethod and other wholesale-only UI.
+  isDistributor    Boolean      @default(false) @map("is_distributor")
+  createdAt        DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  quotes              Quote[]
+  leads               Lead[]
+  orders              Order[]
+  savedPaymentMethods SavedPaymentMethod[]
+
+  @@index([email])
+  @@map("customers")
+}
+
+// ADR-012 Priority 3: a tokenized reference to a payment method already
+// saved with the provider (e.g. Mercado Pago customer + card token) - real
+// card numbers are never stored here or anywhere in this schema. UI for this
+// model is gated behind Customer.isDistributor, not just "has an account".
+model SavedPaymentMethod {
+  id                      String   @id @default(uuid()) @db.Uuid
+  customerId              String   @map("customer_id") @db.Uuid
+  provider                String
+  providerCustomerRef     String   @map("provider_customer_ref")
+  providerPaymentMethodId String   @map("provider_payment_method_id")
+  brand                   String?
+  last4                   String?
+  createdAt               DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@map("saved_payment_methods")
+}
+
+model Product {
+  id                  String   @id @default(uuid()) @db.Uuid
+  sku                 String   @unique
+  slug                String   @unique
+  name                String
+  team                String?
+  league              String?
+  category            String
+  description         String?
+  basePriceCents      Int      @map("base_price_cents")
+  wholesalePriceCents Int?     @map("wholesale_price_cents")
+  active              Boolean  @default(true)
+  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  variants ProductVariant[]
+
+  @@index([team, active])
+  @@map("products")
+}
+
+model ProductVariant {
+  id             String  @id @default(uuid()) @db.Uuid
+  productId      String  @map("product_id") @db.Uuid
+  size           String
+  color          String?
+  gender         Gender  @default(unisex)
+  // Swatch photo shown in the PDP color-swatch strip (see docs/specs/variant-bank-spec.md
+  // "Shared pipeline with catalog PDP swatches"). Falls back to the product's main photo
+  // when null - most existing variants reuse a single catalog photo per color today.
+  swatchImageUrl String? @map("swatch_image_url")
+  stockHint      Int?    @map("stock_hint")
+
+  product        Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quoteLineItems QuoteLineItem[]
+  orderLineItems OrderLineItem[]
+
+  @@unique([productId, size, color, gender])
+  @@map("product_variants")
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(sales)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  quotesCreated Quote[] @relation("QuoteCreatedBy")
+
+  @@map("users")
+}
+
+model Quote {
+  id            String      @id @default(uuid()) @db.Uuid
+  customerId    String      @map("customer_id") @db.Uuid
+  status        QuoteStatus @default(draft)
+  validUntil    DateTime    @map("valid_until") @db.Date
+  subtotalCents Int         @default(0) @map("subtotal_cents")
+  discountCents Int         @default(0) @map("discount_cents")
+  totalCents    Int         @default(0) @map("total_cents")
+  notes         String?
+  sentAt        DateTime?   @map("sent_at") @db.Timestamptz(6)
+  createdById   String?     @map("created_by") @db.Uuid
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  customer  Customer        @relation(fields: [customerId], references: [id])
+  createdBy User?           @relation("QuoteCreatedBy", fields: [createdById], references: [id])
+  lineItems QuoteLineItem[]
+
+  @@index([customerId])
+  @@index([status, createdAt(sort: Desc)])
+  @@map("quotes")
+}
+
+model QuoteLineItem {
+  id               String @id @default(uuid()) @db.Uuid
+  quoteId          String @map("quote_id") @db.Uuid
+  productVariantId String @map("product_variant_id") @db.Uuid
+  quantity         Int
+  unitPriceCents   Int    @map("unit_price_cents")
+  lineTotalCents   Int    @map("line_total_cents")
+
+  quote          Quote                       @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant              @relation(fields: [productVariantId], references: [id])
+  customization  QuoteLineItemCustomization?
+
+  @@map("quote_line_items")
+}
+
+model QuoteLineItemCustomization {
+  id             String         @id @default(uuid()) @db.Uuid
+  lineItemId     String         @unique @map("line_item_id") @db.Uuid
+  decorationType DecorationType @map("decoration_type")
+  sizeBreakdown  Json           @map("size_breakdown")
+  roster         Json
+  logoNotes      String?        @map("logo_notes")
+
+  lineItem QuoteLineItem @relation(fields: [lineItemId], references: [id], onDelete: Cascade)
+
+  @@map("quote_line_item_customizations")
+}
+
+// Guest checkout capable (ADR-012): customerId always points at a Customer row,
+// created/matched by email at checkout with passwordHash null when no account
+// exists. Payment/deposit fields added per ADR-013 (Priority 2).
+model Order {
+  id            String      @id @default(uuid()) @db.Uuid
+  customerId    String      @map("customer_id") @db.Uuid
+  status        OrderStatus @default(pending_payment)
+  subtotalCents Int         @default(0) @map("subtotal_cents")
+  totalCents    Int         @default(0) @map("total_cents")
+  // ADR-013: computed at checkout from total quantity. depositCents/
+  // balanceCents are 0 for a `full` plan; for `deposit_50` they split
+  // totalCents 50/50 (balance = totalCents - depositCents to absorb rounding).
+  paymentPlan   PaymentPlan @default(full) @map("payment_plan")
+  depositCents  Int         @default(0) @map("deposit_cents")
+  balanceCents  Int         @default(0) @map("balance_cents")
+  readyToShipAt DateTime?   @map("ready_to_ship_at") @db.Timestamptz(6)
+  notes         String?
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  customer  Customer        @relation(fields: [customerId], references: [id])
+  lineItems OrderLineItem[]
+  payments  Payment[]
+
+  @@index([customerId])
+  @@index([status, createdAt(sort: Desc)])
+  @@map("orders")
+}
+
+// One row per payment leg (ADR-013): a `full` plan order gets one `full`
+// Payment; a `deposit_50` order gets a `deposit` Payment at checkout and a
+// `balance` Payment once staff requests it (Order.readyToShipAt set).
+// providerPaymentId is the idempotency key for webhook processing.
+model Payment {
+  id                String        @id @default(uuid()) @db.Uuid
+  orderId           String        @map("order_id") @db.Uuid
+  kind              PaymentKind
+  provider          String
+  providerPaymentId String?       @unique @map("provider_payment_id")
+  checkoutUrl       String?       @map("checkout_url")
+  amountCents       Int           @map("amount_cents")
+  feeCents          Int?          @map("fee_cents")
+  status            PaymentStatus @default(pending)
+  capturedAt        DateTime?     @map("captured_at") @db.Timestamptz(6)
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  order  Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  events PaymentEvent[]
+
+  @@index([orderId])
+  @@index([provider, status])
+  @@map("payments")
+}
+
+// Raw webhook audit log (payment-provider-abstraction.md "Webhook Handling").
+// Kept even after Payment is updated so a disputed fee/status can be traced
+// back to the exact payload the provider sent.
+model PaymentEvent {
+  id         String   @id @default(uuid()) @db.Uuid
+  paymentId  String   @map("payment_id") @db.Uuid
+  eventType  String   @map("event_type")
+  payload    Json     @map("payload_json")
+  receivedAt DateTime @default(now()) @map("received_at") @db.Timestamptz(6)
+
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([paymentId])
+  @@map("payment_events")
+}
+
+model OrderLineItem {
+  id               String @id @default(uuid()) @db.Uuid
+  orderId          String @map("order_id") @db.Uuid
+  productVariantId String @map("product_variant_id") @db.Uuid
+  quantity         Int
+  unitPriceCents   Int    @map("unit_price_cents")
+  lineTotalCents   Int    @map("line_total_cents")
+
+  order          Order                       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant              @relation(fields: [productVariantId], references: [id])
+  customization  OrderLineItemCustomization?
+
+  @@map("order_line_items")
+}
+
+// Mirrors QuoteLineItemCustomization so a design captured during quoting or in
+// the configurator (demo/js/configurator.js buildSpec()) carries over to the
+// order without reshaping - roster and size breakdown are already this shape.
+model OrderLineItemCustomization {
+  id             String         @id @default(uuid()) @db.Uuid
+  lineItemId     String         @unique @map("line_item_id") @db.Uuid
+  decorationType DecorationType @map("decoration_type")
+  sizeBreakdown  Json           @map("size_breakdown")
+  roster         Json
+  logoNotes      String?        @map("logo_notes")
+
+  lineItem OrderLineItem @relation(fields: [lineItemId], references: [id], onDelete: Cascade)
+
+  @@map("order_line_item_customizations")
+}
+
+// Owner-curated only (see ADR: homepage testimonials carousel) - no public
+// submission form in this phase. photoUrl is null until real customer photos
+// are collected and approved; the demo homepage carousel uses initials avatars
+// as a placeholder until then.
+model Testimonial {
+  id         String            @id @default(uuid()) @db.Uuid
+  authorName String            @map("author_name")
+  teamName   String?           @map("team_name")
+  quote      String
+  photoUrl   String?           @map("photo_url")
+  status     TestimonialStatus @default(pending)
+  sortOrder  Int               @default(0) @map("sort_order")
+  createdAt  DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime          @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([status, sortOrder])
+  @@map("testimonials")
+}
+
+model Lead {
+  id         String     @id @default(uuid()) @db.Uuid
+  source     LeadSource
+  customerId String?    @map("customer_id") @db.Uuid
+  payload    Json       @map("payload_json")
+  createdAt  DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  customer Customer? @relation(fields: [customerId], references: [id])
+
+  @@index([source, createdAt(sort: Desc)])
+  @@map("leads")
+}

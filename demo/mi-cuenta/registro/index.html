@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="mycuenta.register.title">Crear cuenta - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/collections/jerseys.html" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:11px;" data-i18n="cart.continue_shopping">Seguir comprando</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="mycuenta.register.title">Crear cuenta</h1>
+      <p data-i18n="mycuenta.register.intro">Crea tu cuenta para ver tus pedidos y agilizar tus compras. Esta demo no valida ni almacena tu contrasena en un servidor real.</p>
+    </div>
+    <form class="form-card" id="register-form">
+      <div class="form-group"><label for="account-name" data-i18n="mycuenta.register.name">Nombre</label><input type="text" id="account-name" required></div>
+      <div class="form-group"><label for="account-email" data-i18n="mycuenta.register.email">Correo</label><input type="email" id="account-email" required></div>
+      <div class="form-group"><label for="account-password" data-i18n="mycuenta.register.password">Contrasena</label><input type="password" id="account-password" required></div>
+      <div class="form-group"><label for="account-phone" data-i18n="mycuenta.register.phone">Telefono (opcional)</label><input type="tel" id="account-phone"></div>
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="account-consent" required>
+        <label for="account-consent" data-i18n="mycuenta.register.consent">Acepto recibir promociones, ofertas y novedades de Rosales Sport por correo electronico.</label>
+      </div>
+      <button type="submit" class="btn btn-primary" data-i18n="mycuenta.register.submit">Crear cuenta</button>
+    </form>
+    <p style="text-align:center;">
+      <span data-i18n="mycuenta.register.link_login">Ya tienes cuenta?</span>
+      &nbsp;<a href="/mi-cuenta/login/" data-i18n="mycuenta.register.link_login_cta">Inicia sesion</a>
+    </p>
+  </main>
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

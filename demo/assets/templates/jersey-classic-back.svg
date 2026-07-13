@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" aria-hidden="true">
+  <path id="zone-body" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"
+    d="M40 95 L80 55 L120 75 L160 50 L200 75 L240 55 L280 95 L280 340 L40 340 Z"/>
+  <path id="zone-sleeve" fill="#ED090D" stroke="#1a1a1a" stroke-width="1.5"
+    d="M40 95 L20 130 L35 155 L55 120 Z M280 95 L300 130 L285 155 L265 120 Z"/>
+  <path id="zone-collar" fill="#000000" stroke="#1a1a1a" stroke-width="1"
+    d="M120 75 L160 62 L200 75 L190 95 L130 95 Z"/>
+  <g id="zone-back-number" transform="translate(160, 200)">
+    <text text-anchor="middle" font-size="48" font-weight="bold" fill="#000000" id="back-number-text">12</text>
+  </g>
+  <g id="zone-back-name" transform="translate(160, 250)">
+    <text text-anchor="middle" font-size="14" font-weight="600" fill="#000000" id="back-name-text">GARCIA</text>
+  </g>
+</svg>

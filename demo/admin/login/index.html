@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="admin.login.title">Iniciar sesion - Staff RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="admin.login.title">Iniciar sesion - Staff RS</h1>
+      <p data-i18n="admin.login.intro">Ingresa tu correo y contrasena de staff. Esta demo acepta cualquier dato para simular tu sesion; no valida credenciales reales.</p>
+    </div>
+    <form class="form-card" id="staff-login-form">
+      <div class="form-group"><label for="staff-email" data-i18n="admin.login.email">Correo</label><input type="email" id="staff-email" required></div>
+      <div class="form-group"><label for="staff-password" data-i18n="admin.login.password">Contrasena</label><input type="password" id="staff-password" required></div>
+      <button type="submit" class="btn btn-primary" data-i18n="admin.login.submit">Iniciar sesion</button>
+    </form>
+  </main>
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

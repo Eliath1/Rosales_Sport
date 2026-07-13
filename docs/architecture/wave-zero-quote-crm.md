@@ -121,6 +121,8 @@ User (staff)
 
 See [../api/design-standards.md](../api/design-standards.md) for conventions.
 
+**Implementation status (2026-07):** `app/src/app/api/quotes/route.ts` implements `GET`/`POST` on the collection only - the `/api/quotes/:id/send` and `/api/quotes/:id/pdf` routes above have not been built yet. `app/src/lib/pdf/quotePdf.ts` exists but has no callers anywhere in the codebase, and the `resend` dependency in `app/package.json` is not imported anywhere. Treat PDF generation and email delivery as not-yet-wired, even though the schema and some supporting code exist.
+
 ## Acceptance Criteria
 
 1. Sales user can create and send a quote in **< 3 minutes** after catalog is loaded.

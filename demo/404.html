@@ -3,18 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>No encontrado - RS</title>
+  <title data-i18n-title="404.title">No encontrado - RS</title>
   <link rel="icon" href="/assets/rs-logo.png" type="image/png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner"><a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a></div>
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
   </header>
   <main class="container" style="text-align:center;padding:4rem 1rem;">
-    <h1>404</h1>
-    <p>Pagina no encontrada.</p>
-    <a href="/" class="btn btn-primary">Inicio</a>
+    <h1 data-i18n="404.title">404</h1>
+    <p data-i18n="404.body">Pagina no encontrada.</p>
+    <a href="/" class="btn btn-primary" data-i18n="404.home">Inicio</a>
   </main>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
 </body>
 </html>

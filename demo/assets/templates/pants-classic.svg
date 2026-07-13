@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" aria-hidden="true">
+  <path id="zone-pants-body" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"
+    d="M90 20 L230 20 L250 340 L175 340 L160 120 L145 340 L70 340 Z"/>
+  <path id="zone-pants-stripe" fill="#ED090D" stroke="none" opacity="0.9"
+    d="M90 20 L110 20 L125 340 L70 340 Z M230 20 L210 20 L195 340 L250 340 Z"/>
+  <g id="zone-pants-logo" transform="translate(128, 80)">
+    <rect x="0" y="0" width="48" height="48" fill="none" stroke="#999" stroke-dasharray="4 3" stroke-width="1" rx="4"/>
+  </g>
+</svg>

@@ -1,0 +1,4 @@
+RS curated variant bank - pants-classic
+Curated combos: 8 x 2 views = 16 PNG files (AI-generated product photos)
+Combinations outside this curated set fall back to live tint over the grey mockup base (renderLayered).
+Generated: 2026-07-04T10:37:24.687Z

@@ -1,9 +1,9 @@
 # Aviso de Privacidad / Privacy Notice
 
-> **Warning: LEGAL REVIEW REQUIRED**  
-> This is a **draft template** for educational and project planning purposes only.  
-> **Do not publish** until reviewed and approved by a licensed attorney in Mexico familiar with LFPDPPP (and 2025 reforms).  
-> Replace all `[PLACEHOLDERS]` with client-specific information.
+> **Warning: LEGAL REVIEW RECOMMENDED**  
+> **Published version for Rosales Sport:** [../../docs/legal/aviso-de-privacidad.md](../../docs/legal/aviso-de-privacidad.md)  
+> **Public URL (Stage D demo):** `/aviso-de-privacidad.html`  
+> This file remains a **reusable template** for other deployments. Replace placeholders when drafting for a new client.
 
 ---
 

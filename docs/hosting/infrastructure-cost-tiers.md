@@ -2,6 +2,7 @@
 
 > **Currency:** USD for vendor pricing (typical billing); revenue in MXN.  
 > **Exchange note:** Plan budgets in MXN for client using ~$17-20 MXN/USD (verify current rate).
+> **Current actual spend (2026-07): $0/mo.** Only the Stage D static demo is deployed (Netlify Free, drag-and-drop zip, no build minutes beyond the free allowance). Neon, Cloudflare, and Resend are not provisioned at all yet - the "MVP / Wave Zero" tier and the "Scenario: Wave Zero Only" table below (~$3/mo) describe the cost **once Stage 0 (`app/`) is actually deployed**, not today's spend, which is lower still (no domain-amortized cost has been committed either).
 
 ## Tier Overview
 
@@ -80,7 +81,7 @@ Use model routing to control - see [../ai/model-routing.md](../ai/model-routing.
 
 `.mx` domain ~$20-40 USD/year via registrar.
 
-## Scenario: Wave Zero Only
+## Scenario: Wave Zero Only (target, once `app/` is deployed - not current spend)
 
 | Item | Cost |
 |------|------|

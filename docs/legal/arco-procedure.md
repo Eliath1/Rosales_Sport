@@ -1,6 +1,6 @@
 # ARCO Procedure - Access, Rectification, Cancellation, Opposition
 
-> **Contact channel:** `privacidad@[client-domain].mx` (configure before launch)  
+> **Contact channel:** `contacto@rosalessport.com` (published in aviso de privacidad)  
 > **Response time:** 20 business days (extendable once, +20 days, with notice)
 
 ## Overview

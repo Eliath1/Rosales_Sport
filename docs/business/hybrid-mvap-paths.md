@@ -84,6 +84,10 @@ B2B login -> tier catalog -> quote request
 | $100-300k MXN | A through Wave One MVP |
 | $300k+ MXN | A full + Wave Two B2B |
 
+## Long-term ideas gated by this same stop-gate logic
+
+- **Coach roster capture (photo -> AI extraction -> mobile app):** see [../architecture/coach-roster-mobile-roadmap.md](../architecture/coach-roster-mobile-roadmap.md). Not scoped into any wave above; advances one phase at a time only when its own demand signals fire.
+
 ## Related
 
 - [development-cost-phases.md](./development-cost-phases.md)

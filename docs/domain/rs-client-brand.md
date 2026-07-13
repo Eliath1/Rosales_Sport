@@ -4,16 +4,25 @@
 
 ## Colors
 
-| Token | Hex | Use |
-|-------|-----|-----|
-| Brown | `#924628` | Hero backgrounds, demo banner, accents |
-| Red | `#E31B23` | Primary CTA, KPI highlights, admin active nav |
-| Black | `#000000` | Header promo, footer, text, admin sidebar |
-| White | `#FFFFFF` | Page background, cards, button text on red |
+| Token | Hex | RGB | Use |
+|-------|-----|-----|-----|
+| Red | `#ED090D` | 237, 9, 13 | Demo banner, hero, primary CTA, KPI highlights, admin active nav |
+| Black | `#000000` | 0, 0, 0 | Logo circle in header, promo bar, footer, text, admin sidebar |
+| White | `#FFFFFF` | 255, 255, 255 | Page background, cards, button text on red |
+
+Brown (`#924628`) is deprecated. Do not use in new demo work.
 
 ## Logo
 
-File: `demo/assets/rs-logo.png`
+| File | Use |
+|------|-----|
+| `demo/assets/rs-logo-source.png` | Client master (black background) |
+| `demo/assets/rs-logo.png` | Header on black (transparent PNG; Sport script white) |
+| `demo/assets/rs-logo-hero.png` | Hero on red (transparent PNG; Sport script black) |
+
+Run `npm run demo:logo` after updating source or reference files.
+
+Both outputs are PNG with alpha. Counters inside **Sport** (p, o, r) are transparent so the header (black) or hero (red) background shows through.
 
 ## Business focus (demo messaging)
 
@@ -30,7 +39,7 @@ Custom order capture: `/custom/uniform` in demo; see [custom-uniform-decoration.
 
 Prices stay in **MXN** in both locales until dual-currency is scoped in Stage 1+.
 
-Defined in `demo/css/styles.css` as `--rs-brown`, `--rs-red`, `--rs-black`, `--rs-white`.
+Defined in `demo/css/styles.css` as `--rs-red`, `--rs-black`, `--rs-white`.
 
 ## Production
 

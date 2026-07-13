@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="builder.meta.title">Diseña tu uniforme - RS</title>
+  <meta name="description" data-i18n-content="builder.meta.description" content="Configura jersey y pantalon, sube tu logo y envia el pedido con todos los detalles.">
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/configurator.css">
+</head>
+<body class="builder-page">
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente - sin pagos ni envio real</div>
+  <div class="promo-bar" data-i18n="builder.promo">Diseña tu uniforme - pedido bajo solicitud, sin inventario</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/custom/uniform.html" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:11px;" data-i18n="builder.link.simple_form">Formulario simple</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="builder-layout">
+      <aside class="builder-preview-panel" id="builder-preview-panel">
+        <button type="button" class="preview-mobile-toggle" id="preview-mobile-toggle" aria-expanded="true">
+          <span data-i18n="builder.preview">Vista previa de tu diseño</span>
+          <span class="preview-toggle-icon" aria-hidden="true">&#9660;</span>
+        </button>
+        <div class="preview-panel-body" id="preview-panel-body">
+          <div class="view-toggle" role="group" aria-label="Vista">
+            <button type="button" class="view-toggle-btn active" data-view="front" data-i18n="builder.view.front">Frente</button>
+            <button type="button" class="view-toggle-btn" data-view="back" data-i18n="builder.view.back">Espalda</button>
+          </div>
+          <div class="preview-canvas-wrap">
+            <canvas id="preview-canvas" width="360" height="440" aria-label="Vista previa del uniforme"></canvas>
+          </div>
+          <p class="preview-mode-note" id="preview-mode-note" data-i18n="builder.v2.preview.illustrative"></p>
+          <p class="preview-step-hint" id="preview-step-hint" data-i18n="builder.v2.preview.step1_hint"></p>
+          <p class="preview-mini-summary" id="preview-mini-summary"></p>
+        </div>
+      </aside>
+
+      <div class="builder-main">
+        <div class="page-intro">
+          <h1 data-i18n="builder.title">Diseña tu uniforme</h1>
+          <p data-i18n="builder.intro">Arma tu pedido paso a paso. Ventas recibe todos los detalles sin idas y vueltas por WhatsApp.</p>
+        </div>
+
+        <div class="builder-success" role="status"></div>
+
+        <form id="builder-form" novalidate>
+          <div class="wizard-progress" aria-hidden="true">
+            <div class="wizard-step-dot active" data-ui-step="1"></div>
+            <div class="wizard-step-dot" data-ui-step="2"></div>
+            <div class="wizard-step-dot" data-ui-step="3"></div>
+            <div class="wizard-step-dot" data-ui-step="4"></div>
+          </div>
+          <p class="wizard-step-label" data-step-label data-i18n="builder.v2.step.1">Paso 1 de 4: Tu pedido</p>
+
+          <div class="form-card form-card-wide">
+            <!-- Step 1: Tu pedido -->
+            <div class="wizard-panel active" data-step="1">
+              <h2 data-i18n="builder.v2.step1.title">Tu pedido</h2>
+              <p class="form-hint" data-i18n="builder.v2.step1.hint">Elige que necesitas y el modelo base.</p>
+
+              <p class="field-label" data-i18n="builder.v2.order_mode">Tamano del pedido</p>
+              <div class="order-mode-chips" id="order-mode-chips">
+                <button type="button" class="order-chip" data-mode="small" data-i18n="builder.v2.mode.small">Pedido chico (6-11)</button>
+                <button type="button" class="order-chip selected" data-mode="team" data-i18n="builder.v2.mode.team">Equipo (12+)</button>
+              </div>
+              <p class="form-hint" data-i18n="builder.v2.order_mode_hint">Pedido minimo: 6 piezas.</p>
+
+              <p class="field-label" data-i18n="builder.v2.product_label">Tipo de prenda</p>
+              <div id="product-type-grid" class="product-type-grid"></div>
+
+              <p class="field-label" style="margin-top:1.25rem;" data-i18n="builder.v2.template_label">Modelo base</p>
+              <div id="template-grid" class="template-grid"></div>
+
+              <p class="field-label" style="margin-top:1.25rem;" data-i18n="gender.label">Genero</p>
+              <div class="gender-options" id="gender-options">
+                <button type="button" class="size-btn selected" data-gender="unisex" data-i18n="gender.unisex">Unisex</button>
+                <button type="button" class="size-btn" data-gender="dama" data-i18n="gender.dama">Dama</button>
+                <button type="button" class="size-btn" data-gender="caballero" data-i18n="gender.caballero">Caballero</button>
+              </div>
+              <p class="gender-note" data-i18n="gender.note">Mismo rango de tallas XS-XXL. Guia de medidas por genero disponible proximamente.</p>
+            </div>
+
+            <!-- Step 2: Apariencia -->
+            <div class="wizard-panel" data-step="2">
+              <h2 data-i18n="builder.v2.step2.title">Apariencia</h2>
+              <p class="form-hint" data-i18n="builder.v2.step2.hint">Los colores se ven al instante en la vista previa.</p>
+
+              <div class="form-group">
+                <label for="team-name" data-i18n="custom.team">Equipo, liga o negocio</label>
+                <input type="text" id="team-name" placeholder="Ej. Liga Norte CDMX">
+              </div>
+
+              <p class="field-label" data-i18n="builder.v2.colors_label">Colores por zona</p>
+              <p class="form-hint" id="color-curated-hint" data-i18n="builder.v2.colors_curated_hint" hidden>Elige una combinacion. Todas usan fotos reales del uniforme.</p>
+              <div id="color-curated-presets" class="combo-preset-grid" role="listbox" aria-label="Combinaciones disponibles" hidden></div>
+              <!-- "A personalizar" free-form color-zone picker: hidden for this DEMO because color
+                   selection is now fixed to the curated preset combos above (real photos only).
+                   Kept in markup (commented) so it can be restored when free-form tint preview
+                   is supported for every template. Do not remove.
+              <div id="color-compact" class="color-compact">
+                <div class="form-group color-zone-select-wrap">
+                  <label for="color-zone-select" data-i18n="builder.v2.color_zone">Zona a personalizar</label>
+                  <select id="color-zone-select" class="zone-select" aria-describedby="color-zone-hint"></select>
+                </div>
+                <div class="color-current-row">
+                  <span id="color-current-pill" class="color-current-pill" aria-hidden="true"></span>
+                  <input type="color" id="color-zone-picker" aria-label="Color personalizado">
+                  <span id="color-current-hex" class="color-current-hex"></span>
+                </div>
+                <p class="form-hint" id="color-zone-hint" data-i18n="builder.v2.color_zone_hint">Elige una zona y un color. La vista previa se actualiza al instante.</p>
+                <div id="color-swatches-row" class="color-swatches color-swatches-compact" role="listbox" aria-label="Colores de tela"></div>
+                <div id="color-zone-chips" class="color-zone-chips" role="group" aria-label="Resumen de colores"></div>
+              </div>
+              -->
+
+              <p class="field-label" style="margin-top:1.25rem;" data-i18n="builder.logo.upload">Logo o escudo</p>
+              <div class="logo-dropzone" id="logo-dropzone">
+                <input type="file" id="logo-upload" accept="image/png,image/jpeg,image/svg+xml,image/webp" hidden>
+                <p data-i18n="builder.v2.logo.drop">Arrastra tu escudo o haz clic para subir</p>
+                <p class="form-hint" id="logo-file-name" data-i18n="builder.logo.hint">PNG o JPG, max 5 MB</p>
+              </div>
+              <div class="logo-zone-btns" role="group" aria-label="Ubicacion logo">
+                <button type="button" class="logo-zone-btn selected" data-zone="chest" data-i18n="builder.logo.chest">Pecho</button>
+                <button type="button" class="logo-zone-btn" data-zone="sleeve" data-i18n="builder.logo.sleeve">Manga</button>
+                <button type="button" class="logo-zone-btn" data-zone="pants" data-i18n="builder.logo.pants">Pantalon</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Equipo -->
+            <div class="wizard-panel" data-step="3">
+              <h2 data-i18n="builder.v2.step3.title">Equipo</h2>
+              <p class="form-hint" data-i18n="builder.v2.step3.hint">Captura tu roster; el total por talla se calcula solo.</p>
+
+              <p class="field-label" data-i18n="builder.roster.title">Lista de jugadores</p>
+              <div class="roster-table-wrap">
+                <table class="roster-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th data-i18n="builder.roster.name">Nombre</th>
+                      <th data-i18n="builder.roster.number">Numero</th>
+                      <th data-i18n="builder.roster.size">Talla</th>
+                      <th class="sr-only" data-i18n="builder.roster.remove">Quitar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="roster-tbody"></tbody>
+                </table>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="roster-add-btn" data-i18n="builder.v2.roster.add_player">+ Agregar jugador</button>
+
+              <p class="field-label" style="margin-top:1.25rem;" data-i18n="custom.section.qty">Cantidad por talla</p>
+              <p class="form-hint" data-i18n="builder.v2.qty_auto_hint">Se calcula automaticamente segun las tallas del roster.</p>
+              <div class="size-grid-wrap">
+                <table class="size-grid size-grid-readonly" aria-label="Tallas">
+                  <thead>
+                    <tr><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span id="size-count-xs">0</span></td>
+                      <td><span id="size-count-s">0</span></td>
+                      <td><span id="size-count-m">0</span></td>
+                      <td><span id="size-count-l">0</span></td>
+                      <td><span id="size-count-xl">0</span></td>
+                      <td><span id="size-count-xxl">0</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="size-total-line"><span data-i18n="builder.v2.total_pieces">Total piezas:</span> <strong id="size-total">12</strong></p>
+
+              <p class="field-label" style="margin-top:1.25rem;" data-i18n="custom.section.decoration">Tipo de trabajo</p>
+              <p class="form-hint deco-recommend" data-i18n="builder.v2.deco.recommend">Recomendado en Mexico: Bordado</p>
+              <fieldset class="deco-fieldset">
+                <legend class="sr-only" data-i18n="custom.section.decoration">Tipo de trabajo</legend>
+                <div class="deco-grid">
+                  <div class="deco-option">
+                    <input type="radio" name="decoration" id="deco-embroidery" value="embroidery" checked>
+                    <label for="deco-embroidery"><span class="deco-name" data-i18n="custom.deco.embroidery">Bordado</span></label>
+                  </div>
+                  <div class="deco-option">
+                    <input type="radio" name="decoration" id="deco-dtf" value="dtf">
+                    <label for="deco-dtf"><span class="deco-name">DTF</span></label>
+                  </div>
+                  <div class="deco-option">
+                    <input type="radio" name="decoration" id="deco-tpu" value="tpu">
+                    <label for="deco-tpu"><span class="deco-name">TPU</span></label>
+                  </div>
+                  <div class="deco-option">
+                    <input type="radio" name="decoration" id="deco-3d" value="3d_dtf">
+                    <label for="deco-3d"><span class="deco-name" data-i18n="custom.deco.3d_dtf">3D DTF</span></label>
+                  </div>
+                  <div class="deco-option">
+                    <input type="radio" name="decoration" id="deco-sublimation" value="sublimation">
+                    <label for="deco-sublimation"><span class="deco-name" data-i18n="custom.deco.sublimation">Sublimado</span></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <!-- Step 4: Revisar y enviar -->
+            <div class="wizard-panel" data-step="4">
+              <h2 data-i18n="builder.v2.step4.title">Revisar y enviar</h2>
+              <p class="form-hint" data-i18n="builder.v2.step4.hint">Confirma que todo este correcto antes de enviar.</p>
+
+              <div id="review-summary-cards" class="summary-cards"></div>
+
+              <details class="tech-details">
+                <summary data-i18n="builder.v2.tech_detail">Detalle tecnico (JSON)</summary>
+                <pre id="review-spec" class="review-spec" aria-label="Spec JSON"></pre>
+              </details>
+
+              <h3 class="subsection-title" data-i18n="custom.section.contact">Contacto</h3>
+              <div class="form-group"><label for="contact-name" data-i18n="quote.name">Nombre</label><input type="text" id="contact-name" required></div>
+              <div class="form-group"><label for="contact-email" data-i18n="quote.email">Correo</label><input type="email" id="contact-email" required></div>
+              <div class="form-group"><label for="contact-phone" data-i18n="quote.phone">Telefono / WhatsApp</label><input type="tel" id="contact-phone"></div>
+              <div class="form-group"><label for="contact-notes" data-i18n="quote.notes">Notas</label><textarea id="contact-notes" rows="2"></textarea></div>
+
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="builder-consent" required>
+                <label for="builder-consent" data-i18n="quote.consent">Acepto aviso de privacidad.</label>
+              </div>
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="builder-review-ok" required>
+                <label for="builder-review-ok" data-i18n="builder.v2.review_confirm">Revise mi diseño y los datos del roster.</label>
+              </div>
+            </div>
+
+            <div class="wizard-nav wizard-nav-sticky">
+              <button type="button" class="btn btn-outline" id="wizard-prev" style="display:none;" data-i18n="builder.nav.prev">Anterior</button>
+              <button type="button" class="btn btn-primary" id="wizard-next" data-i18n="builder.nav.next">Siguiente</button>
+              <button type="submit" class="btn btn-primary" id="wizard-submit" style="display:none;" data-i18n="builder.v2.submit">Enviar pedido a Rosales Sport</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+  <script src="/js/variant-bank.js?v=8"></script>
+  <script src="/js/preview-compositor.js?v=8"></script>
+  <script src="/js/configurator.js?v=9"></script>
+</body>
+</html>

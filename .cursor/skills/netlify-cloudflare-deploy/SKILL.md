@@ -11,14 +11,24 @@ description: >-
 ## Instructions
 
 1. Netlify hosts the Next.js app; Cloudflare fronts DNS, CDN, and WAF - follow topology doc.
-2. Separate contexts: production, staging, preview (PR deploys).
-3. Env vars per context: DATABASE_URL, email keys, analytics - never shared blindly.
-4. Prisma: use connection strategy compatible with serverless (pooler/proxy if documented).
-5. Purge Cloudflare cache after static asset or catalog image changes.
+2. **Stage D (now):** static `demo/` publish; images in `demo/images/`; run `npm run demo:build-check` before deploy.
+3. Separate contexts: production, staging, preview (PR deploys).
+4. Env vars per context: DATABASE_URL, email keys, analytics - never shared blindly.
+5. Prisma: use connection strategy compatible with serverless (pooler/proxy if documented).
+6. Purge Cloudflare cache after static asset or catalog image changes.
 
 ## Key Workflows
 
-### Deploy checklist
+### Stage D demo deploy
+
+```
+- [ ] npm run demo:build-check
+- [ ] Images present in demo/images/
+- [ ] npx netlify deploy --prod --dir=demo (or demo:package zip)
+- [ ] Smoke: /, /collections/jerseys, /images/jersey1.webp
+```
+
+### Stage 0+ app deploy checklist
 
 ```
 - [ ] Quality gates pass on branch

@@ -1,0 +1,22 @@
+---
+description: Prohibits use of Altera, Glean, and Playwright MCP tools/docs in this repo
+alwaysApply: true
+---
+
+# Disallowed MCP tools
+
+Never invoke the following in this repository, for any task:
+
+- Altera MCP or Altera docs/tools of any kind
+- Glean MCP or Glean search/docs tools
+- Playwright MCP (browser automation: navigate, screenshot, snapshot, console, etc.)
+
+## Instead
+
+- Verify static HTML/CSS/JS by reading files directly, running `node --check`, Node
+  scripts, and `npm run demo:build-check`.
+- If browser-level verification is genuinely required, ask the user to check
+  manually or run `npm run demo` and describe what to look for - do not fall back
+  to Playwright or any other browser-automation MCP.
+- If a task seems to require Altera or Glean, stop and ask the user how to proceed
+  instead of calling those tools.

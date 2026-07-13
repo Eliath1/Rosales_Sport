@@ -1,10 +1,19 @@
 ---
 description: Product images, video, and static asset guidelines
-globs: "**/{public,components}/**/*.{tsx,ts,svg,png,jpg,webp,mp4}"
+globs: "**/{public,components,demo}/**/*.{tsx,ts,svg,png,jpg,webp,mp4,html,css}"
 alwaysApply: false
 ---
 
 # Multimedia Assets
+
+## Stage D demo (`demo/`)
+
+- Jersey photos: `demo/images/` -> URL `/images/jersey1.webp`.
+- Repo root `images/` is staging only; copy into `demo/images/` before deploy.
+- Collection/home grids: `background-image` on `.placeholder-jersey.has-photo` (70% x 80% frame). Never full-bleed `<img>` in `.product-image`.
+- See `.cursor/rules/stage-d-demo.mdc`.
+
+## Next.js app (`app/`)
 
 - Product images in `public/products/{sku}/`; use WebP with PNG fallback via `<picture>`.
 - Alt text bilingual via i18n: describe bat model, color, and league (LMB Sultanes jersey).

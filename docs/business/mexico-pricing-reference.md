@@ -71,6 +71,18 @@ If offering 3 MSI on $2,000 jersey:
 - Customer pays ~$667 × 3 (no interest if merchant absorbs fee)
 - Merchant fee ~3.5% + MSI surcharge from acquirer - model in finance template
 
+## Processor commission tracking (target, Priority 2 - 2026-07)
+
+Today the ~3.5% figure above is an industry estimate, not a measured number. Per
+[ADR-013-split-payments.md](../architecture/decisions/ADR-013-split-payments.md),
+once the real Mercado Pago adapter ships, `Payment.feeCents` captures the
+**actual** fee per transaction from the webhook payload, and a small admin
+report shows effective commission % (`sum(feeCents) / sum(amountCents)`) over a
+trailing period. Use that real number, not this estimate, to re-price once
+Priority 2 ships - the split-payment plan (100% under 6 pieces, 50%
+deposit + balance for 6+) also means a single order can carry two fees (one per
+payment leg), so the report sums across both.
+
 ## Tax Awareness (not advice)
 
 - IVA 16% on most goods

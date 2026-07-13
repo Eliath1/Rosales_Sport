@@ -1,13 +1,15 @@
 # Website Architecture Plan - Mexico Baseball Store CRM
 
-> **Status:** Planning (pre-scaffold)  
+> **Status:** Target architecture for Wave 0+. A partial, undeployed `app/` scaffold exists (see note below); nothing in this plan is live yet.  
 > **Audience:** You (learner), future contributors, AI agents  
 > **Last updated:** 2026-07  
-> **Next step:** Stage D static demo deploy, then Phase 2 Next.js scaffold  
+> **Next step:** Wire and deploy `app/` per [03-staged-delivery-roadmap.md](./03-staged-delivery-roadmap.md) Stage 0 build order  
 > **Delivery stance:** Value first, fast - one custom stack, no parallel ERP platforms  
-> **Active stage:** [Stage D - Static demo](./stage-demo-static.md) for client validation
+> **Active stage:** [Stage D - Static demo](./stage-demo-static.md) is the only stage currently deployed
 
 This document is the **single source of truth** for how the website is structured: public storefront, admin CRM, APIs, data, integrations, and delivery waves. Read it before writing code or opening ADRs.
+
+**Reality check (2026-07):** `app/` (Next.js + Prisma) exists in the repo as local scaffolding - not deployed, not connected to a live database anywhere reachable by a customer. Its current storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md): no configurator UI, no `Design` domain. Everything below is the target design this scaffold is working toward, not a description of what runs today.
 
 ---
 
@@ -418,6 +420,8 @@ src/app/
   api/                    # Route handlers
 ```
 
+**As-built note (2026-07):** `app/src/app/` does not have a `[locale]` segment yet - routes are flat (`src/app/page.tsx`, `src/app/quote/page.tsx`, `src/app/admin/page.tsx`, etc.), and `next-intl` is a `package.json` dependency with no actual usage in the code. Bilingual routing per this layout has not been started; the only bilingual UI shipped so far is the Stage D demo's client-side toggle in `demo/js/i18n.js` / `demo/js/messages.js`, which is a different (non-Next.js) mechanism and won't carry over directly.
+
 ### Storefront components (planned)
 
 | Component | Responsibility |
@@ -485,6 +489,8 @@ Security review skill/agent before Wave 1 payments go live.
 
 ## 13. Deployment topology
 
+> **Not deployed yet.** The only live Netlify site today publishes `demo/` as a static bundle - no Cloudflare, no Next.js runtime, no Neon, no Resend, no R2. This diagram is the target for when Stage 0 ships.
+
 ```mermaid
 flowchart LR
   User[Browser] --> CF[Cloudflare DNS CDN WAF]
@@ -534,6 +540,8 @@ RS/
 ```
 
 **Decision:** Keep `app/` as sibling to `docs/` so planning toolkit stays separate from runnable code.
+
+**As-built note (2026-07):** `app/` exists but does not follow the `modules/{customers,catalog,quotes,...}` domain-folder layout above - the actual tree is flatter (`src/lib/services/*Service.ts` per domain, `src/app/api/*` route handlers, no `src/modules/` directory, no `[locale]` route segment despite `next-intl` being a dependency). Reconcile this doc with the real layout once the module-folder structure is actually adopted, or update the doc to match the flatter layout if that's the accepted direction.
 
 ---
 

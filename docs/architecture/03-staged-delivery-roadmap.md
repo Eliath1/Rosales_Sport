@@ -16,7 +16,7 @@ This document maps **every delivery stage** from the first customer-facing previ
 | **D** | Static demo | HTML/CSS/JS on Netlify | None | Storefront + fake admin UI | Fast visual validation (es-MX + en) |
 | **0** | Wave 0 CRM | Next.js on Netlify | Neon | Real admin; real storefront forms | Quotes replace spreadsheets |
 | **0.2** | Privacy | Same app | Same | Legal pages + consent | LFPDPPP baseline |
-| **1** | Commerce | Same app | Same + orders | Cart + checkout | Online sales |
+| **1** | Commerce (expanded) | Same app | Same + orders/payments | Guest/account checkout, split payments, order tracking | Online sales, in owner priority order: new customers -> payments -> accounts |
 | **2** | Payments+ | Same app | Same | More payment methods | Broader checkout |
 | **3** | Ops depth | Same app | Same + integrations | Shipping, invoicing hooks | Back-office scale |
 | **5** | AI assist | Same app | Same + vector index | Chat widget | Support deflection |
@@ -97,6 +97,8 @@ Full spec: [stage-demo-static.md](./stage-demo-static.md).
 
 ## Stage 0 - Wave 0 (real CRM)
 
+> **Status (2026-07): scaffolded, not deployed.** `app/` has a local Next.js + Prisma + NextAuth scaffold (build order steps 1-4 partially done: routes, services, and schema exist for Customers/Products/Quotes/Leads), but it has never been deployed - no `netlify.toml` targets `app/`, and `demo/` remains the only live site. `quotePdf.ts` still has no caller. `app/`'s current storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md) - there is no configurator UI or `DesignRequest` model in `app/` yet, so the primary-journey pivot from that ADR has not been carried into Stage 0 work. Treat the rest of this section as the target design for Stage 0, not a description of what's running today - see Stage 1 below for what actually exists now.
+
 ### Purpose
 
 Internal value first: sales creates and sends real quotes; public site captures leads. Modular monolith on Next.js.
@@ -133,9 +135,9 @@ flowchart TB
 
 Detail: [wave-zero-quote-crm.md](./wave-zero-quote-crm.md), section 17 in [02-website-architecture-plan.md](./02-website-architecture-plan.md).
 
-### Modules active
+### Modules active (target - once Stage 0 ships)
 
-Customers, Catalog, Quotes, Notifications, Auth, Payments (mock adapter only)
+Customers, Catalog, Quotes, Notifications, Auth, Payments (mock adapter only). **As of 2026-07, no payments mock adapter exists in `app/` code** - this list describes what should be active when Stage 0 is complete and deployed, not the current state.
 
 ### Routes added (vs demo)
 
@@ -178,36 +180,66 @@ Docs: [../legal/mexico-privacy-framework.md](../legal/mexico-privacy-framework.m
 
 ---
 
-## Stage 1 - Storefront commerce
+## Stage 1 - Storefront commerce (expanded scope, 2026-07)
+
+> **Status (2026-07):** expanded beyond the original "cart + checkout" framing to cover the owner's three stated priorities in order. This stage is now internally sequenced as **Priority 1 -> Priority 2 -> Priority 3** below, not built as one flat batch of work. See the new-requirements roadmap plan (ADR-012, ADR-013) for the full breakdown.
+>
+> **Build status:** Priority 1, Priority 2, and Priority 3 are implemented in `app/` (still undeployed - same caveat as Stage 0 above: no `netlify.toml` targets `app/` yet). `MercadoPagoAdapter` is code-complete but untested against real Mercado Pago sandbox credentials - `PAYMENT_PROVIDER` defaults to `mock` so checkout/webhook/commission-report code paths are fully exercisable without any payment credentials. Priority 3 (customer accounts) has not had a security review pass yet (see checkpoint below), has no email verification flow, and `SavedPaymentMethod` has no UI beyond an empty-state stub gated on `isDistributor`.
 
 ### Purpose
 
-Cart, checkout, Mercado Pago (cards, OXXO, wallet), orders linked to quotes.
+Guest and logged-in checkout, split/deposit payments with commission tracking, and customer accounts - in that order, because getting a new customer to buy comes before optimizing how they pay, which comes before building account/dashboard tooling for repeat customers.
 
 ### Architecture delta
 
 ```mermaid
 flowchart LR
-  Store[Storefront] --> Cart[Session cart]
-  Cart --> Checkout[Checkout]
-  Checkout --> MP[Mercado Pago]
+  Store[Storefront] --> Catalog2["Catalog: gender + swatches"]
+  Catalog2 --> Checkout["Checkout (guest or logged in)"]
+  Checkout --> Orders[Orders module]
+  Orders --> MP[Mercado Pago]
   MP --> WH[Webhook handler]
-  WH --> Orders[Orders module]
+  WH --> Orders
   Orders --> Neon[(Neon)]
+  Orders --> Notify["Notifications: sales@rosalessport.com"]
 ```
 
-| Added | Module |
-|-------|--------|
-| `orders`, `order_line_items`, `payment_intents` | Orders + Payments |
-| Mercado Pago adapter (live) | Payments |
-| `/cart`, `/checkout`, `/order/[id]` | Storefront |
-| `/api/webhooks/mercadopago` | API |
-| `/admin/orders` | Admin |
-| Public catalog filters | Catalog |
+### Priority 1 - Getting new customers (done)
+
+| Added | Module | Status |
+|-------|--------|--------|
+| `orders`, `order_line_items` | Orders | Done (`orderService.ts`) |
+| `ProductVariant.gender`, `swatchImageUrl` | Catalog | Schema done; demo/ has the consolidated Manga Normal PDP with swatch strip, `app/` storefront does not yet |
+| Guest checkout (`/checkout`, no account required) | Orders + Customers | Done - price always read server-side from the product record, never trusted from the request |
+| Testimonial model + admin CRUD + homepage carousel | Notifications/Content | Model + admin CRUD done in `app/`; homepage carousel done in `demo/`; `app/` homepage does not render it yet |
+| Basic new-order email to `sales@rosalessport.com` | Notifications | Done, best-effort (`orderNotification.ts` - skips silently if `RESEND_API_KEY` unset) |
+| `/admin/orders` (basic list) | Admin | Done, includes inline status change |
+
+### Priority 2 - Payment management (done, mock provider - Mercado Pago untested)
+
+| Added | Module | Status |
+|-------|--------|--------|
+| `payments`, `payment_events`, deposit/balance fields on `orders` | Payments | Done (ADR-013 shape, plus an audit-log `payment_events` table) |
+| `PaymentProvider` interface + `MockPaymentProvider` + `MercadoPagoAdapter`, split payment plan (full under 6 pieces, 50% deposit + balance for 6+) | Payments | Done. `MercadoPagoAdapter` is code-complete but **not verified against real sandbox credentials** - webhook signature scheme in particular needs confirming against current MP docs before go-live |
+| Commission `feeCents` capture + admin report | Payments | Done (`/admin/payments`, trailing-30-day effective % by provider) |
+| `POST /api/webhooks/payments/:provider` | API | Done, idempotent by `providerPaymentId`; mock provider has a local-only simulate endpoint (`/pay/mock/:paymentId`) since it has no real webhook source |
+| Order PDF+Excel attachment (payment/commission detail) | Notifications | Not started |
+
+### Priority 3 - User registration and login (done, unreviewed)
+
+| Added | Module | Status |
+|-------|--------|--------|
+| `Customer.passwordHash`/`emailVerifiedAt`/`isDistributor`, `SavedPaymentMethod` model | Schema | Done (migration `20260709090000_p3_customer_accounts`); `emailVerifiedAt` is written nowhere yet - no verification email flow exists |
+| Second NextAuth instance (`customerAuth.config.ts` + `customerAuth.ts`), own `customer-session-token` cookie, `/mi-cuenta/*` middleware scope | Auth (customer) | Done - fully separate from staff auth, no shared role table |
+| `/mi-cuenta/registro`, `/mi-cuenta/login`, `/mi-cuenta` | Customers | Done. Registration claims an existing guest `Customer` row by email (from a prior order) instead of duplicating it |
+| `/mi-cuenta/pedidos` order list + `/mi-cuenta/pedidos/[id]` status timeline | Orders | Done, login-gated per ADR-012 (no guest tracking link in this phase); IDOR-checked by `customerId` |
+| `/checkout` pre-fill for logged-in customers | Orders | Done; guest checkout unchanged when no session |
+| `isDistributor` toggle on `/admin/customers` | Admin | Done, staff-session-checked |
+| `SavedPaymentMethod` UI | Customers + Payments | Not started beyond an empty-state stub on `/mi-cuenta` gated on `isDistributor` - schema/model only |
 
 ### Security checkpoint
 
-`security-reviewer` (Opus) sign-off before go-live.
+`security-reviewer` (Opus) sign-off before go-live - required before Priority 2 (real payments) and again before Priority 3 (customer auth) ship.
 
 ### Exit criteria
 
@@ -215,9 +247,10 @@ flowchart LR
 |--------|--------|
 | Online orders | 5+ per week after 90 days marketing |
 | Webhook reliability | 99%+ payment confirmations |
-| OXXO flow tested | Sandbox + one real txn |
+| Guest checkout completion | No login prompt blocks a first-time purchase |
+| Commission visibility | Effective % visible in admin report within 1 day of a real payment |
 
-Docs: [payment-provider-abstraction.md](./payment-provider-abstraction.md), [../business/payment-methods-roadmap.md](../business/payment-methods-roadmap.md)
+Docs: [payment-provider-abstraction.md](./payment-provider-abstraction.md), [../business/payment-methods-roadmap.md](../business/payment-methods-roadmap.md), [decisions/ADR-012-customer-accounts.md](./decisions/ADR-012-customer-accounts.md), [decisions/ADR-013-split-payments.md](./decisions/ADR-013-split-payments.md)
 
 ---
 
@@ -296,6 +329,16 @@ Phased: static FAQ (0) -> RAG Q&A (1) -> tools (2) -> staff copilot (3). See [ai
 
 ---
 
+## Future ideas (not yet staged)
+
+Items below are long-term product ideas with no ADR, no committed timeline, and no assigned stage number. They live here so they aren't lost, and get pulled into a real numbered stage only when a demand signal appears - same discipline as everything else in this roadmap.
+
+| Idea | Trigger to scope it for real | Detail |
+|---|---|---|
+| Coach roster capture (photo of handwritten roster -> AI extraction -> mobile app) | Coaches keep sending roster photos over WhatsApp after a plain upload field ships | [coach-roster-mobile-roadmap.md](./coach-roster-mobile-roadmap.md), full feasibility/cost/timeline assessment in [coach-roster-ai-capture-assessment-2026-07.md](./coach-roster-ai-capture-assessment-2026-07.md) |
+
+---
+
 ## Deployment topology by stage
 
 | Stage | Netlify publish | Build command | DB | Email |
@@ -362,3 +405,4 @@ When Stage 0 ships, update `netlify.toml` build settings for `app/`.
 | [demo-dns-netlify-setup.md](../hosting/demo-dns-netlify-setup.md) | DNS + Netlify for Stage D |
 | [wave-zero-quote-crm.md](./wave-zero-quote-crm.md) | Stage 0 features |
 | [hybrid-mvap-paths.md](../business/hybrid-mvap-paths.md) | Business path alignment |
+| [coach-roster-mobile-roadmap.md](./coach-roster-mobile-roadmap.md) | Long-term idea, not yet staged |

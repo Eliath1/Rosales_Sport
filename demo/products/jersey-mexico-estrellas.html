@@ -8,32 +8,39 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <div class="demo-banner">Vista previa para cliente</div>
-  <div class="promo-bar">Cotiza mayoreo y equipos</div>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <div class="promo-bar" data-i18n="promo.bar">Cotiza mayoreo y equipos</div>
   <header class="site-header">
     <div class="header-inner">
       <div class="header-left"><button class="menu-toggle" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
-      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
-      <div class="header-icons"><button class="icon-btn" type="button" data-demo-icon="Carrito en etapa 1" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/></svg></button></div>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/mi-cuenta/login/" class="icon-btn account-link" data-account-link data-i18n-aria="aria.account" aria-label="Cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><span data-account-link-label data-i18n="account.nav.login">Iniciar sesion</span></a>
+        <a href="/cart/" class="icon-btn" data-i18n-aria="aria.cart" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="badge" data-cart-badge>0</span></a>
+      </div>
     </div>
-    <nav class="header-nav container"><a href="/collections/jerseys.html">Jerseys</a></nav>
-    <nav class="nav-mobile"><a href="/collections/jerseys.html">Jerseys</a></nav>
+    <nav class="header-nav container"><a href="/collections/jerseys.html" data-i18n="nav.jerseys">Jerseys</a></nav>
+    <nav class="nav-mobile"><a href="/collections/jerseys.html" data-i18n="nav.jerseys">Jerseys</a></nav>
   </header>
   <main class="container">
-    <nav class="breadcrumb"><a href="/">Inicio</a> / <a href="/collections/jerseys.html">Jerseys</a> / Mexico Estrellas</nav>
+    <nav class="breadcrumb"><a href="/" data-i18n="breadcrumb.home">Inicio</a> / <a href="/collections/jerseys.html" data-i18n="collection.title">Jerseys</a> / Mexico Estrellas</nav>
     <div class="pdp-layout">
       <div>
-        <div class="pdp-gallery-main"><div class="placeholder-jersey" style="width:75%;height:85%;">Vista frontal</div></div>
+        <div class="pdp-gallery-main"><div class="placeholder-jersey has-photo" style="width:75%;height:85%;background-image:url('/images/jersey2.jpg')" data-i18n="pdp.view.front">Vista frontal</div></div>
         <div class="pdp-thumbs">
-          <button type="button" class="pdp-thumb active" data-label="Vista frontal"><div class="placeholder-jersey" style="width:100%;height:100%;font-size:9px;">Frente</div></button>
-          <button type="button" class="pdp-thumb" data-label="Vista trasera"><div class="placeholder-jersey" style="width:100%;height:100%;font-size:9px;">Espalda</div></button>
+          <button type="button" class="pdp-thumb active" data-i18n-key="pdp.view.front" data-image="/images/jersey2.jpg"><div class="placeholder-jersey has-photo" style="width:100%;height:100%;font-size:9px;background-image:url('/images/jersey2.jpg')" data-i18n="pdp.view.front">Frente</div></button>
+          <button type="button" class="pdp-thumb" data-i18n-key="pdp.view.back" data-image="/images/jersey4.jpg"><div class="placeholder-jersey has-photo" style="width:100%;height:100%;font-size:9px;background-image:url('/images/jersey4.jpg')" data-i18n="pdp.view.back">Espalda</div></button>
         </div>
       </div>
       <div class="pdp-details">
         <h1>Jersey Mexico LMB Juego de Estrellas 2026</h1>
         <p class="pdp-sku">SKU: RS-JER-MEX-EST-26</p>
         <p class="pdp-price">$ 2,699.00</p>
-        <label class="size-label">Talla</label>
+        <label class="size-label" data-i18n="pdp.size">Talla</label>
         <div class="size-options">
           <button type="button" class="size-btn">S</button>
           <button type="button" class="size-btn">M</button>
@@ -41,12 +48,25 @@
           <button type="button" class="size-btn">XL</button>
         </div>
         <div class="pdp-actions">
-          <a href="/quote/?sku=RS-JER-MEX-EST-26&name=Jersey%20Mexico%20Estrellas" class="btn btn-primary">Solicitar cotizacion</a>
+          <button type="button" class="btn btn-primary" data-buy-now data-qty="6" data-sku="RS-JER-MEX-EST-26" data-name="Jersey Mexico Estrellas" data-price="2699" data-i18n="pdp.cta.buynow">Comprar ahora</button>
+          <button type="button" class="btn btn-outline" data-add-to-cart data-qty="6" data-sku="RS-JER-MEX-EST-26" data-name="Jersey Mexico Estrellas" data-price="2699" data-i18n="pdp.cta.addtocart">Agregar al carrito</button>
+          <a href="/quote/?sku=RS-JER-MEX-EST-26&name=Jersey%20Mexico%20Estrellas" class="btn btn-outline" data-i18n="pdp.cta.quote">Solicitar cotizacion</a>
+        </div>
+        <p class="form-hint" data-i18n="pdp.qty.min_note">Pedido minimo: 6 piezas.</p>
+        <p class="checkout-deposit-note" data-i18n="pdp.deposit.note">Pedidos de 6 o mas piezas: 50% de anticipo y 50% al estar listo el pedido para envio.</p>
+        <div class="payment-methods-block">
+          <p class="payment-methods-title" data-i18n="payment.methods.title">Metodos de pago aceptados</p>
+          <ul class="payment-methods" aria-label="Metodos de pago">
+            <li class="payment-method-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><span data-i18n="payment.method.card">Tarjeta</span></li>
+            <li class="payment-method-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg><span data-i18n="payment.method.mercadopago">Mercado Pago</span></li>
+            <li class="payment-method-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-6 9 6"/><path d="M4 10v9h16v-9"/><path d="M9 19v-5h6v5"/></svg><span data-i18n="payment.method.oxxo">OXXO</span></li>
+            <li class="payment-method-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="10" width="18" height="8" rx="1"/><path d="M7 10V6a5 5 0 0110 0v4"/></svg><span data-i18n="payment.method.spei">SPEI/Transferencia</span></li>
+          </ul>
         </div>
       </div>
     </div>
   </main>
-  <div class="pdp-sticky-bar"><span class="pdp-price">$ 2,699.00</span><a href="/quote/?sku=RS-JER-MEX-EST-26&name=Jersey%20Mexico%20Estrellas" class="btn btn-primary" style="flex:2;">Cotizar</a></div>
+  <div class="pdp-sticky-bar"><span class="pdp-price">$ 2,699.00</span><button type="button" class="btn btn-primary" style="flex:2;" data-buy-now data-qty="6" data-sku="RS-JER-MEX-EST-26" data-name="Jersey Mexico Estrellas" data-price="2699" data-i18n="pdp.cta.buynow">Comprar ahora</button></div>
   <footer class="site-footer"><p class="footer-copy">RS Beisbol Mexico</p></footer>
   <script src="/js/messages.js"></script>
   <script src="/js/i18n.js"></script>

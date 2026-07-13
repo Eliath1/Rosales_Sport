@@ -34,6 +34,8 @@ description: >-
 - Customization / team order entry points
 - Contact or quote CTA placement
 
+For **Stage D static demo** (`demo/`), run skill `stage-d-static-demo` and `npm run demo:build-check` after parity edits. Do not approve full-bleed grid images or duplicate hero CTAs.
+
 ## Reference Docs
 
 - [docs/product/mvp-newera-mx-reference.md](../../../docs/product/mvp-newera-mx-reference.md)

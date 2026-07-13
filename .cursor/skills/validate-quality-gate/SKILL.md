@@ -30,6 +30,15 @@ description: >-
 - [ ] No secrets in diff
 ```
 
+### Stage D demo gate (before Netlify demo deploy)
+
+```
+- [ ] npm run demo:build-check (structure + files)
+- [ ] Collection grid: uniform card proportions on /collections/jerseys
+- [ ] Copy parity: demo/js/messages.js es + en for changed keys
+- [ ] Skill: stage-d-static-demo pre/post checklists
+```
+
 ### Wave 0 release gate
 
 - Quote workflow happy path manually verified

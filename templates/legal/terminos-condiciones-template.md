@@ -1,8 +1,9 @@
 # Términos y Condiciones de Uso del Sitio Web
 
 > **Warning: LEGAL REVIEW REQUIRED**  
-> Draft template - not for publication without review by licensed counsel in Mexico.  
-> Replace `[PLACEHOLDERS]`. Spanish version is primary.
+> Draft template - not for publication without review by licensed counsel in Mexico (and U.S. counsel if actively selling to U.S. consumers).  
+> **Published version for Rosales Sport:** [../../docs/legal/terminos-condiciones.md](../../docs/legal/terminos-condiciones.md)  
+> **Public URL (Stage D demo):** `/terminos-condiciones.html`
 
 ---
 

@@ -1,0 +1,4 @@
+RS mockup pack - pants-classic
+Mapping: images/mockup-mapping.json
+Verified: true
+Ingested: 2026-07-04T08:18:01.416Z

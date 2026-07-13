@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" aria-hidden="true">
+  <path id="zone-body" fill="#ffffff" stroke="#1a1a1a" stroke-width="2"
+    d="M40 95 L80 55 L120 75 L160 50 L200 75 L240 55 L280 95 L280 340 L40 340 Z"/>
+  <path id="zone-sleeve" fill="#ED090D" stroke="#1a1a1a" stroke-width="1.5"
+    d="M40 95 L20 130 L35 155 L55 120 Z M280 95 L300 130 L285 155 L265 120 Z"/>
+  <path id="zone-collar" fill="#000000" stroke="#1a1a1a" stroke-width="1"
+    d="M120 75 L160 62 L200 75 L190 95 L130 95 Z"/>
+  <path id="zone-pinstripe" fill="none" stroke="#ED090D" stroke-width="3" opacity="0.85"
+    d="M95 120 L95 320 M115 118 L115 322 M205 118 L205 322 M225 120 L225 320"/>
+  <path id="zone-trim" fill="#000000" opacity="0.9"
+    d="M40 330 L280 330 L280 340 L40 340 Z"/>
+  <g id="zone-logo-slot" transform="translate(128, 155)">
+    <rect x="0" y="0" width="64" height="64" fill="none" stroke="#999" stroke-dasharray="4 3" stroke-width="1" rx="4"/>
+  </g>
+</svg>

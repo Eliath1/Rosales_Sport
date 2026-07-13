@@ -3,51 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>COT-1042 - RS Admin</title>
+  <title>Cotizacion - RS Admin</title>
   <link rel="icon" href="/assets/rs-logo.png" type="image/png">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <div class="demo-banner">Admin demo</div>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
   <div class="admin-layout">
     <aside class="admin-sidebar">
-      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
       <ul class="admin-nav">
-        <li><a href="/admin/">Dashboard</a></li>
-        <li><a href="/admin/quotes.html" class="active">Cotizaciones</a></li>
+        <li><a href="/admin/" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" data-i18n="admin.designs">Disenos</a></li>
+        <li><a href="/admin/quotes.html" class="active" data-i18n="admin.quotes">Cotizaciones</a></li>
+        <li><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" data-i18n="admin.testimonials">Testimonios</a></li>
+        <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
       </ul>
     </aside>
-    <div class="admin-main">
-      <nav class="breadcrumb"><a href="/admin/quotes.html">Cotizaciones</a> / COT-1042</nav>
-      <h1 style="margin:0.5rem 0;color:var(--rs-red);">COT-1042 - Liga Norte CDMX</h1>
-      <p><span class="status status-sent">enviada</span> Vigencia: 15 jul 2026</p>
+    <div id="quote-detail-root" class="admin-main">
+      <nav class="breadcrumb"><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a> / <span id="quote-breadcrumb-current"></span></nav>
+      <h1 id="quote-title" style="margin:0.5rem 0;color:var(--rs-red);"></h1>
+      <p id="quote-meta" style="margin:0 0 0.5rem;font-size:13px;"></p>
+      <p id="quote-customer" style="margin:0 0 1.5rem;font-size:13px;color:var(--gray-600);"></p>
+
       <div class="form-card" style="max-width:100%;margin-top:1.5rem;">
-        <h2 style="font-size:1rem;text-transform:uppercase;margin:0 0 1rem;color:var(--rs-brown);" data-i18n="admin.custom.title">Detalle de personalizacion</h2>
-        <dl style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;font-size:13px;margin:0 0 1.5rem;">
-          <dt style="font-weight:700;" data-i18n="admin.custom.decoration">Tipo de estampado</dt>
-          <dd data-i18n="admin.custom.deco.embroidery">Bordado (Embroidery)</dd>
-          <dt style="font-weight:700;" data-i18n="admin.custom.sizes">Tallas</dt>
-          <dd>4x S, 6x M, 2x L (12 total)</dd>
-          <dt style="font-weight:700;" data-i18n="admin.custom.roster">Nombres y numeros</dt>
-          <dd>Garcia Lopez 12, Martinez Ruiz 7, Torres 3 (+9 mas)</dd>
-        </dl>
+        <h2 style="font-size:1rem;text-transform:uppercase;margin:0 0 1rem;color:var(--rs-red);" data-i18n="admin.custom.title">Detalle de personalizacion</h2>
+        <dl id="quote-custom-detail" style="display:grid;grid-template-columns:auto 1fr;gap:0.35rem 1rem;font-size:13px;margin:0 0 1.5rem;"></dl>
         <table class="data-table">
-          <thead><tr><th>Producto</th><th>Cant.</th><th>P. unit.</th><th>Total</th></tr></thead>
-          <tbody>
-            <tr><td>Jersey Diablos Borgona</td><td>12</td><td>$1,600.00</td><td>$19,200.00</td></tr>
-            <tr><td>Bordado nombre</td><td>12</td><td>$800.00</td><td>$9,600.00</td></tr>
-          </tbody>
+          <thead><tr>
+            <th data-i18n="admin.col.product">Producto</th>
+            <th data-i18n="admin.col.qty">Cant.</th>
+            <th data-i18n="admin.col.unit">P. unit.</th>
+            <th data-i18n="admin.col.total">Total</th>
+          </tr></thead>
+          <tbody id="quote-line-items-body"></tbody>
         </table>
-        <p style="text-align:right;font-weight:700;margin-top:1rem;">Total: $28,800.00 MXN</p>
+        <p style="text-align:right;font-weight:700;margin-top:1rem;"><span data-i18n="admin.col.total">Total</span>: <span id="quote-total"></span></p>
         <div style="margin-top:1rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <a href="#" class="btn btn-outline" data-demo-action="PDF en etapa 0">Vista previa PDF</a>
-          <a href="#" class="btn btn-primary" data-demo-action="Demo: en produccion envia PDF por Resend">Enviar cotizacion</a>
+          <a href="#" class="btn btn-outline" data-i18n="admin.preview_pdf" data-demo-action="PDF en etapa 0">Vista previa PDF</a>
+          <a href="#" class="btn btn-primary" data-i18n="admin.send" data-demo-action="Demo: en produccion envia PDF por Resend">Enviar cotizacion</a>
         </div>
       </div>
+
+      <p style="margin-top:1.5rem;"><a href="/admin/quotes.html" class="btn btn-outline" data-i18n="admin.quote.detail.back">Volver a cotizaciones</a></p>
     </div>
   </div>
   <script src="/js/messages.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/demo.js"></script>
+  <script src="/js/mock-crm-data.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
 </body>
 </html>

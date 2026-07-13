@@ -45,7 +45,8 @@ Required **before** collecting data. Must include:
 6. Means to revoke consent
 7. Changes to the notice
 
-Template: [../../templates/legal/aviso-de-privacidad-template.md](../../templates/legal/aviso-de-privacidad-template.md)
+Published notice: [aviso-de-privacidad.md](./aviso-de-privacidad.md)  
+Draft template: [../../templates/legal/aviso-de-privacidad-template.md](../../templates/legal/aviso-de-privacidad-template.md)
 
 ## Consent Models
 

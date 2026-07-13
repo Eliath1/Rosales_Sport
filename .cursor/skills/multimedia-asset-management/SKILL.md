@@ -11,14 +11,24 @@ description: >-
 ## Instructions
 
 1. Store blobs in object storage; serve via Cloudflare CDN with cache headers.
-2. Separate buckets or prefixes: `catalog/`, `custom-requests/`, `marketing/`.
-3. Validate MIME type and size server-side; generate thumbnails for catalog images.
-4. Custom request uploads may contain team logos - treat as confidential; restrict access by role.
-5. Reference assets in Prisma by stable key/URL, not embedded binary.
+2. **Stage D:** jersey files in `demo/images/`; never deploy from repo root `images/` alone.
+3. Separate buckets or prefixes: `catalog/`, `custom-requests/`, `marketing/`.
+4. Validate MIME type and size server-side; generate thumbnails for catalog images.
+5. Custom request uploads may contain team logos - treat as confidential; restrict access by role.
+6. Reference assets in Prisma by stable key/URL, not embedded binary.
 
 ## Key Workflows
 
-### Upload pipeline
+### Stage D demo images
+
+```
+- [ ] Add files to images/ or directly to demo/images/
+- [ ] Copy-Item images/* demo/images/ (PowerShell) before deploy
+- [ ] Wire with .placeholder-jersey.has-photo + background-image in HTML
+- [ ] npm run demo:build-check
+```
+
+### Upload pipeline (Stage 0+ app)
 
 ```
 - [ ] Client requests signed upload URL (or direct POST to API)

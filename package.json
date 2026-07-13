@@ -2,8 +2,29 @@
   "name": "baseball-store-crm",
   "private": true,
   "scripts": {
-    "demo": "npx serve demo -l 3456",
+    "demo": "serve demo -l 3456",
     "demo:build-check": "node scripts/verify-demo.js",
-    "demo:package": "node scripts/package-demo-netlify.js"
+    "demo:package": "node scripts/package-demo-netlify.js",
+    "demo:logo": "node scripts/process-rs-logo.js",
+    "demo:mockups:classify": "node scripts/classify-mockup-images.js",
+    "demo:mockups:test": "node scripts/test-mockup-tint.js",
+    "demo:assets:sync": "node scripts/sync-demo-assets.js",
+    "demo:mockups:bootstrap": "node scripts/bootstrap-mockup-sources.js",
+    "demo:mockups:gemini": "node scripts/ingest-gemini-mockups.js",
+    "demo:variant-bank:build": "node scripts/build-curated-variant-manifest.js",
+    "demo:catalog:sync": "node scripts/sync-rs-catalog.js",
+    "demo:catalog:compose": "node scripts/compose-catalog-hero.js",
+    "demo:mockups:ingest": "node scripts/ingest-mockup-pack.js",
+    "demo:mockups": "node scripts/ingest-mockup-pack.js",
+    "demo:mockups:white": "node scripts/prepare-white-jersey-mockup.js",
+    "demo:mockups:vecteezy": "node scripts/prepare-vecteezy-mockup.js",
+    "app:dev": "npm run dev --prefix app",
+    "app:build": "npm run build --prefix app",
+    "app:install": "npm install --prefix app",
+    "install:all": "npm install && npm install --prefix app"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6",
+    "sharp": "^0.34.3"
   }
 }

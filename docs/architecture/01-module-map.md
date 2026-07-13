@@ -10,24 +10,25 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                     Presentation Layer                       │
-│  ┌──────────────────┐    ┌──────────────────────────────┐ │
-│  │ Storefront (B2C) │    │ Admin CRM (B2B/internal)       │ │
-│  │ /catalog, /quote │    │ /customers, /quotes, /reports│ │
-│  └────────┬─────────┘    └──────────────┬───────────────┘ │
-└───────────┼─────────────────────────────┼───────────────────┘
-            │                             │
-            ▼                             ▼
+│  ┌──────────────────┐  ┌──────────────┐  ┌────────────────┐ │
+│  │ Storefront (B2C) │  │ /mi-cuenta   │  │ Admin CRM       │ │
+│  │ /catalog, /quote │  │ (customer)   │  │ (B2B/internal)  │ │
+│  └────────┬─────────┘  └──────┬───────┘  └───────┬─────────┘ │
+└───────────┼───────────────────┼──────────────────┼───────────┘
+            │                   │                  │
+            ▼                   ▼                  ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                      API / Application Layer                 │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐   │
-│  │ Customers│ │ Catalog  │ │  Quotes  │ │ Notifications│   │
-│  │  Module  │ │  Module  │ │  Module  │ │    Module    │   │
-│  └────┬─────┘ └────┬─────┘ └────┬─────┘ └──────┬───────┘   │
-│       │            │            │              │            │
-│  ┌────┴─────┐ ┌────┴─────┐ ┌───┴──────┐ ┌─────┴──────┐     │
-│  │ Payments │ │  Auth    │ │ Privacy  │ │  (future)  │     │
-│  │ (stub)   │ │  Module  │ │  Module  │ │  AI Assist │     │
-│  └──────────┘ └──────────┘ └──────────┘ └────────────┘     │
+│ ┌─────────┐┌─────────┐┌────────┐┌────────┐┌───────────────┐ │
+│ │Customers││ Catalog ││ Orders ││ Quotes ││ Notifications │ │
+│ │ Module  ││ Module  ││ Module ││ Module ││    Module     │ │
+│ └────┬────┘└────┬────┘└───┬────┘└───┬────┘└──────┬────────┘ │
+│      │          │         │         │            │           │
+│ ┌────┴────┐┌────┴────┐┌───┴────┐┌───┴────┐┌──────┴──────┐   │
+│ │Payments ││CustomerA││ Staff  ││Privacy ││  (future)   │   │
+│ │(stub->  ││uth (new)││ Auth   ││ Module ││  AI Assist  │   │
+│ │ full)   ││         ││        ││        ││             │   │
+│ └─────────┘└─────────┘└────────┘└────────┘└─────────────┘   │
 └─────────────────────────────┬───────────────────────────────┘
                               │
                               ▼
@@ -36,6 +37,16 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 │  Database (Neon) · Email (Resend) · Payment adapters · Cache │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+## Module rollout sequencing (2026-07 owner priorities)
+
+The owner's stated priority order is (1) getting new customers, (2) payment management, (3) user registration and login. Module work below follows that order, not a generic "commerce then accounts" default:
+
+| Priority | Modules touched |
+|----------|------------------|
+| 1 - Getting new customers | Catalog (gender + swatches), Orders (guest checkout), Notifications (basic new-order email) |
+| 2 - Payment management | Payments (real Mercado Pago, deposit split, commission capture), Notifications (rich PDF/Excel) |
+| 3 - Registration and login | Auth (customer instance), Customers (distributor flag, saved payment methods) |
 
 ## Module Responsibilities
 
@@ -47,8 +58,12 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 | Contact preferences | Email, WhatsApp opt-in |
 | ARCO request linkage | Privacy module integration |
 | Activity timeline | Quote sent, email opened |
+| **Guest vs registered accounts** | `passwordHash = null` = guest (checkout without registering); set = registered customer |
+| **Distributor flag** | `isDistributor` gates `/mi-cuenta/*` saved payment methods, independent of `customerType` |
 
 **Public API surface:** `CustomerService.create()`, `CustomerService.findByEmail()`, events: `customer.created`
+
+**Target design note (2026-07, [ADR-012](./decisions/ADR-012-customer-accounts.md)):** customer-facing auth is a **second, separate NextAuth instance** scoped to `/mi-cuenta/*`, distinct from staff auth below. Guest checkout never requires this module's auth layer - it only needs a `Customer` row, same pattern leads/quotes already use.
 
 ### Catalog Module
 
@@ -58,8 +73,20 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 | Categories & collections | Jerseys MLB, Selección Mexicana, Gorras |
 | Pricing tiers | Público, mayoreo 12+, equipo |
 | Media references | Image URLs, not blob storage in DB |
+| **Gender + swatch variants** | `ProductVariant.gender` (dama/caballero/unisex), `swatchImageUrl` reusing the configurator's curated variant-bank photos so one base jersey PDP shows a color-swatch strip instead of one page per color |
 
-**Does NOT:** Handle cart/checkout (Payments module, later wave).
+**Does NOT:** Handle cart/checkout (Orders + Payments modules, below).
+
+### Orders Module (new, Priority 1)
+
+| Responsibility | Examples |
+|----------------|----------|
+| Order creation | Guest or logged-in checkout; no account required to create an `Order` |
+| Line items | `OrderLineItem` mirrors `QuoteLineItem` shape (variant + qty + customization JSON) so accepted quotes convert cleanly |
+| Status workflow | `pending_payment -> deposit_paid -> in_production -> ready_to_ship -> awaiting_final_payment -> shipped -> delivered` |
+| Order tracking | Feeds `/mi-cuenta/pedidos` for logged-in customers; guests get email status updates |
+
+**Public API surface:** `OrderService.create()` (guest-safe), events: `order.created`, `order.ready_to_ship`, `order.shipped`
 
 ### Quotes Module
 
@@ -79,14 +106,18 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 | Transactional email | Quote delivery, password reset |
 | Template rendering | Spanish copy, MXN formatting |
 | Delivery tracking | Resend webhooks, bounce handling |
+| **Order notifications (new)** | Priority 1: plain email to `sales@rosalessport.com` on order create. Priority 2: same email upgraded to PDF+Excel attachment with payment/commission detail, plus customer-facing status emails |
 
-### Auth Module
+### Auth Module (two independent instances)
 
 | Responsibility | Examples |
 |----------------|----------|
-| Staff login | Email + password, session cookies |
+| Staff login | Email + password, session cookies, scoped `/admin/*` |
 | Role-based access | admin, sales, read-only |
 | API key auth (future) | Webhook verification |
+| **Customer login (new, Priority 3)** | Separate NextAuth instance, separate session cookie, scoped `/mi-cuenta/*`; optional for retail, required for the distributor dashboard - see [ADR-012](./decisions/ADR-012-customer-accounts.md) |
+
+**Rule:** staff and customer auth never share a session, cookie, or role table - a bug in one cannot escalate into the other.
 
 ### Privacy Module
 
@@ -98,13 +129,17 @@ The Baseball Store CRM is organized as a **modular monolith**: one codebase, one
 
 ### Payments Module (stub -> full)
 
-| Wave | Capability |
-|------|------------|
-| Zero | Interface + mock adapter for dev |
-| One | Mercado Pago or Stripe MX checkout |
-| Two | Refunds, partial captures, wholesale invoicing |
+> **Status (2026-07):** interface, mock adapter, and split payment plan are implemented in `app/src/lib/payments/` and `paymentService.ts` - see [03-staged-delivery-roadmap.md](./03-staged-delivery-roadmap.md) Priority 2 for the detailed build status. `MercadoPagoAdapter` is code-complete but not verified against real sandbox credentials. Public API surface below is the actual function names, not a rename target.
 
-See [payment-provider-abstraction.md](./payment-provider-abstraction.md).
+| Wave | Capability | Status |
+|------|------------|--------|
+| Zero | Interface + mock adapter for dev | Done |
+| One (Priority 2) | Mercado Pago live; **split payment plan** (full under 6 pieces, 50% deposit + balance for 6+, per [ADR-013](./decisions/ADR-013-split-payments.md)); commission `feeCents` capture from webhooks | Done except real Mercado Pago sandbox verification |
+| Two | Refunds, partial captures, wholesale invoicing, saved payment methods for distributors ([ADR-012](./decisions/ADR-012-customer-accounts.md)) | Not started |
+
+**Public API surface:** `orderService.createGuestOrder()` (computes plan + creates the first `Payment` leg), `paymentService.requestBalancePayment()`, `paymentService.getCommissionReport()`, webhook: `POST /api/webhooks/payments/:provider`
+
+See [payment-provider-abstraction.md](./payment-provider-abstraction.md) for the provider-agnostic interface (ADR-006) and [ADR-013](./decisions/ADR-013-split-payments.md) for the business terms (deposit split, commission visibility) layered on top of it.
 
 ## Cross-Module Rules
 

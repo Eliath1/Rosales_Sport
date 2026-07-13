@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="mycuenta.login.title">Iniciar sesion - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/collections/jerseys.html" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:11px;" data-i18n="cart.continue_shopping">Seguir comprando</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="mycuenta.login.title">Iniciar sesion</h1>
+      <p data-i18n="mycuenta.login.intro">Ingresa tu correo y contrasena. Esta demo acepta cualquier dato para simular tu sesion; no valida credenciales reales.</p>
+    </div>
+    <form class="form-card" id="login-form">
+      <div class="form-group"><label for="account-email" data-i18n="mycuenta.login.email">Correo</label><input type="email" id="account-email" required></div>
+      <div class="form-group"><label for="account-password" data-i18n="mycuenta.login.password">Contrasena</label><input type="password" id="account-password" required></div>
+      <button type="submit" class="btn btn-primary" data-i18n="mycuenta.login.submit">Iniciar sesion</button>
+    </form>
+    <p style="text-align:center;">
+      <span data-i18n="mycuenta.login.link_register">No tienes cuenta?</span>
+      &nbsp;<a href="/mi-cuenta/registro/" data-i18n="mycuenta.login.link_register_cta">Registrate</a>
+    </p>
+  </main>
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

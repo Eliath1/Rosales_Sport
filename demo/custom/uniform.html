@@ -13,7 +13,7 @@
   <div class="promo-bar" data-i18n="custom.promo">Uniformes y gorras a tu medida - ligas, escuelas y equipos</div>
   <header class="site-header">
     <div class="header-inner">
-      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
       <div class="header-icons">
         <div class="lang-switcher" role="group" aria-label="Language">
           <button type="button" class="lang-btn active" data-lang="es">ES</button>
@@ -95,20 +95,19 @@
       </section>
 
       <section class="form-section">
-        <h2 data-i18n="custom.section.decoration">Tipo de estampado / bordado</h2>
+        <h2 data-i18n="custom.section.decoration">Tipo de trabajo</h2>
         <div class="market-hint">
-          <p data-i18n="custom.market.mx"><strong>Mexico:</strong> Bordado es la opcion mas solicitada para ligas y escuelas.</p>
-          <p data-i18n="custom.market.us"><strong>EE.UU.:</strong> DTF, TPU y acabado 3D DTF son mas comunes para pedidos al mayoreo.</p>
+          <p data-i18n="custom.market.all">Todos los acabados (bordado, DTF, TPU, 3D DTF y sublimado full color) estan disponibles para pedidos en Mexico y EE.UU.</p>
         </div>
         <fieldset class="deco-fieldset">
-          <legend class="sr-only" data-i18n="custom.section.decoration">Tipo de estampado</legend>
+          <legend class="sr-only" data-i18n="custom.section.decoration">Tipo de trabajo</legend>
           <div class="deco-grid">
             <div class="deco-option">
               <input type="radio" name="decoration" id="deco-embroidery" value="embroidery" required>
               <label for="deco-embroidery">
                 <span class="deco-name" data-i18n="custom.deco.embroidery">Bordado</span>
                 <span class="deco-sub" data-i18n="custom.deco.embroidery.sub">Embroidery</span>
-                <span class="deco-badge" data-i18n="custom.deco.badge.mx">Popular en Mexico</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.available">Disponible</span>
               </label>
             </div>
             <div class="deco-option">
@@ -116,7 +115,7 @@
               <label for="deco-dtf">
                 <span class="deco-name">DTF</span>
                 <span class="deco-sub" data-i18n="custom.deco.dtf.sub">Direct to film</span>
-                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.available">Disponible</span>
               </label>
             </div>
             <div class="deco-option">
@@ -124,7 +123,7 @@
               <label for="deco-tpu">
                 <span class="deco-name">TPU</span>
                 <span class="deco-sub" data-i18n="custom.deco.tpu.sub">Parches termoplasticos</span>
-                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.available">Disponible</span>
               </label>
             </div>
             <div class="deco-option">
@@ -132,7 +131,15 @@
               <label for="deco-3d-dtf">
                 <span class="deco-name" data-i18n="custom.deco.3d_dtf">3D DTF</span>
                 <span class="deco-sub" data-i18n="custom.deco.3d_dtf.sub">Acabado elevado</span>
-                <span class="deco-badge" data-i18n="custom.deco.badge.us">Popular en EE.UU.</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.available">Disponible</span>
+              </label>
+            </div>
+            <div class="deco-option">
+              <input type="radio" name="decoration" id="deco-sublimation" value="sublimation">
+              <label for="deco-sublimation">
+                <span class="deco-name" data-i18n="custom.deco.sublimation">Sublimado</span>
+                <span class="deco-sub" data-i18n="custom.deco.sublimation.sub">Full color</span>
+                <span class="deco-badge" data-i18n="custom.deco.badge.available">Disponible</span>
               </label>
             </div>
           </div>
@@ -155,6 +162,8 @@
     </form>
 
     <p style="margin-bottom:3rem;font-size:13px;">
+      <a href="/custom/uniform/builder.html" data-i18n="custom.link.builder">Abrir configurador visual</a>
+      &nbsp;|&nbsp;
       <a href="/quote/" data-i18n="custom.link.simple">Cotizacion simple (sin personalizacion detallada)</a>
       &nbsp;|&nbsp;
       <a href="/quote/bulk.html" data-i18n="quote.bulk.link">Cotizacion mayoreo</a>

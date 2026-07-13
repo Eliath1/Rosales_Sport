@@ -117,6 +117,49 @@ See [custom-uniform-decoration.md](./custom-uniform-decoration.md).
 
 ---
 
+## Journey 4b: Guest checks out without an account (Priority 1)
+
+**Actor:** First-time or occasional retail customer
+**Goal:** Buy without creating an account - the owner's #1 stated priority is getting new customers, so this path must have the least friction possible.
+
+| Step | Actor | Action | System |
+|------|-------|--------|--------|
+| 1 | Customer | Picks a jersey base model, color swatch, and gender/size | Catalog PDP swatch strip |
+| 2 | Customer | Adds to order, goes to checkout | Storefront `/checkout` |
+| 3 | Customer | Fills contact info inline (no login prompt) | Guest checkout form |
+| 4 | System | Creates/matches `Customer` by email with `passwordHash = null` | Customers + Orders modules |
+| 5 | System | Creates `Order` (`pending_payment`) | Orders module |
+| 6 | Sales/owner | Gets notified immediately | Notifications -> `sales@rosalessport.com` |
+| 7 | Customer | Gets order confirmation by email | Resend |
+
+**Success metric:** a new visitor can complete steps 1-7 without ever seeing a login screen.
+
+See [ADR-012-customer-accounts.md](../architecture/decisions/ADR-012-customer-accounts.md).
+
+---
+
+## Journey 4c: Split/deposit payment on a team order (Priority 2)
+
+**Actor:** Liga or equipo coordinator ordering 6+ pieces
+**Goal:** Pay a deposit now, the balance when the order is ready to ship - matching how the owner already sells larger orders informally.
+
+| Step | Actor | Action | System |
+|------|-------|--------|--------|
+| 1 | Customer | Checks out with 6+ pieces | Checkout computes `paymentPlan = deposit_50` |
+| 2 | Customer | Pays 50% via Mercado Pago | Payments module, `Payment.kind = deposit` |
+| 3 | System | Order moves to `deposit_paid` -> `in_production` | Orders module |
+| 4 | Staff | Marks order `ready_to_ship` when production finishes | Admin -> Orders |
+| 5 | System | Emails customer a balance-payment link | Notifications |
+| 6 | Customer | Pays remaining 50% | Payments module, `Payment.kind = balance` |
+| 7 | System | Order moves to `shipped` | Orders module |
+| 8 | Owner | Sees effective commission % on both payments | Admin commission report |
+
+**Success metric:** balance-payment email sent within minutes of the `ready_to_ship` status change.
+
+See [ADR-013-split-payments.md](../architecture/decisions/ADR-013-split-payments.md).
+
+---
+
 ## Journey 5: Privacy - customer exercises ARCO access (Wave Zero+)
 
 **Actor:** Customer  
@@ -150,6 +193,26 @@ See [../architecture/ai-chatbot-roadmap.md](../architecture/ai-chatbot-roadmap.m
 
 ---
 
+## Journey 7: Distributor registers, then tracks order status (Priority 3)
+
+**Actor:** Frequent distributor/mayorista customer
+**Goal:** Have an account, see order history and status, and reuse a saved payment method - this is deliberately the last-built journey per the owner's priority order, since it serves repeat/B2B customers rather than new-customer acquisition.
+
+| Step | Actor | Action | System |
+|------|-------|--------|--------|
+| 1 | Distributor | Registers with email + password at `/mi-cuenta/registro` | Customer auth (separate from staff auth) |
+| 2 | Owner/staff | Flags the account `isDistributor = true` | Admin -> Customers |
+| 3 | Distributor | Logs in, sees order history | `/mi-cuenta/pedidos` |
+| 4 | Distributor | Opens an order, sees status timeline | `/mi-cuenta/pedidos/[id]` |
+| 5 | Distributor | Saves a payment method for faster future checkout | `SavedPaymentMethod` (tokenized reference only) |
+| 6 | Distributor | Places next order, attaches the saved method at checkout | Orders + Payments modules |
+
+**Success metric:** a returning distributor completes checkout without re-entering payment details.
+
+See [ADR-012-customer-accounts.md](../architecture/decisions/ADR-012-customer-accounts.md).
+
+---
+
 ## Journey Map Summary
 
 | Journey | Wave | Priority |
@@ -159,6 +222,9 @@ See [../architecture/ai-chatbot-roadmap.md](../architecture/ai-chatbot-roadmap.m
 | Wholesale quote | Zero | P0 |
 | Owner dashboard | Zero | P1 |
 | Online checkout OXXO | One | P0 |
+| Guest checkout (no account) | One (Priority 1) | P0 |
+| Split/deposit payment | One (Priority 2) | P0 |
+| Distributor registration + order tracking | One (Priority 3) | P1 |
 | ARCO access | Zero (manual) | P1 |
 | AI size help | Two+ | P2 |
 
@@ -166,3 +232,5 @@ See [../architecture/ai-chatbot-roadmap.md](../architecture/ai-chatbot-roadmap.m
 
 - [../architecture/wave-zero-quote-crm.md](../architecture/wave-zero-quote-crm.md)
 - [baseball-store-glossary.md](./baseball-store-glossary.md)
+- [../architecture/decisions/ADR-012-customer-accounts.md](../architecture/decisions/ADR-012-customer-accounts.md)
+- [../architecture/decisions/ADR-013-split-payments.md](../architecture/decisions/ADR-013-split-payments.md)

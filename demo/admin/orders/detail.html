@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedido - RS Admin</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <ul class="admin-nav">
+        <li><a href="/admin/" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" data-i18n="admin.designs">Disenos</a></li>
+        <li><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a></li>
+        <li><a href="/admin/orders.html" class="active" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" data-i18n="admin.testimonials">Testimonios</a></li>
+        <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
+      </ul>
+    </aside>
+    <div id="order-detail-root" class="admin-main">
+      <nav class="breadcrumb"><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a> / <span id="order-breadcrumb-current"></span></nav>
+      <h1 id="order-title" style="margin:0.5rem 0;color:var(--rs-red);"></h1>
+      <p id="order-meta" style="margin:0 0 0.5rem;font-size:13px;"></p>
+      <p id="order-customer" style="margin:0 0 1.5rem;font-size:13px;color:var(--gray-600);"></p>
+
+      <div class="order-stepper" id="order-stepper"></div>
+
+      <div class="form-card" style="max-width:100%;margin-top:1rem;">
+        <h2 style="font-size:1rem;text-transform:uppercase;margin:0 0 1rem;color:var(--rs-red);" data-i18n="admin.order.detail.financials">Resumen financiero</h2>
+        <div class="kpi-grid" id="order-finance-grid"></div>
+      </div>
+
+      <div class="form-card" style="max-width:100%;margin-top:1.5rem;">
+        <h2 style="font-size:1rem;text-transform:uppercase;margin:0 0 1rem;color:var(--rs-red);" data-i18n="admin.order.detail.timeline">Historial de estado</h2>
+        <table class="data-table">
+          <thead><tr>
+            <th data-i18n="admin.col.stage">Etapa</th>
+            <th data-i18n="admin.col.date">Fecha</th>
+            <th data-i18n="admin.col.status">Estado</th>
+          </tr></thead>
+          <tbody id="order-timeline-body"></tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1.5rem;"><a href="/admin/orders.html" class="btn btn-outline" data-i18n="admin.order.detail.back">Volver a pedidos</a></p>
+    </div>
+  </div>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+  <script src="/js/mock-crm-data.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>

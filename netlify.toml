@@ -18,7 +18,22 @@
 
 [[redirects]]
   from = "/custom/uniform"
-  to = "/custom/uniform.html"
+  to = "/custom/uniform/builder.html"
+  status = 200
+
+[[redirects]]
+  from = "/custom/uniform/builder"
+  to = "/custom/uniform/builder.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/cart/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/checkout/index.html"
   status = 200
 
 [[redirects]]
@@ -34,6 +49,36 @@
 [[redirects]]
   from = "/admin/quotes/detail"
   to = "/admin/quotes/detail.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/orders"
+  to = "/admin/orders.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/orders/detail"
+  to = "/admin/orders/detail.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/customers"
+  to = "/admin/customers.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/designs"
+  to = "/admin/designs.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/designs/detail"
+  to = "/admin/designs/detail.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/testimonials"
+  to = "/admin/testimonials.html"
   status = 200
 
 [[redirects]]
@@ -54,6 +99,111 @@
 [[redirects]]
   from = "/products/jersey-mexico-emblem"
   to = "/products/jersey-mexico-emblem.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-manga-normal"
+  to = "/products/jersey-rs-manga-normal.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-blank-blanco"
+  to = "/products/jersey-rs-blank-blanco.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-borgona-negro"
+  to = "/products/jersey-rs-borgona-negro.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-royal-azul"
+  to = "/products/jersey-rs-royal-azul.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-verde-militar"
+  to = "/products/jersey-rs-verde-militar.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-naranja-negro"
+  to = "/products/jersey-rs-naranja-negro.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-navy-blanco"
+  to = "/products/jersey-rs-navy-blanco.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-navy-pinstripe"
+  to = "/products/jersey-rs-navy-pinstripe.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-negro-solido"
+  to = "/products/jersey-rs-negro-solido.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-celeste-blanco"
+  to = "/products/jersey-rs-celeste-blanco.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/jersey-rs-estrellas-rojo"
+  to = "/products/jersey-rs-estrellas-rojo.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-blanco"
+  to = "/products/pants-rs-blanco.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-negro"
+  to = "/products/pants-rs-negro.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-borgona"
+  to = "/products/pants-rs-borgona.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-gris-rayas"
+  to = "/products/pants-rs-gris-rayas.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-verde-militar"
+  to = "/products/pants-rs-verde-militar.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-royal-franja"
+  to = "/products/pants-rs-royal-franja.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-navy-franja"
+  to = "/products/pants-rs-navy-franja.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-navy-pinstripe"
+  to = "/products/pants-rs-navy-pinstripe.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-rojo-franja"
+  to = "/products/pants-rs-rojo-franja.html"
+  status = 200
+
+[[redirects]]
+  from = "/products/pants-rs-naranja-franja"
+  to = "/products/pants-rs-naranja-franja.html"
   status = 200
 
 [[headers]]

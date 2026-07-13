@@ -8,18 +8,21 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - sin login</div>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
   <div class="admin-layout">
     <aside class="admin-sidebar">
-      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="RS"></a>
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
       <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
         <button type="button" class="lang-btn active" data-lang="es">ES</button>
         <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
       <ul class="admin-nav">
         <li><a href="/admin/" class="active" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" data-i18n="admin.designs">Disenos</a></li>
         <li><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a></li>
-        <li><a href="#" data-i18n-toast="toast.customers" data-demo-action="Clientes" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" data-i18n="admin.testimonials">Testimonios</a></li>
         <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
       </ul>
     </aside>
@@ -27,11 +30,35 @@
       <div class="admin-note" data-i18n="admin.note">En produccion: login requerido para personal RS (admin, ventas).</div>
       <h1 style="margin:0 0 1.5rem;text-transform:uppercase;" data-i18n="admin.dashboard">Dashboard</h1>
       <div class="kpi-grid">
-        <div class="kpi-card"><div class="value">12</div><div class="label" data-i18n="admin.kpi.week">Cotizaciones semana</div></div>
-        <div class="kpi-card"><div class="value">$48,200</div><div class="label" data-i18n="admin.kpi.pipeline">Pipeline MXN</div></div>
-        <div class="kpi-card"><div class="value">5</div><div class="label" data-i18n="admin.kpi.followup">Seguimiento</div></div>
-        <div class="kpi-card"><div class="value">3</div><div class="label" data-i18n="admin.kpi.accepted">Aceptadas</div></div>
+        <div class="kpi-card"><div class="value" id="kpi-quotes-week">-</div><div class="label" data-i18n="admin.kpi.week">Cotizaciones semana</div></div>
+        <div class="kpi-card"><div class="value" id="kpi-pipeline">-</div><div class="label" data-i18n="admin.kpi.pipeline">Pipeline MXN</div></div>
+        <div class="kpi-card"><div class="value" id="kpi-followup">-</div><div class="label" data-i18n="admin.kpi.followup">Seguimiento</div></div>
+        <div class="kpi-card"><div class="value" id="kpi-accepted">-</div><div class="label" data-i18n="admin.kpi.accepted">Aceptadas</div></div>
       </div>
+
+      <h2 class="section-title" data-i18n="admin.finance.title">Analisis financiero</h2>
+      <p style="margin:-0.75rem 0 1.25rem;font-size:13px;color:var(--gray-600);" data-i18n="admin.finance.subtitle">Ultimos 6 meses de operacion</p>
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-revenue"><div class="value" id="kpi-revenue">-</div><div class="label" data-i18n="admin.kpi.revenue">Ventas totales</div></div>
+        <div class="kpi-card kpi-cost"><div class="value" id="kpi-cost">-</div><div class="label" data-i18n="admin.kpi.cost">Costos</div></div>
+        <div class="kpi-card kpi-profit"><div class="value" id="kpi-profit">-</div><div class="label" data-i18n="admin.kpi.profit">Utilidad</div></div>
+        <div class="kpi-card kpi-margin"><div class="value" id="kpi-margin">-</div><div class="label" data-i18n="admin.kpi.margin">Margen promedio</div></div>
+        <div class="kpi-card"><div class="value" id="kpi-units">-</div><div class="label" data-i18n="admin.kpi.units">Uniformes vendidos</div></div>
+      </div>
+
+      <h3 style="font-size:0.9rem;text-transform:uppercase;margin:0 0 0.75rem;color:var(--gray-600);" data-i18n="admin.chart.title">Tendencia mensual</h3>
+      <div class="bar-chart-legend">
+        <span><i class="swatch swatch-revenue"></i><span data-i18n="admin.chart.revenue">Ventas</span></span>
+        <span><i class="swatch swatch-cost"></i><span data-i18n="admin.chart.cost">Costos</span></span>
+        <span><i class="swatch swatch-profit"></i><span data-i18n="admin.chart.profit">Utilidad</span></span>
+      </div>
+      <div class="bar-chart" id="finance-chart"></div>
+
+      <h2 class="section-title" data-i18n="admin.pipeline.title">Estado de pedidos</h2>
+      <p style="margin:-0.75rem 0 1.25rem;font-size:13px;color:var(--gray-600);" data-i18n="admin.pipeline.subtitle">Flujo operativo del taller, de cotizacion aceptada a entrega</p>
+      <div class="pipeline-cards" id="pipeline-summary"></div>
+      <p style="margin:-0.5rem 0 2rem;"><a href="/admin/orders.html" data-i18n="admin.pipeline.view_all">Ver todos los pedidos</a></p>
+
       <h2 class="section-title" data-i18n="admin.recent">Recientes</h2>
       <table class="data-table">
         <thead><tr>
@@ -40,15 +67,14 @@
           <th data-i18n="admin.col.status">Estado</th>
           <th data-i18n="admin.col.date">Fecha</th>
         </tr></thead>
-        <tbody>
-          <tr><td><a href="/admin/quotes/detail.html">Liga Norte CDMX</a></td><td>$28,800.00</td><td><span class="status status-sent" data-i18n="admin.status.sent">enviada</span></td><td>01 jul</td></tr>
-          <tr><td><a href="/admin/quotes/detail.html">Roberto M.</a></td><td>$3,798.00</td><td><span class="status status-accepted" data-i18n="admin.status.accepted">aceptada</span></td><td>30 jun</td></tr>
-        </tbody>
+        <tbody id="recent-quotes-body"></tbody>
       </table>
     </div>
   </div>
   <script src="/js/messages.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/demo.js"></script>
+  <script src="/js/mock-crm-data.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
 </body>
 </html>

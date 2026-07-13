@@ -1,18 +1,28 @@
 ---
 description: Netlify deployment and environment configuration
-globs: "**/{netlify.toml,netlify/**,.env.example}"
+globs: "**/{netlify.toml,netlify/**,.env.example,demo/**}"
 alwaysApply: false
 ---
 
 # Netlify Deploy
 
-- Build: `npm run build`; publish `.next` via `@netlify/plugin-nextjs`.
+## Stage D (static demo, active now)
+
+- Publish directory: `demo/` (root `netlify.toml`, no build command).
+- Images and assets must live **inside** `demo/` (e.g. `demo/images/`, `demo/assets/`).
+- Deploy: `npx netlify deploy --prod --dir=demo` or `npm run demo:package` for zip upload.
+- Run `npm run demo:build-check` before every demo deploy.
+
+## Stage 0+ (Next.js app)
+
+- Build: `npm run build` in `app/`; publish via `@netlify/plugin-nextjs`.
 - Set env vars in Netlify UI (never in repo): `DATABASE_URL`, payment keys, webhook secrets.
-- Use **Deploy Previews** for PRs; run smoke test on `/`, `/es-MX/bats`, checkout sandbox.
+- Use **Deploy Previews** for PRs; smoke test on `/`, admin login, quote intake.
 
 ```toml
-# netlify.toml excerpt
+# Stage 0 netlify.toml (future) - do not mix with demo publish
 [build]
+  base = "app"
   command = "npm run build"
   publish = ".next"
 
@@ -20,5 +30,5 @@ alwaysApply: false
   package = "@netlify/plugin-nextjs"
 ```
 
-- Branch deploys: `main` -> production; feature branches -> preview URLs for stakeholder review.
+- Branch deploys: `main` -> production; feature branches -> preview URLs.
 - Functions timeout: keep webhooks under 10s; offload heavy work to background job or queue.

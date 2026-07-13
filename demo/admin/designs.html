@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Disenos recibidos - Admin RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <ul class="admin-nav">
+        <li><a href="/admin/" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" class="active" data-i18n="admin.designs">Disenos</a></li>
+        <li><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a></li>
+        <li><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" data-i18n="admin.testimonials">Testimonios</a></li>
+        <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
+      </ul>
+    </aside>
+    <div class="admin-main">
+      <div class="admin-note" data-i18n="admin.designs.note">Pedidos enviados desde el configurador (localStorage demo).</div>
+      <h1 style="margin:0 0 1.5rem;text-transform:uppercase;" data-i18n="admin.designs">Disenos</h1>
+      <table class="data-table" id="designs-table">
+        <thead>
+          <tr>
+            <th data-i18n="admin.col.id">ID</th>
+            <th data-i18n="admin.col.team">Equipo</th>
+            <th data-i18n="admin.col.product">Producto</th>
+            <th data-i18n="admin.col.qty">Cant.</th>
+            <th data-i18n="admin.col.contact">Contacto</th>
+            <th data-i18n="admin.col.date">Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="designs-tbody">
+          <tr><td colspan="6" data-i18n="admin.designs.empty">Sin pedidos. Completa el configurador en la tienda.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+  <script>
+    (function () {
+      var tbody = document.getElementById("designs-tbody");
+      var list = [];
+      try {
+        list = JSON.parse(localStorage.getItem("rs_design_requests") || "[]");
+      } catch (e) {}
+      if (!list.length) return;
+      tbody.innerHTML = "";
+      list.forEach(function (item) {
+        var tr = document.createElement("tr");
+        var date = item.submittedAt ? new Date(item.submittedAt).toLocaleDateString() : "-";
+        tr.innerHTML =
+          '<td><a href="/admin/designs/detail.html?id=' +
+          encodeURIComponent(item.id) +
+          '">' +
+          (item.id || "-") +
+          "</a></td>" +
+          "<td>" +
+          (item.teamName || "-") +
+          "</td>" +
+          "<td>" +
+          (item.productType || "-") +
+          " / " +
+          (item.templateSlug || "-") +
+          "</td>" +
+          "<td>" +
+          (item.quantity || "-") +
+          "</td>" +
+          "<td>" +
+          (item.contact && item.contact.name ? item.contact.name : "-") +
+          "</td>" +
+          "<td>" +
+          date +
+          "</td>";
+        tbody.appendChild(tr);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8" />
+<title>Propuesta Comercial - Plataforma RS</title>
+<style>
+  @page { size: A4; margin: 0; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    background: #fff;
+  }
+
+  .page {
+    width: 210mm;
+    padding: 14mm 16mm 10mm 16mm;
+    margin: 0 auto;
+    background: #fff;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-of-type {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .report-title {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #002B49;
+    margin-bottom: 3pt;
+    line-height: 1.2;
+  }
+
+  .report-subtitle {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 10pt;
+  }
+
+  .cover-header {
+    background: #002B49;
+    color: #fff;
+    padding: 10mm 16mm 8mm 16mm;
+    margin: -14mm -16mm 10mm -16mm;
+  }
+
+  .cover-header .tag { background: #007A8A; }
+  .cover-header .report-title { color: #fff; margin-top: 8pt; }
+  .cover-header .report-subtitle { color: #cfe3ea; }
+
+  h2 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #007A8A;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2pt solid #007A8A;
+    padding-bottom: 4pt;
+    margin-top: 10pt;
+    margin-bottom: 7pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  h2.first-on-page { margin-top: 0; }
+
+  h3 {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #002B49;
+    margin-top: 9pt;
+    margin-bottom: 4pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p { margin: 4pt 0; line-height: 1.45; }
+  ol, ul { margin: 4pt 0 4pt 5mm; line-height: 1.5; }
+  li { margin: 2pt 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.7pt;
+    margin-bottom: 8pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  thead tr { background: #002B49; color: #fff; }
+
+  thead th {
+    padding: 5pt 6pt;
+    text-align: left;
+    font-weight: 700;
+    font-size: 8.3pt;
+    border: 1pt solid #002B49;
+  }
+
+  tbody tr:nth-child(even) { background: #f2f7fa; }
+  tbody tr:nth-child(odd) { background: #fff; }
+
+  tbody td {
+    padding: 5pt 6pt;
+    vertical-align: top;
+    line-height: 1.4;
+    border: 1pt solid #ddd;
+  }
+
+  .row-highlight td {
+    background: #eaf3f5 !important;
+    font-weight: 700;
+    border-color: #007A8A;
+  }
+
+  .tag {
+    display: inline-block;
+    background: #007A8A;
+    color: #fff;
+    padding: 3pt 9pt;
+    border-radius: 2pt;
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #002B49;
+    color: #fff;
+    padding: 2pt 7pt;
+    border-radius: 2pt;
+    font-size: 8pt;
+    font-weight: 700;
+  }
+
+  .bottom-line {
+    background: #f7fbfd;
+    border-left: 4pt solid #007A8A;
+    padding: 9pt 11pt;
+    margin: 8pt 0;
+    font-size: 9.8pt;
+    line-height: 1.5;
+  }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8pt;
+    margin: 10pt 0;
+  }
+
+  .kpi-box {
+    border: 1pt solid #ccc;
+    border-radius: 3pt;
+    padding: 8pt 9pt;
+  }
+
+  .kpi-box .kpi-num {
+    font-size: 13.5pt;
+    font-weight: 700;
+    color: #007A8A;
+    line-height: 1.25;
+  }
+
+  .kpi-box .kpi-lbl {
+    font-size: 8pt;
+    color: #444;
+    margin-top: 3pt;
+  }
+
+  .prop-card {
+    border: 1.5pt solid #002B49;
+    border-radius: 4pt;
+    padding: 9pt 11pt;
+    margin: 9pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .prop-card h3 { margin-top: 0; font-size: 11.5pt; color: #007A8A; }
+  .prop-card .price { font-size: 15pt; font-weight: 700; color: #002B49; margin: 2pt 0 5pt 0; }
+
+  .footnote { font-size: 8pt; color: #666; margin-top: 3pt; }
+
+  .page-footer {
+    font-size: 7.5pt;
+    color: #999;
+    margin-top: 12pt;
+    border-top: 0.5pt solid #ddd;
+    padding-top: 4pt;
+  }
+
+  .timeline-block {
+    border-left: 3pt solid #007A8A;
+    padding-left: 10pt;
+    margin: 8pt 0 10pt 4pt;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; min-height: auto; height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER + EXEC SUMMARY (VALUE-FOCUSED, NO COST FIGURES) -->
+<div class="page">
+  <div class="cover-header">
+    <span class="tag">PROPUESTA COMERCIAL</span>
+    <div class="report-title">Plataforma Digital RS</div>
+    <div class="report-subtitle">Un sistema para cotizar, dar seguimiento a clientes y vender mas facil</div>
+    <p style="color:#cfe3ea; font-size: 9pt;">Preparado para: Cliente RS | Julio 2026</p>
+  </div>
+
+  <h2 class="first-on-page">Que va a cambiar en el negocio</h2>
+  <p>Hoy, cotizar, dar seguimiento y vender se hace a mano: papel, memoria y WhatsApp. Esta plataforma
+  ordena todo ese trabajo en un solo lugar, para que nada se pierda y las cotizaciones salgan mas rapido.</p>
+
+  <div class="bottom-line">
+    <strong>En una frase:</strong> lo que hoy se cotiza a mano en 20 minutos, por telefono o WhatsApp, y se
+    pierde con facilidad, pasa a vivir en un sistema donde se cotiza en minutos, se le da seguimiento y no se
+    pierde ningun cliente.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-box">
+      <div class="kpi-num">75% menos tiempo</div>
+      <div class="kpi-lbl">en cada cotizacion, comparado con hacerla a mano</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">Cero clientes perdidos</div>
+      <div class="kpi-lbl">por falta de seguimiento o mensajes olvidados</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">Arranque con gasto minimo</div>
+      <div class="kpi-lbl">la inversion crece solo si el negocio crece</div>
+    </div>
+  </div>
+
+  <p class="footnote">Las paginas siguientes explican en detalle que se construyo, cuanto vale, cuanto
+  cuesta mantenerlo, el cronograma y las opciones de pago.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 2: SCOPE -->
+<div class="page">
+  <h2 class="first-on-page">1. Alcance real del proyecto</h2>
+
+  <div class="bottom-line">
+    <strong>Punto de partida:</strong> hoy el negocio no cuenta con ninguna base de datos ni sistema para
+    administrar clientes y ventas. Todo se maneja en papel, memoria y WhatsApp. Todo lo que se describe
+    abajo es construccion completamente nueva, incluida por completo en el alcance y el costo de este
+    proyecto: no se esta mejorando ni reemplazando algo que ya existiera.
+  </div>
+
+  <p>Esto es lo que ya se construyo en el proyecto (el trabajo ya esta hecho; falta conectarlo y ponerlo a
+  funcionar todos los dias con el negocio real):</p>
+
+  <table>
+    <thead>
+      <tr><th>Componente</th><th>Que hace</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sitio de muestra (48 paginas)</td>
+        <td>Inicio, catalogo de jerseys y pantalones, fichas de producto, cotizador retail y de mayoreo,
+        panel de administracion de muestra, aviso de privacidad, terminos</td>
+        <td><span class="badge">Completo</span></td>
+      </tr>
+      <tr>
+        <td>Disenador de uniformes</td>
+        <td>Asistente paso a paso para disenar un uniforme personalizado con vista previa</td>
+        <td><span class="badge">Completo (version de muestra)</span></td>
+      </tr>
+      <tr>
+        <td>Banco de imagenes</td>
+        <td>730 imagenes generadas (variantes de color y vistas) que sustituyen una sesion de fotografia
+        profesional para el catalogo</td>
+        <td><span class="badge">Completo</span></td>
+      </tr>
+      <tr>
+        <td>Sistema para clientes y cotizaciones (CRM)</td>
+        <td>Un CRM es el programa donde se guardan los clientes, se hacen cotizaciones con PDF, se envian
+        correos y el equipo de ventas tiene su propio acceso con permisos</td>
+        <td><span class="badge">Trabajo aprox. 70% terminado</span></td>
+      </tr>
+      <tr>
+        <td>Base de datos</td>
+        <td>El lugar donde queda guardada toda la informacion de clientes, productos y cotizaciones de
+        forma segura y permanente</td>
+        <td><span class="badge">Diseno listo, falta construirla</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Lo que a proposito no incluye esta etapa (para no gastar de mas)</h3>
+  <ul>
+    <li>Cobros en linea (se agrega solo si el negocio en linea lo justifica, ver cronograma)</li>
+    <li>Control de inventario en tiempo real</li>
+    <li>Conexion completa del disenador de uniformes con pedidos reales (hoy es una demostracion visual,
+    no esta conectada a la base de datos real)</li>
+  </ul>
+  <p class="footnote">Esta decision sigue el mismo principio de todo el proyecto: habilitar barato primero,
+  invertir mas solo cuando el negocio lo pida.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 3: MARKET VS ME -->
+<div class="page">
+  <h2 class="first-on-page">2. El valor de este proyecto: mercado vs. tu inversion</h2>
+  <p>Asi se cotizaria este mismo trabajo con una agencia de desarrollo en Mexico, usando tarifas estandar
+  de la industria:</p>
+
+  <table>
+    <thead>
+      <tr><th>Concepto</th><th>Tiempo de trabajo equivalente</th><th>Valor de mercado (MXN)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sitio de muestra + disenador de uniformes + banco de imagenes (sustituye sesion fotografica)</td>
+        <td>6 a 8 semanas</td>
+        <td>$130,000 - $200,000</td>
+      </tr>
+      <tr>
+        <td>Sistema para clientes y cotizaciones (CRM, catalogo, panel admin, PDF, correo)</td>
+        <td>4 a 5 semanas</td>
+        <td>$95,000 - $220,000</td>
+      </tr>
+      <tr class="row-highlight">
+        <td>Total valor de mercado</td>
+        <td>Aprox. 10 a 13 semanas</td>
+        <td>$225,000 - $420,000</td>
+      </tr>
+      <tr class="row-highlight">
+        <td>Tu inversion propuesta</td>
+        <td>-</td>
+        <td>$45,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Esto representa aproximadamente 15 a 20% del valor de mercado, por dos razones.</strong> Primero,
+  trabajas directo con quien disena y construye la plataforma, sin las capas de costo de una agencia tradicional:
+  sin project managers, sin multiples desarrolladores facturables, sin margenes de subcontratacion. Segundo, ese
+  desarrollador usa con criterio herramientas modernas de desarrollo asistido por inteligencia artificial para
+  ejecutar mas rapido las decisiones de arquitectura, las reglas de negocio y los estandares de seguridad y
+  privacidad que ya viste en las paginas anteriores. La herramienta acelera la ejecucion; que construir, como
+  protegerlo y como dejarlo listo para crecer sigue siendo criterio y experiencia humana. Esa eficiencia
+  combinada -relacion directa mas ejecucion experta- es la que se traslada directamente a la inversion
+  propuesta.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 4: VALUE PROPOSITION -->
+<div class="page">
+  <h2 class="first-on-page">3. Cuanto tiempo y dinero ahorra</h2>
+  <p>Hoy, todo el proceso de cotizacion, seguimiento y ventas se hace a mano. Esto es lo que cambia:</p>
+
+  <table>
+    <thead>
+      <tr><th>Hoy (a mano)</th><th>Con la plataforma</th><th>Ahorro</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Armar una cotizacion: aprox. 20 minutos por cliente, calculando precios y tallas a mano</td>
+        <td>Aprox. 5 minutos, con precios de catalogo y mayoreo ya cargados</td>
+        <td>75% menos tiempo por cotizacion</td>
+      </tr>
+      <tr>
+        <td>Seguimiento de clientes: en la cabeza o en chats de WhatsApp que se pierden</td>
+        <td>Cada cliente y cotizacion queda registrada, con historial y estatus</td>
+        <td>Cero clientes perdidos por olvido</td>
+      </tr>
+      <tr>
+        <td>Precios de mayoreo o equipos: se calculan cada vez, riesgo de error humano</td>
+        <td>Tarifas por volumen ya definidas en el catalogo</td>
+        <td>Elimina errores de precio en pedidos grandes</td>
+      </tr>
+      <tr>
+        <td>Decidir a quien contactar primero</td>
+        <td>Un panel muestra todas las cotizaciones y su estatus, ordenadas</td>
+        <td>Decisiones de venta mas rapidas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>En numeros concretos</h3>
+  <div class="bottom-line">
+    Si hoy se generan aprox. 20 cotizaciones al mes, pasar de 20 a 5 minutos libera aproximadamente
+    <strong>5 horas al mes</strong> solo en ese proceso. A un valor conservador de tiempo de $200 MXN/hora,
+    son <strong>$1,000 a $2,000 MXN al mes</strong> en horas recuperadas, sin contar una sola venta
+    adicional.
+  </div>
+
+  <p><strong>Retorno de la inversion</strong> (solo por ahorro de tiempo, sin contar ventas nuevas): con una
+  inversion de $45,000 MXN y un ahorro estimado de $2,000 MXN/mes, la plataforma se paga sola en
+  aproximadamente <strong>22 a 23 meses</strong>. Ese es el escenario conservador, sin sumar el efecto de
+  recuperar clientes que hoy se pierden.</p>
+
+  <h3>Referencia de la industria (contexto, no garantia)</h3>
+  <p>Estudios de adopcion de sistemas de gestion de clientes en pequenas y medianas empresas (Salesforce,
+  HubSpot) reportan de forma consistente incrementos de hasta <strong>29% en ventas</strong> y
+  <strong>34% en productividad del equipo</strong>, principalmente por reducir clientes perdidos y acelerar
+  la respuesta. Son cifras de referencia general de la industria, no una promesa para este negocio en
+  particular: el resultado real depende de que tanto se use el sistema dia a dia.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 5: HOURS -->
+<div class="page">
+  <h2 class="first-on-page">4. Tiempo de trabajo estimado</h2>
+
+  <table>
+    <thead>
+      <tr><th>Bloque</th><th>Tiempo equivalente</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ya invertido (sitio de muestra, disenador, banco de imagenes, CRM base)</td>
+        <td>Aprox. 10 a 13 semanas de trabajo equivalente</td>
+        <td><span class="badge">Hecho</span></td>
+      </tr>
+      <tr>
+        <td>Conectar el sistema a la base de datos real y ponerlo a funcionar</td>
+        <td>1 a 2 dias</td>
+        <td>Pendiente</td>
+      </tr>
+      <tr>
+        <td>Pruebas y carga del catalogo con productos y precios reales</td>
+        <td>2 a 3 dias</td>
+        <td>Pendiente</td>
+      </tr>
+      <tr>
+        <td>Capacitacion al equipo de ventas y ajustes finales</td>
+        <td>1 a 2 dias</td>
+        <td>Pendiente</td>
+      </tr>
+      <tr class="row-highlight">
+        <td>Total restante para el lanzamiento</td>
+        <td>Aprox. 4 a 7 dias de trabajo</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">El disenador de uniformes queda como demostracion visual en esta etapa; conectarlo por
+  completo con pedidos reales es trabajo de una siguiente etapa, cuando el volumen de pedidos personalizados
+  lo justifique.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 6: MAINTENANCE / INFRA COSTS -->
+<div class="page">
+  <h2 class="first-on-page">5. Costo mensual para mantener todo funcionando</h2>
+  <p><strong>Importante:</strong> este costo no lo cobro yo. Son pagos directos a los proveedores y
+  herramientas que mantienen el sitio, la base de datos, el correo y el mantenimiento del sistema
+  funcionando. Existen aunque no haya una sola venta, y deben pagarse para que la plataforma siga
+  funcionando.</p>
+
+  <table>
+    <thead>
+      <tr><th>Proveedor o herramienta</th><th>Para que sirve</th><th>Costo hoy</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Netlify</td><td>Hospedaje del sitio y la aplicacion</td><td>$0 (plan gratuito)</td></tr>
+      <tr><td>Neon</td><td>Guarda toda la informacion (base de datos)</td><td>$0 (plan gratuito)</td></tr>
+      <tr><td>Cloudflare</td><td>Protege el sitio y lo hace mas rapido</td><td>$0 (plan gratuito)</td></tr>
+      <tr><td>Resend</td><td>Envia los correos de cotizacion</td><td>$0 (hasta 100 correos/dia)</td></tr>
+      <tr><td>Dominio propio (rosalessport.com + rosalessport.com.mx)</td><td>Direccion web profesional, ya comprado</td><td>$510.05 MXN el primer ano (ambos dominios); despues, renovacion anual aprox. $200-400 MXN</td></tr>
+      <tr class="row-highlight">
+        <td>Total mensual estimado</td>
+        <td>-</td>
+        <td>Aprox. $43 MXN/mes (primer ano); baja a $17-33 MXN/mes en renovaciones</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">La herramienta de desarrollo con inteligencia artificial que se usa para mantener y mejorar
+  el sistema es un costo propio del desarrollador, no un costo de esta plataforma - no esta incluida en la
+  tabla anterior.</p>
+
+  <p><strong>Esto solo sube cuando el negocio lo requiera</strong>, nunca por anticipado. Senales concretas
+  de que seria momento de subir de plan:</p>
+  <ul>
+    <li>El sitio empieza a recibir trafico real y ventas en linea (etapa de crecimiento: aprox. $1,465 a
+    $1,735 MXN/mes en total de infraestructura)</li>
+    <li>Se superan los 100 correos gratuitos de cotizaciones por dia</li>
+    <li>Se necesita mayor capacidad de la base de datos por volumen de clientes o cotizaciones</li>
+  </ul>
+  <p class="footnote">Filosofia del proyecto: arrancar con el gasto minimo posible y dejar que la demanda
+  real, no la especulacion, sea la que empuje cualquier siguiente inversion.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 7: TIMELINE -->
+<div class="page">
+  <h2 class="first-on-page">6. Cronograma del proyecto</h2>
+  <p>Estos son los pasos concretos, en el orden en el que se van a activar. La primera parte ya esta
+  cubierta por esta propuesta; la segunda parte queda lista para activarse mas adelante, solo si el negocio
+  lo demanda.</p>
+
+  <h3>Ahora: lanzamiento (semanas 1 a 4, incluido en esta propuesta)</h3>
+  <div class="timeline-block">
+    <table>
+      <thead>
+        <tr><th>Cuando</th><th>Hito</th><th>Que significa para el negocio</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Semana 1</td>
+          <td>Base de datos conectada</td>
+          <td>Toda la informacion de clientes, productos y cotizaciones queda guardada de forma segura y
+          permanente, ya no en papel ni en la memoria</td>
+        </tr>
+        <tr>
+          <td>Semana 1 a 2</td>
+          <td>Catalogo cargado con precios reales</td>
+          <td>Los productos y precios de mayoreo quedan listos y correctos en el sistema</td>
+        </tr>
+        <tr>
+          <td>Semana 2</td>
+          <td>CRM y cotizador en funcionamiento</td>
+          <td>El equipo puede crear, enviar y dar seguimiento a cotizaciones reales de clientes reales</td>
+        </tr>
+        <tr>
+          <td>Semana 2</td>
+          <td>Envio automatico de correos</td>
+          <td>Cada cotizacion se envia por correo al cliente sin trabajo manual</td>
+        </tr>
+        <tr>
+          <td>Semana 2 a 3</td>
+          <td>Panel de administracion con accesos por persona</td>
+          <td>Ventas y administracion tienen su propio acceso, con un primer panel de resultados basico</td>
+        </tr>
+        <tr>
+          <td>Semana 3</td>
+          <td>Capacitacion del equipo</td>
+          <td>El personal aprende a usar el sistema en su trabajo del dia a dia</td>
+        </tr>
+        <tr>
+          <td>Semana 3 a 4</td>
+          <td>Lanzamiento con el negocio real</td>
+          <td>El equipo empieza a usar el sistema con clientes reales, ya no como prueba</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Despues: solo si el negocio lo demanda (no incluido en el precio actual)</h3>
+  <div class="timeline-block">
+    <table>
+      <thead>
+        <tr><th>Etapa futura</th><th>Que agrega</th><th>Se activa cuando...</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cobros en linea</td>
+          <td>Los clientes pueden pagar directamente en el sitio (tarjeta, OXXO)</td>
+          <td>Haya suficiente trafico y pedidos en linea que lo justifiquen</td>
+        </tr>
+        <tr>
+          <td>Metricas y reportes avanzados</td>
+          <td>Graficas de ventas, clientes y desempeno para tomar mejores decisiones</td>
+          <td>Haya suficiente informacion acumulada para sacarle provecho</td>
+        </tr>
+        <tr>
+          <td>Monitoreo y alertas</td>
+          <td>Aviso automatico si algo falla en el sitio, antes de que el cliente lo note</td>
+          <td>El sitio este recibiendo trafico real de clientes todos los dias</td>
+        </tr>
+        <tr>
+          <td>Portal para pedidos de equipos y mayoreo</td>
+          <td>Clientes de mayoreo pueden cotizar por su cuenta, sin llamar</td>
+          <td>Haya suficiente demanda repetida de pedidos grandes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote">Este cronograma sigue el plan de etapas ya definido para el proyecto: primero se
+  prueba el valor con el equipo interno, despues se abre al publico solo cuando la demanda lo pide.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 8: 3 PROPOSALS -->
+<div class="page">
+  <h2 class="first-on-page">7. Tres propuestas</h2>
+  <p>Los $45,000 MXN se pueden dividir hasta en 10 o 12 pagos. Ademas de esto, elige como prefieres
+  estructurar el trato:</p>
+
+  <div class="prop-card">
+    <h3>Propuesta 1 - Pago fijo simple</h3>
+    <div class="price">$45,000 MXN</div>
+    <ul>
+      <li>10 pagos de $4,500 MXN, o 12 pagos de $3,750 MXN</li>
+      <li>Sin comisiones ni porcentajes futuros</li>
+      <li>Eres dueno total de la plataforma desde el dia uno</li>
+      <li>Infraestructura aparte, pagada directo a los proveedores (aprox. $43 MXN/mes hoy; hasta $1,465-1,735 MXN/mes solo si el sitio recibe trafico y ventas reales)</li>
+      <li>Los primeros 30 dias de soporte son gratis. Despues, soporte continuo opcional desde $3,000 a $6,000 MXN/mes</li>
+    </ul>
+    <p class="footnote">Ideal si prefieres simplicidad total y cero seguimiento administrativo entre
+    nosotros.</p>
+  </div>
+
+  <div class="prop-card">
+    <h3>Propuesta 2 - Pago reducido mas comision</h3>
+    <div class="price">$25,000 MXN + 4% por 18 meses</div>
+    <ul>
+      <li>8 pagos de $3,125 MXN</li>
+      <li>4% sobre el valor de las cotizaciones aceptadas que se generen por el sitio (solo clientes nuevos
+      captados en linea, no tu cartera actual de clientes)</li>
+      <li>Vigencia de 18 meses, despues se revisa o se termina automaticamente</li>
+      <li>Infraestructura aparte (aprox. $43 a $1,735 MXN/mes segun trafico)</li>
+      <li>Los primeros 30 dias de soporte son gratis. Despues, soporte continuo opcional desde $3,000 a $6,000 MXN/mes</li>
+    </ul>
+    <p class="footnote">Reduce el pago inicial a cambio de que yo tambien gane si el sitio realmente
+    vende.</p>
+  </div>
+
+  <div class="prop-card">
+    <h3>Propuesta 3 - Socio estrategico</h3>
+    <div class="price">$15,000 MXN + 6% por 24 meses</div>
+    <ul>
+      <li>5 pagos de $3,000 MXN, practicamente a costo</li>
+      <li>6% sobre el valor de las cotizaciones aceptadas generadas por el sitio (clientes nuevos en
+      linea)</li>
+      <li>Vigencia de 24 meses</li>
+      <li>Opcion de recompra: despues de 12 meses puedes cerrar la comision con un pago unico equivalente a
+      12 veces el promedio mensual cobrado</li>
+      <li>Infraestructura aparte (aprox. $43 a $1,735 MXN/mes segun trafico)</li>
+      <li>Los primeros 30 dias de soporte son gratis. Despues, soporte continuo opcional desde $3,000 a $6,000 MXN/mes</li>
+    </ul>
+    <p class="footnote">La opcion que mas me compromete contigo a largo plazo: gano poco si el sitio no se
+    usa, gano mas si de verdad genera ventas.</p>
+  </div>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+<!-- PAGE 9: COMPARISON + NEXT STEPS -->
+<div class="page">
+  <h2 class="first-on-page">Comparacion rapida</h2>
+  <table>
+    <thead>
+      <tr><th>Criterio</th><th>Propuesta 1</th><th>Propuesta 2</th><th>Propuesta 3</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Pago inicial total</td><td>$45,000</td><td>$25,000</td><td>$15,000</td></tr>
+      <tr><td>Numero de pagos</td><td>10 a 12</td><td>8</td><td>5</td></tr>
+      <tr><td>Comision sobre ventas nuevas</td><td>Ninguna</td><td>4% / 18 meses</td><td>6% / 24 meses</td></tr>
+      <tr><td>Compromiso a largo plazo</td><td>Bajo</td><td>Medio</td><td>Alto</td></tr>
+      <tr><td>Infraestructura</td><td colspan="3">Siempre aparte, a costo real (aprox. $43 a $1,735 MXN/mes segun trafico)</td></tr>
+      <tr><td>Soporte despues de 30 dias (opcional)</td><td colspan="3">Igual en las tres: $3,000 a $6,000 MXN/mes si decides continuarlo</td></tr>
+    </tbody>
+  </table>
+
+  <h2>8. Siguientes pasos</h2>
+  <ol>
+    <li>Elegir una de las tres propuestas (o ajustar los numeros juntos)</li>
+    <li>Conectar la plataforma a la base de datos real y ponerla a funcionar (4 a 7 dias)</li>
+    <li>Cargar catalogo y precios reales</li>
+    <li>Capacitacion breve al equipo de ventas</li>
+    <li>Lanzamiento y primer mes de acompanamiento</li>
+  </ol>
+  <p class="footnote">Propuesta preparada en julio de 2026. Cifras de mercado basadas en tarifas estandar
+  de la industria de desarrollo de software en Mexico. Documento confidencial entre las partes.</p>
+  <div class="page-footer">v1.2 | 2026-07-09 | Propuesta RS | Confidencial - Uso interno entre las partes</div>
+</div>
+
+</body>
+</html>

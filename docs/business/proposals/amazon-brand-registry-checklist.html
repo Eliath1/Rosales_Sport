@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8" />
+<title>Costos y Checklist - Pagina de Marca en Amazon</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    background: #fff;
+  }
+
+  .page {
+    width: 210mm;
+    padding: 14mm 16mm 10mm 16mm;
+    margin: 0 auto;
+    background: #fff;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .page:last-of-type { page-break-after: avoid; break-after: avoid; }
+
+  .cover-header {
+    background: #002B49;
+    color: #fff;
+    padding: 10mm 16mm 8mm 16mm;
+    margin: -14mm -16mm 10mm -16mm;
+  }
+
+  .cover-header .tag { background: #007A8A; }
+  .report-title { font-size: 20pt; font-weight: 700; color: #fff; margin-top: 8pt; line-height: 1.2; }
+  .report-subtitle { font-size: 10pt; font-weight: 700; color: #cfe3ea; margin-top: 4pt; }
+
+  .tag {
+    display: inline-block;
+    background: #007A8A;
+    color: #fff;
+    padding: 3pt 9pt;
+    border-radius: 2pt;
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  h2 {
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: #007A8A;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-bottom: 2pt solid #007A8A;
+    padding-bottom: 4pt;
+    margin-top: 10pt;
+    margin-bottom: 7pt;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h2.first-on-page { margin-top: 0; }
+
+  h3 { font-size: 10.5pt; font-weight: 700; color: #002B49; margin-top: 6pt; margin-bottom: 2pt; }
+
+  p { margin: 3pt 0; line-height: 1.4; }
+
+  .checklist { list-style: none; margin: 4pt 0 8pt 2pt; }
+  .checklist li {
+    margin: 4pt 0;
+    padding-left: 20pt;
+    position: relative;
+    line-height: 1.4;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1pt;
+    width: 10pt;
+    height: 10pt;
+    border: 1.3pt solid #002B49;
+    border-radius: 2pt;
+  }
+  .checklist.sub { margin-left: 10pt; }
+
+  .bottom-line {
+    background: #f7fbfd;
+    border-left: 4pt solid #007A8A;
+    padding: 7pt 11pt;
+    margin: 6pt 0;
+    font-size: 9.8pt;
+    line-height: 1.4;
+  }
+
+  .role-box {
+    display: inline-block;
+    background: #002B49;
+    color: #fff;
+    padding: 2pt 8pt;
+    border-radius: 2pt;
+    font-size: 8pt;
+    font-weight: 700;
+    margin-top: 4pt;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.7pt;
+    margin: 6pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  thead tr { background: #002B49; color: #fff; }
+  thead th { padding: 4pt 6pt; text-align: left; font-weight: 700; font-size: 8.3pt; border: 1pt solid #002B49; }
+  tbody tr:nth-child(even) { background: #f2f7fa; }
+  tbody tr:nth-child(odd) { background: #fff; }
+  tbody td { padding: 4pt 6pt; vertical-align: top; line-height: 1.35; border: 1pt solid #ddd; }
+
+  .footnote { font-size: 7.8pt; color: #666; margin-top: 2pt; line-height: 1.3; }
+  .page-footer {
+    font-size: 7.5pt; color: #999; margin-top: 6pt;
+    border-top: 0.5pt solid #ddd; padding-top: 3pt;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; min-height: auto; height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER + RESUMEN DE INVERSION INICIAL -->
+<div class="page">
+  <div class="cover-header">
+    <span class="tag">COSTOS</span>
+    <div class="report-title">Costos y Checklist: Pagina de Marca en Amazon</div>
+    <div class="report-subtitle">Mexico y Estados Unidos - inversion inicial, costo por venta, y pasos de tramite</div>
+  </div>
+
+  <div class="bottom-line">
+    <strong>En una frase:</strong> Amazon exige marca registrada (o en tramite) y cuenta Professional antes
+    de dejarte construir una pagina de marca. Este documento ordena primero el dinero, despues el tramite.
+  </div>
+
+  <h2 class="first-on-page">Resumen de costo mensual (aparte de la comision por venta)</h2>
+  <table>
+    <thead><tr><th>Concepto</th><th>Costo</th><th>Quien lo hace</th><th>Tipo de costo</th></tr></thead>
+    <tbody>
+      <tr><td>Cuota de vendedor Amazon (Plan Profesional)</td><td>$0 primer ano, luego $75 - $600 MXN/mes</td><td>Pago directo a Amazon</td><td>Mensual, obligatorio</td></tr>
+      <tr><td>Gestion y actualizacion de catalogo (subir productos, precios, contenido de tienda)</td><td>$1,500 MXN (pago unico)</td><td>Te enseño a un empleado del negocio</td><td>Una sola vez, no mensual</td></tr>
+      <tr><td><strong>Costo mensual recurrente real</strong></td><td><strong>~$75 - $600 MXN/mes</strong></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Referencia de mercado: una agencia de gestion de catalogo en Mexico cobra entre
+  $1,500 y $10,500+ MXN al mes; el programa oficial Paid Essentials de Amazon cuesta $16,240 MXN/mes.
+  Capacitando a un empleado propio una sola vez, ese costo recurrente casi desaparece.</p>
+
+  <h2>Resumen de inversion inicial (costo unico, antes de vender)</h2>
+  <p>Esto se paga <strong>una sola vez</strong>, no cada mes. Es el costo de registrar la marca y abrir la
+  cuenta.</p>
+
+  <h3>Mexico - registrar la marca ante el IMPI</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Costo</th><th>Quien lo hace</th><th>Cuando se paga</th></tr></thead>
+    <tbody>
+      <tr><td>Tarifa oficial IMPI, 1 clase, tramite en linea</td><td>$2,814 MXN</td><td>Pago directo al IMPI (obligatorio siempre)</td><td>Al presentar la solicitud</td></tr>
+      <tr><td>Gestoria del tramite (llenado, presentacion, seguimiento)</td><td>$750 MXN</td><td>Gestoria propia, ya se ha hecho antes</td><td>Al presentar la solicitud</td></tr>
+      <tr><td>Validacion de metodo de pago (cuenta Amazon Seller)</td><td>$12 MXN</td><td>Cliente, directo en Amazon</td><td>Al registrar la cuenta</td></tr>
+      <tr><td><strong>Total si el cliente lo hace solo</strong></td><td><strong>~$2,826 MXN</strong></td><td></td><td></td></tr>
+      <tr><td><strong>Total con gestoria propia</strong></td><td><strong>~$3,576 MXN</strong></td><td></td><td></td></tr>
+      <tr><td><strong>Total con gestoria externa (mercado)</strong></td><td><strong>~$5,326 - $6,826 MXN</strong></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Referencia de mercado: una gestoria o despacho externo cobra $2,500 - $4,000 MXN por
+  el mismo servicio. Tiempo de espera del IMPI: 4 a 6 meses sin objeciones; hasta 18 meses si las hay.</p>
+
+  <h3>Estados Unidos - registrar la marca ante el USPTO (para vender ahi despues)</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Costo</th><th>Cuando se paga</th></tr></thead>
+    <tbody>
+      <tr><td>Tarifa oficial USPTO, 1 clase</td><td>$350 USD</td><td>Al presentar la solicitud</td></tr>
+      <tr><td>Abogado de marcas (opcional)</td><td>$500 - $2,000 USD</td><td>Al presentar la solicitud</td></tr>
+      <tr><td><strong>Total sin abogado</strong></td><td><strong>~$350 USD</strong></td><td></td></tr>
+      <tr><td><strong>Total con abogado</strong></td><td><strong>~$850 - $2,350 USD</strong></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Alternativa si aun no hay marca lista: Amazon IP Accelerator conecta con despachos
+  aprobados por Amazon; una marca en tramite por esta via puede calificar para Brand Registry antes de
+  terminar el registro completo. Costo se cotiza directo con el despacho.</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 2: COSTOS POR UNIDAD - MEXICO -->
+<div class="page">
+  <h2 class="first-on-page">Costos de vender en Amazon (por unidad)</h2>
+  <div class="bottom-line">
+    <strong>Regla simple:</strong> si el producto se personaliza por pedido (nombre, numero, logo), Amazon
+    no puede tener stock listo en su bodega, asi que <strong>no se puede usar FBA</strong>. Si el producto
+    es igual para todos y solo cambia la talla, si se puede mandar stock a Amazon y usar <strong>FBA</strong>.
+  </div>
+  <ul class="checklist">
+    <li><strong>Jersey personalizado</strong> (nombre, numero, patrocinador) -&gt; sin FBA, tu envias cada
+    pedido.</li>
+    <li><strong>Pantalon estandar</strong> (sin personalizar, stock fijo por talla) -&gt; con FBA, Amazon
+    guarda y envia.</li>
+  </ul>
+
+  <h3>Mexico (MXN)</h3>
+  <h3>Jersey personalizado - precio ejemplo $1,400 MXN - sin FBA (tu envias)</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Monto</th></tr></thead>
+    <tbody>
+      <tr><td>Comision por venta (Ropa y Accesorios, 15%)</td><td>$210</td></tr>
+      <tr><td>Envio al cliente (paqueteria, tu lo pagas)</td><td>$120</td></tr>
+      <tr><td>Empaque y etiquetado</td><td>$25</td></tr>
+      <tr><td><strong>Total costo variable por unidad</strong></td><td><strong>$355</strong></td></tr>
+      <tr><td>Te queda por unidad</td><td>$1,045 (75%)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Pantalon estandar - precio ejemplo $700 MXN - con FBA</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Monto</th></tr></thead>
+    <tbody>
+      <tr><td>Comision por venta (Ropa y Accesorios, 15%)</td><td>$105</td></tr>
+      <tr><td>Tarifa de logistica FBA (recoleccion, empaque, envio)</td><td>$57</td></tr>
+      <tr><td>Almacenamiento mensual FBA (prorrateado por unidad)</td><td>$1</td></tr>
+      <tr><td><strong>Total costo variable por unidad</strong></td><td><strong>$163</strong></td></tr>
+      <tr><td>Te queda por unidad</td><td>$537 (77%)</td></tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">Aparte de estos costos por unidad, hay una cuota fija mensual de vendedor: $0 el
+  primer ano, luego $75 MXN/mes si vendes menos de $26,000 MXN al mes, o $600 MXN/mes si vendes mas.</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 3: COSTOS POR UNIDAD - EUA + TABLA FINAL -->
+<div class="page">
+  <h2 class="first-on-page">Estados Unidos (USD)</h2>
+  <h3>Jersey personalizado - precio ejemplo $75 USD - sin FBA (tu envias)</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Monto</th></tr></thead>
+    <tbody>
+      <tr><td>Comision por venta (Ropa, escalonada 5% / 10% / 17%)</td><td>$10.60</td></tr>
+      <tr><td>Envio al cliente (paqueteria en EUA, tu lo pagas)</td><td>$8.00</td></tr>
+      <tr><td>Empaque y etiquetado</td><td>$1.50</td></tr>
+      <tr><td><strong>Total costo variable por unidad</strong></td><td><strong>$20.10</strong></td></tr>
+      <tr><td>Te queda por unidad</td><td>$54.90 (73%)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Pantalon estandar - precio ejemplo $40 USD - con FBA</h3>
+  <table>
+    <thead><tr><th>Concepto</th><th>Monto</th></tr></thead>
+    <tbody>
+      <tr><td>Comision por venta (Ropa, escalonada 5% / 10% / 17%)</td><td>$4.65</td></tr>
+      <tr><td>Tarifa de logistica FBA (talla estandar, banda $10-50)</td><td>$5.70</td></tr>
+      <tr><td>Almacenamiento mensual FBA (prorrateado por unidad)</td><td>$0.15</td></tr>
+      <tr><td><strong>Total costo variable por unidad</strong></td><td><strong>$10.50</strong></td></tr>
+      <tr><td>Te queda por unidad</td><td>$29.50 (74%)</td></tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">Aparte de estos costos por unidad, hay una cuota fija mensual de vendedor: $39.99
+  USD/mes (plan Profesional, requerido para tener pagina de marca).</p>
+
+  <h2>Tabla final: solo totales por unidad</h2>
+  <table>
+    <thead>
+      <tr><th>Mercado</th><th>Producto</th><th>Envio</th><th>Precio ejemplo</th><th>Costo total/unidad</th><th>% del precio</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mexico</td><td>Jersey personalizado</td><td>Tu envias (sin FBA)</td><td>$1,400 MXN</td><td>$355 MXN</td><td>25%</td></tr>
+      <tr><td>Mexico</td><td>Pantalon estandar</td><td>FBA</td><td>$700 MXN</td><td>$163 MXN</td><td>23%</td></tr>
+      <tr><td>EUA</td><td>Jersey personalizado</td><td>Tu envias (sin FBA)</td><td>$75 USD</td><td>$20.10 USD</td><td>27%</td></tr>
+      <tr><td>EUA</td><td>Pantalon estandar</td><td>FBA</td><td>$40 USD</td><td>$10.50 USD</td><td>26%</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Precios de ejemplo para ilustrar el calculo. Los precios reales de catalogo pueden
+  variar; ajustar la formula con el precio final de cada producto.</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 4: FASE 0 -->
+<div class="page">
+  <div class="cover-header">
+    <span class="tag">CHECKLIST</span>
+    <div class="report-title">Paso a paso: inscribir la marca y construir la tienda</div>
+    <div class="report-subtitle">Las fases 0 y 1 son bloqueantes</div>
+  </div>
+
+  <h2 class="first-on-page">Fase 0: Prerrequisitos legales y de cuenta</h2>
+  <ul class="checklist">
+    <li><strong>Marca registrada o en tramite (trademark)</strong> ante una oficina de propiedad
+    intelectual reconocida por Amazon (en Mexico: IMPI; en Estados Unidos: USPTO; tambien aplica EUIPO,
+    UKIPO, segun el pais donde se quiera vender). Puede ser marca de texto (nombre) o de diseno (logo con
+    palabras, letras o numeros).</li>
+    <li>Si todavia no existe una marca registrada: Amazon ofrece <strong>IP Accelerator</strong> (ver
+    resumen de inversion inicial, pagina 1).</li>
+    <li><strong>Logo con el nombre de marca puesto de forma permanente</strong> en el producto o su
+    empaque (no una etiqueta que se pueda despegar).</li>
+    <li><strong>Cuenta de Amazon Seller Central tipo Professional</strong> (no la cuenta gratuita
+    Individual). Costo aproximado: $39.99 USD/mes.</li>
+    <li>Confirmar que quien inscribe la marca <strong>es el dueno legal de los derechos</strong> o su
+    agente autorizado.</li>
+  </ul>
+  <p class="role-box">Responsable sugerido: dueno del negocio + abogado de propiedad intelectual</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 5: FASE 1 + FASE 2 -->
+<div class="page">
+  <h2 class="first-on-page">Fase 1: Inscripcion en Amazon Brand Registry (gratis)</h2>
+  <ul class="checklist">
+    <li>Entrar a <strong>brandservices.amazon.com</strong> con las credenciales de Seller Central.</li>
+    <li>Seleccionar "Enroll a new brand" (Inscribir una marca nueva).</li>
+    <li>Escribir el <strong>nombre de marca exactamente igual</strong> a como aparece en el registro de la
+    marca. Un nombre que no coincide letra por letra es la causa mas comun de rechazo.</li>
+    <li>Ingresar el <strong>numero de registro o de tramite</strong> de la marca, en el formato exacto que
+    dio la oficina de propiedad intelectual.</li>
+    <li>Subir el <strong>logo</strong> (si la marca es de diseno) exactamente como aparece en el registro.
+    Se sube la imagen del logo, no el certificado completo de la marca.</li>
+    <li>Subir una <strong>foto del producto o su empaque</strong> donde se vea el nombre de marca puesto de
+    forma permanente.</li>
+    <li>Listar las <strong>categorias de producto</strong> donde se va a vender con esta marca.</li>
+    <li>Enviar la solicitud.</li>
+    <li>Esperar verificacion de Amazon (tipico: 2 a 10 dias habiles).</li>
+  </ul>
+  <p class="role-box">Responsable sugerido: dueno del negocio, o quien tenga acceso a Seller Central y a
+  los documentos de la marca</p>
+
+  <h2>Fase 2: Desbloquear el creador de tiendas</h2>
+  <ul class="checklist">
+    <li>Marca ya <strong>aprobada</strong> en Brand Registry (resultado de la fase 1).</li>
+    <li><strong>Registrar una cuenta de Amazon Ads</strong> (aunque no se vaya a pagar publicidad todavia;
+    es requisito para entrar al creador de tiendas).</li>
+    <li>Tener <strong>al menos un producto publicado</strong> en el catalogo bajo esa marca.</li>
+  </ul>
+  <p class="role-box">Responsable sugerido: dueno del negocio o encargado de marketing</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 6: FASE 3 + NOTAS -->
+<div class="page">
+  <h2 class="first-on-page">Fase 3: Construir la pagina de marca (Amazon Store)</h2>
+  <ul class="checklist">
+    <li>Entrar a Seller Central, menu <strong>Stores &gt; Manage Stores</strong>, iniciar sesion con las
+    credenciales de Amazon Ads.</li>
+    <li>Click en <strong>Create Brand Store</strong> (Crear tienda de marca).</li>
+    <li>Elegir una plantilla de diseno (layout).</li>
+    <li>Preparar el contenido antes de empezar a disenar:</li>
+  </ul>
+  <ul class="checklist sub">
+    <li>Logo en alta resolucion</li>
+    <li>Imagenes de encabezado o banner</li>
+    <li>Fotos de producto de buena calidad</li>
+    <li>Texto breve de "historia de marca"</li>
+    <li>Organizacion de categorias o secciones (tiles) de la tienda</li>
+  </ul>
+  <ul class="checklist">
+    <li>Agregar los productos (por ASIN) a las paginas correspondientes.</li>
+    <li>Revisar todo en modo vista previa.</li>
+    <li>Enviar a publicar (<strong>Submit for publishing</strong>). Amazon revisa el contenido antes de que
+    quede visible al publico.</li>
+  </ul>
+  <p class="role-box">Responsable sugerido: marketing / diseno, con apoyo del equipo tecnico para cargar el
+  catalogo</p>
+
+  <h2>Notas importantes (errores comunes)</h2>
+  <ul class="checklist">
+    <li>El <strong>nombre de marca debe coincidir exactamente</strong> con el del registro de la marca,
+    incluyendo mayusculas y espacios.</li>
+    <li>No subir el <strong>certificado completo</strong> de la marca donde se pide el logo; se pide la
+    imagen del logotipo.</li>
+    <li>Solo el <strong>dueno legal</strong> de la marca (o su agente autorizado formalmente) puede
+    inscribirla.</li>
+    <li>El costo de Brand Registry en si es <strong>$0</strong>; los costos reales y obligatorios son la
+    cuenta Professional ($39.99 USD/mes) y el tramite legal de la marca (ver pagina 1).</li>
+    <li>Sin marca registrada o en tramite <strong>no hay forma de saltarse este requisito</strong>.</li>
+  </ul>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+<!-- PAGE 7: RESUMEN DE RESPONSABLES -->
+<div class="page">
+  <h2 class="first-on-page">Resumen de responsables</h2>
+  <table>
+    <thead>
+      <tr><th>Fase</th><th>Que se resuelve</th><th>Quien lo hace</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td>Marca registrada o en tramite, cuenta Professional</td><td>Dueno del negocio + abogado de propiedad intelectual</td></tr>
+      <tr><td>1</td><td>Inscripcion en Brand Registry</td><td>Dueno del negocio</td></tr>
+      <tr><td>2</td><td>Cuenta de Amazon Ads, primer producto publicado</td><td>Dueno del negocio / marketing</td></tr>
+      <tr><td>3</td><td>Diseno y publicacion de la tienda</td><td>Marketing / diseno + apoyo tecnico</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Checklist y costos preparados en julio de 2026, con base en la documentacion oficial
+  vigente de Amazon Brand Registry, Amazon Stores, IMPI y USPTO. Verificar requisitos y tarifas vigentes
+  antes de iniciar el tramite, ya que estas instituciones pueden actualizar sus politicas y precios.</p>
+  <div class="page-footer">v2.0 | 2026-07-09 | Costos y Checklist Amazon Brand Registry | RS</div>
+</div>
+
+</body>
+</html>

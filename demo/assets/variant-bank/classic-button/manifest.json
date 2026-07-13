@@ -1,0 +1,196 @@
+{
+  "version": 2,
+  "mode": "curated-photo",
+  "generatedAt": "2026-07-04T10:37:21.295Z",
+  "zones": [
+    "body",
+    "sleeve",
+    "collar"
+  ],
+  "bank": [
+    {
+      "id": "wht",
+      "hex": "#FFFFFF",
+      "label": "Blanco"
+    },
+    {
+      "id": "blk",
+      "hex": "#000000",
+      "label": "Negro"
+    },
+    {
+      "id": "red",
+      "hex": "#ED090D",
+      "label": "Rojo RS"
+    },
+    {
+      "id": "nav",
+      "hex": "#1e3a8a",
+      "label": "Navy"
+    },
+    {
+      "id": "roy",
+      "hex": "#2563eb",
+      "label": "Royal"
+    },
+    {
+      "id": "grn",
+      "hex": "#4a5d23",
+      "label": "Verde militar"
+    },
+    {
+      "id": "gry",
+      "hex": "#525252",
+      "label": "Gris"
+    }
+  ],
+  "paletteMap": {
+    "#FFFFFF": "wht",
+    "#000000": "blk",
+    "#525252": "gry",
+    "#d4d4d4": "wht",
+    "#ED090D": "red",
+    "#8B0000": "red",
+    "#ea580c": "red",
+    "#1e3a8a": "nav",
+    "#2563eb": "roy",
+    "#38bdf8": "roy",
+    "#4a5d23": "grn",
+    "#166534": "grn"
+  },
+  "curatedCount": 12,
+  "variants": {
+    "wht_wht_wht": {
+      "label": "Blanco solido",
+      "body": "wht",
+      "bodyHex": "#FFFFFF",
+      "sleeve": "wht",
+      "sleeveHex": "#FFFFFF",
+      "collar": "wht",
+      "collarHex": "#FFFFFF",
+      "front": "front/wht_wht_wht.png",
+      "back": "back/wht_wht_wht.png"
+    },
+    "blk_blk_blk": {
+      "label": "Negro solido",
+      "body": "blk",
+      "bodyHex": "#000000",
+      "sleeve": "blk",
+      "sleeveHex": "#000000",
+      "collar": "blk",
+      "collarHex": "#000000",
+      "front": "front/blk_blk_blk.png",
+      "back": "back/blk_blk_blk.png"
+    },
+    "red_red_red": {
+      "label": "Rojo solido",
+      "body": "red",
+      "bodyHex": "#ED090D",
+      "sleeve": "red",
+      "sleeveHex": "#ED090D",
+      "collar": "red",
+      "collarHex": "#ED090D",
+      "front": "front/red_red_red.png",
+      "back": "back/red_red_red.png"
+    },
+    "nav_nav_nav": {
+      "label": "Navy solido",
+      "body": "nav",
+      "bodyHex": "#1e3a8a",
+      "sleeve": "nav",
+      "sleeveHex": "#1e3a8a",
+      "collar": "nav",
+      "collarHex": "#1e3a8a",
+      "front": "front/nav_nav_nav.png",
+      "back": "back/nav_nav_nav.png"
+    },
+    "roy_roy_roy": {
+      "label": "Royal solido",
+      "body": "roy",
+      "bodyHex": "#2563eb",
+      "sleeve": "roy",
+      "sleeveHex": "#2563eb",
+      "collar": "roy",
+      "collarHex": "#2563eb",
+      "front": "front/roy_roy_roy.png",
+      "back": "back/roy_roy_roy.png"
+    },
+    "grn_grn_grn": {
+      "label": "Verde militar solido",
+      "body": "grn",
+      "bodyHex": "#4a5d23",
+      "sleeve": "grn",
+      "sleeveHex": "#4a5d23",
+      "collar": "grn",
+      "collarHex": "#4a5d23",
+      "front": "front/grn_grn_grn.png",
+      "back": "back/grn_grn_grn.png"
+    },
+    "gry_gry_gry": {
+      "label": "Gris solido",
+      "body": "gry",
+      "bodyHex": "#525252",
+      "sleeve": "gry",
+      "sleeveHex": "#525252",
+      "collar": "gry",
+      "collarHex": "#525252",
+      "front": "front/gry_gry_gry.png",
+      "back": "back/gry_gry_gry.png"
+    },
+    "wht_red_red": {
+      "label": "Blanco con mangas y cuello rojo",
+      "body": "wht",
+      "bodyHex": "#FFFFFF",
+      "sleeve": "red",
+      "sleeveHex": "#ED090D",
+      "collar": "red",
+      "collarHex": "#ED090D",
+      "front": "front/wht_red_red.png",
+      "back": "back/wht_red_red.png"
+    },
+    "wht_nav_nav": {
+      "label": "Blanco con mangas y cuello navy",
+      "body": "wht",
+      "bodyHex": "#FFFFFF",
+      "sleeve": "nav",
+      "sleeveHex": "#1e3a8a",
+      "collar": "nav",
+      "collarHex": "#1e3a8a",
+      "front": "front/wht_nav_nav.png",
+      "back": "back/wht_nav_nav.png"
+    },
+    "wht_blk_blk": {
+      "label": "Blanco con mangas y cuello negro",
+      "body": "wht",
+      "bodyHex": "#FFFFFF",
+      "sleeve": "blk",
+      "sleeveHex": "#000000",
+      "collar": "blk",
+      "collarHex": "#000000",
+      "front": "front/wht_blk_blk.png",
+      "back": "back/wht_blk_blk.png"
+    },
+    "red_wht_wht": {
+      "label": "Rojo con mangas y cuello blanco",
+      "body": "red",
+      "bodyHex": "#ED090D",
+      "sleeve": "wht",
+      "sleeveHex": "#FFFFFF",
+      "collar": "wht",
+      "collarHex": "#FFFFFF",
+      "front": "front/red_wht_wht.png",
+      "back": "back/red_wht_wht.png"
+    },
+    "blk_red_red": {
+      "label": "Negro con mangas y cuello rojo",
+      "body": "blk",
+      "bodyHex": "#000000",
+      "sleeve": "red",
+      "sleeveHex": "#ED090D",
+      "collar": "red",
+      "collarHex": "#ED090D",
+      "front": "front/blk_red_red.png",
+      "back": "back/blk_red_red.png"
+    }
+  }
+}

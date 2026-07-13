@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "cloudflare": {
+      "enabled": true
+    },
+    "netlify-skills": {
+      "enabled": true
+    },
+    "neon-postgres": {
+      "enabled": true
+    }
+  }
+}

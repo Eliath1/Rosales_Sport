@@ -1,0 +1,67 @@
+---
+description: Stage D static demo (demo/) - layout, images, copy, deploy guardrails
+globs: "demo/**"
+alwaysApply: false
+---
+
+# Stage D Static Demo
+
+Active until Stage 0 Next.js replaces client preview. Read [docs/architecture/stage-demo-static.md](../../docs/architecture/stage-demo-static.md) before editing `demo/`.
+
+## Plan before execute
+
+1. State what changes (copy, images, new page) and what stays untouched (grid CSS, card HTML shape).
+2. Edit `demo/js/messages.js` for copy (ES + EN); keep `data-i18n` keys on visible text.
+3. Run `npm run demo:build-check` before suggesting Netlify deploy.
+
+## Product card HTML (do not break)
+
+Every `.product-card` inside `.product-grid` must keep this shape:
+
+```html
+<!-- GOOD -->
+<article class="product-card" data-team="..." data-liga="..." data-price="...">
+  <a href="/products/....html">
+    <span class="product-badge">...</span>  <!-- optional -->
+    <div class="product-image">
+      <div class="placeholder-jersey has-photo" style="background-image:url('/images/....')">Jersey</div>
+    </div>
+    <div class="product-info">
+      <h3>Product title</h3>
+      <p class="product-price">$ X,XXX.00</p>
+    </div>
+  </a>
+</article>
+```
+
+```html
+<!-- BAD: breaks grid proportions -->
+<div class="product-image"><img src="/images/jersey1.webp" alt="..."></div>
+<!-- BAD: missing product-info wrapper -->
+<div class="product-image">...</div>
+<p class="product-price">...</p>
+```
+
+## Images in demo
+
+| Location | Purpose |
+|----------|---------|
+| `demo/images/` | Jersey photos served at `/images/*` on Netlify (publish dir is `demo/`) |
+| `images/` (repo root) | Optional staging only; copy into `demo/images/` before deploy |
+| `demo/assets/` | Logo and brand static files |
+
+- Use `background-image` on `.placeholder-jersey.has-photo`, not full-bleed `<img>` in cards.
+- PDP gallery: keep `.placeholder-jersey` inside `.pdp-gallery-main` and `.pdp-thumb` (see `demo/js/demo.js` `initGallery`).
+- Do not add CSS that sets product images to `width:100%;height:100%` on placeholders unless scoped to PDP only.
+
+## Copy and markets
+
+- Decoration types (bordado, DTF, TPU, 3D DTF) are available for **Mexico and US** unless product owner says otherwise.
+- Do not split finishing by market in UI copy without explicit approval.
+- Avoid duplicate hero sections that repeat the same CTA (one primary path to `/custom/uniform.html`).
+
+## Deploy
+
+- Stage D: `publish = "demo"` in root `netlify.toml`; deploy with `npx netlify deploy --prod --dir=demo`.
+- Zip deploy: `npm run demo:package` (POSIX paths; never Windows `Compress-Archive`).
+- Stage 0 app (`app/`) uses `@netlify/plugin-nextjs`; do not mix publish dirs in one deploy.

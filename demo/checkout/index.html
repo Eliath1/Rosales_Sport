@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="checkout.title">Pagar pedido - RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="banner.demo">Vista previa para cliente</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="header-icons">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="/cart/" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:11px;" data-i18n="cart.title">Tu carrito</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="page-intro">
+      <h1 data-i18n="checkout.title">Pagar pedido</h1>
+      <p data-i18n="checkout.intro">Completa tus datos para procesar el pago. Esto es una demostracion; ningun cargo real se realiza.</p>
+    </div>
+    <div class="checkout-layout">
+      <form class="form-card form-card-wide" id="checkout-form">
+        <div id="checkout-form-root">
+          <div class="form-group"><label for="checkout-name" data-i18n="checkout.name">Nombre completo</label><input type="text" id="checkout-name" required></div>
+          <div class="form-group"><label for="checkout-email" data-i18n="checkout.email">Correo</label><input type="email" id="checkout-email" required></div>
+          <div class="form-group"><label for="checkout-phone" data-i18n="checkout.phone">Telefono</label><input type="tel" id="checkout-phone"></div>
+
+          <p class="size-label" data-i18n="checkout.payment_method.title">Metodo de pago</p>
+          <div class="payment-method-options" style="margin-bottom:1.25rem;">
+            <label class="payment-method-option">
+              <input type="radio" name="payment-method" value="card" checked>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              <span data-i18n="payment.method.card">Tarjeta</span>
+            </label>
+            <label class="payment-method-option">
+              <input type="radio" name="payment-method" value="mercadopago">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+              <span data-i18n="payment.method.mercadopago">Mercado Pago</span>
+            </label>
+            <label class="payment-method-option">
+              <input type="radio" name="payment-method" value="oxxo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M3 9l9-6 9 6"/><path d="M4 10v9h16v-9"/><path d="M9 19v-5h6v5"/></svg>
+              <span data-i18n="payment.method.oxxo">OXXO</span>
+            </label>
+            <label class="payment-method-option">
+              <input type="radio" name="payment-method" value="spei">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="10" width="18" height="8" rx="1"/><path d="M7 10V6a5 5 0 0110 0v4"/></svg>
+              <span data-i18n="payment.method.spei">SPEI/Transferencia</span>
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="checkout-consent" required>
+            <label for="checkout-consent" data-i18n="checkout.consent">Acepto aviso de privacidad y terminos y condiciones.</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-i18n="checkout.submit">Pagar ahora</button>
+        </div>
+        <div class="form-success" data-i18n="checkout.success">Pago simulado con exito.</div>
+      </form>
+      <div id="checkout-summary-root"></div>
+    </div>
+  </main>
+  <footer class="site-footer"><p class="footer-copy" data-i18n="footer.copy">RS Beisbol Mexico</p></footer>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+</body>
+</html>

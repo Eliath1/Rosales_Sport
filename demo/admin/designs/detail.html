@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalle de diseno - Admin RS</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/configurator.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <ul class="admin-nav">
+        <li><a href="/admin/" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" class="active" data-i18n="admin.designs">Disenos</a></li>
+        <li><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a></li>
+        <li><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" data-i18n="admin.testimonials">Testimonios</a></li>
+        <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
+      </ul>
+    </aside>
+    <div class="admin-main" id="design-detail-root">
+      <p data-i18n="admin.designs.not_found">Diseno no encontrado.</p>
+    </div>
+  </div>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get("id");
+      var root = document.getElementById("design-detail-root");
+      var list = [];
+      try {
+        list = JSON.parse(localStorage.getItem("rs_design_requests") || "[]");
+      } catch (e) {}
+      var item = list.find(function (x) { return x.id === id; });
+      if (!item) return;
+
+      var rosterRows = (item.roster || [])
+        .map(function (r) {
+          return "<tr><td>" + (r.name || "") + "</td><td>" + (r.number || "") + "</td><td>" + (r.size || "") + "</td></tr>";
+        })
+        .join("");
+
+      var sizes = Object.keys(item.sizeBreakdown || {})
+        .map(function (k) { return k + ": " + item.sizeBreakdown[k]; })
+        .join(", ");
+
+      root.innerHTML =
+        '<p><a href="/admin/designs.html">&larr; ' +
+        (window.rsI18n ? window.rsI18n.t(window.rsI18n.getLang(), "admin.designs.back") : "Disenos") +
+        "</a></p>" +
+        "<h1 style=\"margin:0 0 1rem;\">" +
+        (item.teamName || item.id) +
+        "</h1>" +
+        '<div style="display:grid;gap:1.5rem;grid-template-columns:1fr 280px;">' +
+        "<div>" +
+        '<div class="form-card">' +
+        "<h2 style=\"font-size:14px;text-transform:uppercase;\">" +
+        (window.rsI18n ? window.rsI18n.t(window.rsI18n.getLang(), "admin.custom.title") : "Personalizacion") +
+        "</h2>" +
+        "<p><strong>ID:</strong> " +
+        item.id +
+        "</p>" +
+        "<p><strong>Producto:</strong> " +
+        item.productType +
+        " / " +
+        item.templateSlug +
+        "</p>" +
+        "<p><strong>Decoracion:</strong> " +
+        item.decoration +
+        "</p>" +
+        "<p><strong>Cantidad:</strong> " +
+        item.quantity +
+        "</p>" +
+        "<p><strong>Tallas:</strong> " +
+        (sizes || "-") +
+        "</p>" +
+        "<p><strong>Contacto:</strong> " +
+        (item.contact ? item.contact.name + " &lt;" + item.contact.email + "&gt;" : "-") +
+        "</p>" +
+        '<table class="data-table" style="margin-top:1rem;">' +
+        "<thead><tr><th>Nombre</th><th>Numero</th><th>Talla</th></tr></thead>" +
+        "<tbody>" +
+        rosterRows +
+        "</tbody></table>" +
+        '<pre class="review-spec" style="margin-top:1rem;">' +
+        JSON.stringify(item, function (k, v) { return k === "previewDataUrl" || k === "dataUrl" ? "[image]" : v; }, 2) +
+        "</pre>" +
+        '<button type="button" class="btn btn-primary" style="margin-top:1rem;" data-i18n-toast="toast.send_quote" data-i18n="admin.designs.create_quote">Crear cotizacion</button>' +
+        "</div></div>" +
+        '<div><img src="' +
+        (item.previewDataUrl || "") +
+        '" alt="Preview" style="width:100%;border:1px solid #e5e5e5;border-radius:8px;background:#f5f5f5;"></div>' +
+        "</div>";
+
+      if (window.rsI18n) window.rsI18n.apply(document.documentElement.lang || "es");
+    })();
+  </script>
+</body>
+</html>

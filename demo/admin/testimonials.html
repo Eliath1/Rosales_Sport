@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testimonios - RS Admin</title>
+  <link rel="icon" href="/assets/rs-logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" data-i18n="admin.banner">Panel admin demo - acceso de staff simulado</div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <a href="/" class="logo"><img src="/assets/rs-logo.png" alt="Rosales Sport"></a>
+      <div class="lang-switcher" style="margin:1rem 0;border-color:rgba(255,255,255,0.3);">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <ul class="admin-nav">
+        <li><a href="/admin/" data-i18n="admin.dashboard">Dashboard</a></li>
+        <li><a href="/admin/designs.html" data-i18n="admin.designs">Disenos</a></li>
+        <li><a href="/admin/quotes.html" data-i18n="admin.quotes">Cotizaciones</a></li>
+        <li><a href="/admin/orders.html" data-i18n="admin.orders">Pedidos</a></li>
+        <li><a href="/admin/customers.html" data-i18n="admin.customers">Clientes</a></li>
+        <li><a href="/admin/testimonials.html" class="active" data-i18n="admin.testimonials">Testimonios</a></li>
+        <li><a href="/" data-i18n="admin.view_store">Ver tienda</a></li>
+      </ul>
+    </aside>
+    <div class="admin-main">
+      <h1 style="margin:0 0 0.5rem;text-transform:uppercase;" data-i18n="admin.testimonials">Testimonios</h1>
+      <p class="admin-note" data-i18n="admin.testimonials.note">Testimonios cargados por el equipo RS. Solo se publican en el carrusel los que esten aprobados.</p>
+      <table class="data-table" id="testimonials-table">
+        <thead>
+          <tr>
+            <th data-i18n="admin.testimonials.col.author">Cliente</th>
+            <th data-i18n="admin.testimonials.col.team">Equipo</th>
+            <th data-i18n="admin.testimonials.col.quote">Testimonio</th>
+            <th data-i18n="admin.testimonials.col.status">Estado</th>
+            <th data-i18n="admin.testimonials.col.actions">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="testimonials-tbody"></tbody>
+      </table>
+      <button type="button" class="btn btn-outline" style="margin-top:1.25rem;" data-i18n="admin.testimonials.add">+ Agregar testimonio</button>
+    </div>
+  </div>
+  <script src="/js/messages.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/demo.js"></script>
+  <script>
+    (function () {
+      var DATA = [
+        { author: "testimonial.1.author", team: "testimonial.1.team", quote: "testimonial.1.quote", status: "approved" },
+        { author: "testimonial.2.author", team: "testimonial.2.team", quote: "testimonial.2.quote", status: "approved" },
+        { author: "testimonial.3.author", team: "testimonial.3.team", quote: "testimonial.3.quote", status: "approved" },
+        { author: "testimonial.4.author", team: "testimonial.4.team", quote: "testimonial.4.quote", status: "approved" },
+        { author: "Cliente demo (sin foto)", team: "Enviado desde formulario de contacto", quote: "Excelente atencion, seguimos comprando cada temporada.", status: "pending", literal: true }
+      ];
+
+      function t(key) {
+        return window.rsI18n ? window.rsI18n.t(window.rsI18n.getLang(), key) : key;
+      }
+
+      function render() {
+        var tbody = document.getElementById("testimonials-tbody");
+        tbody.innerHTML = "";
+        DATA.forEach(function (item) {
+          var author = item.literal ? item.author : t(item.author);
+          var team = item.literal ? item.team : t(item.team);
+          var quote = item.literal ? item.quote : t(item.quote);
+          var statusKey = item.status === "approved" ? "admin.testimonials.status.approved" : "admin.testimonials.status.pending";
+          var statusClass = item.status === "approved" ? "status-accepted" : "status-draft";
+          var actionKey = item.status === "approved" ? "admin.testimonials.action.hide" : "admin.testimonials.action.approve";
+          var tr = document.createElement("tr");
+          tr.innerHTML =
+            "<td>" + author + "</td>" +
+            "<td>" + team + "</td>" +
+            "<td style=\"max-width:320px;\">" + quote + "</td>" +
+            "<td><span class=\"status " + statusClass + "\">" + t(statusKey) + "</span></td>" +
+            "<td>" +
+            "<button type=\"button\" class=\"btn btn-outline testimonial-action\" style=\"padding:0.3rem 0.6rem;font-size:12px;margin-right:0.4rem;\">" + t(actionKey) + "</button>" +
+            "<button type=\"button\" class=\"btn btn-outline testimonial-action\" style=\"padding:0.3rem 0.6rem;font-size:12px;\">" + t("admin.testimonials.action.edit") + "</button>" +
+            "</td>";
+          tbody.appendChild(tr);
+        });
+        tbody.querySelectorAll(".testimonial-action").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (window.demoShowToast) window.demoShowToast(t("admin.testimonials.toast"));
+          });
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        render();
+        document.addEventListener("rs:locale", render);
+        var addBtn = document.querySelector("[data-i18n=\"admin.testimonials.add\"]");
+        if (addBtn) {
+          addBtn.addEventListener("click", function () {
+            if (window.demoShowToast) window.demoShowToast(t("admin.testimonials.toast"));
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

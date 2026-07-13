@@ -1,0 +1,345 @@
+{
+  "generatedAt": "2026-07-04T08:17:12.412Z",
+  "sourceDir": "C:\\Users\\eliath.guzman\\Desktop\\AI Experiments 2026\\RS\\images",
+  "files": [
+    {
+      "file": "Gemini_Generated_Image_6hdxyd6hdxyd6hdx.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0.013,
+        "midRatio": 0.987,
+        "avgLum": 221.2,
+        "whiteArea": 0.906
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.5
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_9h7jco9h7jco9h7j.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "front-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0.02,
+        "midRatio": 0.98,
+        "avgLum": 215.7,
+        "whiteArea": 0.821
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.49
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_awny7sawny7sawny.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0.988,
+        "whiteRatio": 0.008,
+        "midRatio": 0.004,
+        "avgLum": 2.9,
+        "whiteArea": 0.008
+      },
+      "bbox": {
+        "minX": 0.27586206896551724,
+        "maxX": 0.7230603448275862,
+        "minY": 0.1015625,
+        "maxY": 0.9479166666666666,
+        "cx": 0.5,
+        "cy": 0.52
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_cmllm9cmllm9cmll.png",
+      "width": 928,
+      "height": 1152,
+      "type": "mask",
+      "role": "body",
+      "stats": {
+        "blackRatio": 0.673,
+        "whiteRatio": 0.322,
+        "midRatio": 0.005,
+        "avgLum": 83,
+        "whiteArea": 0.323
+      },
+      "bbox": {
+        "minX": 0.22844827586206898,
+        "maxX": 0.7704741379310345,
+        "minY": 0.11979166666666667,
+        "maxY": 0.9114583333333334,
+        "cx": 0.5,
+        "cy": 0.53
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_d5zkj5d5zkj5d5zk.png",
+      "width": 928,
+      "height": 1152,
+      "type": "mask",
+      "role": "sleeve",
+      "stats": {
+        "blackRatio": 0.912,
+        "whiteRatio": 0.085,
+        "midRatio": 0.003,
+        "avgLum": 22.4,
+        "whiteArea": 0.086
+      },
+      "bbox": {
+        "minX": 0.059267241379310345,
+        "maxX": 0.9396551724137931,
+        "minY": 0.10677083333333333,
+        "maxY": 0.4661458333333333,
+        "cx": 0.5,
+        "cy": 0.31
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_hc2ee2hc2ee2hc2e.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0,
+        "midRatio": 0.999,
+        "avgLum": 121,
+        "whiteArea": 0.108
+      },
+      "bbox": {
+        "minX": 0.059267241379310345,
+        "maxX": 0.9396551724137931,
+        "minY": 0.08246527777777778,
+        "maxY": 0.875,
+        "cx": 0.51,
+        "cy": 0.26
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_hsp9u8hsp9u8hsp9 (1).png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0.055,
+        "whiteRatio": 0.92,
+        "midRatio": 0.025,
+        "avgLum": 238.3,
+        "whiteArea": 0.926
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.51
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_hsp9u8hsp9u8hsp9.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0.055,
+        "whiteRatio": 0.92,
+        "midRatio": 0.025,
+        "avgLum": 238.3,
+        "whiteArea": 0.926
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.51
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_m2gw19m2gw19m2gw.png",
+      "width": 928,
+      "height": 1152,
+      "type": "mask",
+      "role": "body",
+      "stats": {
+        "blackRatio": 0.917,
+        "whiteRatio": 0.08,
+        "midRatio": 0.003,
+        "avgLum": 21.1,
+        "whiteArea": 0.08
+      },
+      "bbox": {
+        "minX": 0.3275862068965517,
+        "maxX": 0.6702586206896551,
+        "minY": 0.08246527777777778,
+        "maxY": 0.9114583333333334,
+        "cx": 0.5,
+        "cy": 0.4
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_ppcpqdppcpqdppcp.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "front-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0.007,
+        "midRatio": 0.993,
+        "avgLum": 212.5,
+        "whiteArea": 0.702
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.51,
+        "cy": 0.49
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_qj4hfvqj4hfvqj4h.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0.988,
+        "whiteRatio": 0.008,
+        "midRatio": 0.004,
+        "avgLum": 2.9,
+        "whiteArea": 0.008
+      },
+      "bbox": {
+        "minX": 0.27586206896551724,
+        "maxX": 0.7230603448275862,
+        "minY": 0.1015625,
+        "maxY": 0.9479166666666666,
+        "cx": 0.5,
+        "cy": 0.53
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_qm8z9tqm8z9tqm8z.png",
+      "width": 928,
+      "height": 1152,
+      "type": "mask",
+      "role": "body",
+      "stats": {
+        "blackRatio": 0.703,
+        "whiteRatio": 0.293,
+        "midRatio": 0.004,
+        "avgLum": 75.4,
+        "whiteArea": 0.293
+      },
+      "bbox": {
+        "minX": 0.28125,
+        "maxX": 0.7176724137931034,
+        "minY": 0.049479166666666664,
+        "maxY": 0.9505208333333334,
+        "cx": 0.5,
+        "cy": 0.45
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_rir9werir9werir9.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "back-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0.015,
+        "midRatio": 0.985,
+        "avgLum": 220.6,
+        "whiteArea": 0.885
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.5
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_siii9osiii9osiii.png",
+      "width": 928,
+      "height": 1152,
+      "type": "mask",
+      "role": "body",
+      "stats": {
+        "blackRatio": 0.693,
+        "whiteRatio": 0.303,
+        "midRatio": 0.004,
+        "avgLum": 78.1,
+        "whiteArea": 0.304
+      },
+      "bbox": {
+        "minX": 0.27586206896551724,
+        "maxX": 0.7230603448275862,
+        "minY": 0.04774305555555555,
+        "maxY": 0.9548611111111112,
+        "cx": 0.5,
+        "cy": 0.45
+      }
+    },
+    {
+      "file": "Gemini_Generated_Image_tjpbz0tjpbz0tjpb.png",
+      "width": 928,
+      "height": 1152,
+      "type": "photo",
+      "role": "front-base",
+      "stats": {
+        "blackRatio": 0,
+        "whiteRatio": 0.013,
+        "midRatio": 0.987,
+        "avgLum": 210.9,
+        "whiteArea": 0.685
+      },
+      "bbox": {
+        "minX": 0,
+        "maxX": 0.9989224137931034,
+        "minY": 0,
+        "maxY": 0.9991319444444444,
+        "cx": 0.5,
+        "cy": 0.48
+      }
+    }
+  ],
+  "proposed": {
+    "classic-button": {
+      "front-base.png": "Gemini_Generated_Image_9h7jco9h7jco9h7j.png",
+      "back-base.png": "Gemini_Generated_Image_6hdxyd6hdxyd6hdx.png",
+      "front-mask-body.png": "Gemini_Generated_Image_cmllm9cmllm9cmll.png",
+      "front-mask-sleeve.png": "Gemini_Generated_Image_d5zkj5d5zkj5d5zk.png",
+      "back-mask-body.png": "Gemini_Generated_Image_m2gw19m2gw19m2gw.png"
+    }
+  }
+}
