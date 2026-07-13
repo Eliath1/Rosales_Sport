@@ -48,6 +48,9 @@ dist-netlify-upload/
 rs-demo-netlify.zip
 rs-demo-netlify-tar.zip
 
+# Full-repo snapshot zips for manual GitHub upload - never commit
+rosales-sport-repo-*.zip
+
 # Local secrets - never commit
 *.pem
 credentials.json

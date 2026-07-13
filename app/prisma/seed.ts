@@ -1,4 +1,5 @@
 import "dotenv/config";
+import crypto from "node:crypto";
 import bcrypt from "bcryptjs";
 import { createPrismaClient } from "../src/lib/db";
 
@@ -53,28 +54,38 @@ const PRODUCTS = [
   },
 ];
 
+// Generates a fresh, random per-run password instead of a fixed, publicly-known
+// default. Only meaningful the first time an account is created - upsert()
+// leaves the password untouched on later re-runs, so we only print credentials
+// for accounts that didn't already exist (see security-checklist.md: "No
+// default admin credentials in production").
+function generateStaffPassword(): string {
+  return crypto.randomBytes(15).toString("base64url");
+}
+
+async function upsertStaffUser(email: string, role: "admin" | "sales") {
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) {
+    return { user: existing, generatedPassword: null as string | null };
+  }
+
+  const generatedPassword = generateStaffPassword();
+  const passwordHash = await bcrypt.hash(generatedPassword, 12);
+  const user = await prisma.user.create({
+    data: { email, passwordHash, role },
+  });
+  return { user, generatedPassword };
+}
+
 async function main() {
-  const passwordHash = await bcrypt.hash("changeme123", 12);
-
-  const admin = await prisma.user.upsert({
-    where: { email: "admin@rosalessport.mx" },
-    update: {},
-    create: {
-      email: "admin@rosalessport.mx",
-      passwordHash,
-      role: "admin",
-    },
-  });
-
-  const sales = await prisma.user.upsert({
-    where: { email: "ventas@rosalessport.mx" },
-    update: {},
-    create: {
-      email: "ventas@rosalessport.mx",
-      passwordHash,
-      role: "sales",
-    },
-  });
+  const { user: admin, generatedPassword: adminPassword } = await upsertStaffUser(
+    "admin@rosalessport.mx",
+    "admin"
+  );
+  const { user: sales, generatedPassword: salesPassword } = await upsertStaffUser(
+    "ventas@rosalessport.mx",
+    "sales"
+  );
 
   for (const product of PRODUCTS) {
     await prisma.product.upsert({
@@ -217,8 +228,14 @@ async function main() {
   }
 
   console.log("Seed complete.");
-  console.log("Staff login: admin@rosalessport.mx / changeme123");
-  console.log("Staff login: ventas@rosalessport.mx / changeme123");
+  if (adminPassword || salesPassword) {
+    console.log("");
+    console.log("Generated staff credentials (shown once here only - not stored anywhere, save them now):");
+    if (adminPassword) console.log(`  admin@rosalessport.mx / ${adminPassword}`);
+    if (salesPassword) console.log(`  ventas@rosalessport.mx / ${salesPassword}`);
+  } else {
+    console.log("Staff accounts already existed - passwords unchanged, not shown.");
+  }
 }
 
 main()
