@@ -1,0 +1,24 @@
+# Netlify config for the @rs/admin app (staff CRM).
+#
+# This site's "Base directory" must be set to `apps/admin` in the Netlify UI.
+# It must be a SEPARATE Netlify site from apps/web so a compromise or outage
+# on the public storefront never exposes or takes down the CRM, and so staff
+# auth cookies never share a domain with customer-facing pages.
+#
+# Deploy target: admin.rosalessport.com (see
+# docs/hosting/monorepo-netlify-setup.md for DNS + site creation steps).
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Robots-Tag = "noindex, nofollow"

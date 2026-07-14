@@ -397,10 +397,12 @@ Stage D mock: `demo/admin/designs.html` + update `detail.html` with sample spec 
 7. demo/admin/designs.html           [mock inbox]
 8. demo/index.html                   [CTA -> builder]
 9. scripts/verify-demo.js            [contract checks]
-10. app/prisma schema + migration     [Phase B]
-11. app API routes + services         [Phase B]
-12. app Next.js pages                [Phase B - replaces demo]
+10. packages/db/prisma schema + migration            [Phase B]
+11. apps/web + apps/admin API routes + services       [Phase B]
+12. apps/web Next.js pages                            [Phase B - replaces demo]
 ```
+
+Paths above reflect the [ADR-014](./decisions/ADR-014-monorepo-two-apps.md) monorepo split - the configurator's public builder UI lands in `apps/web`, and any staff-side design inbox review lands in `apps/admin`.
 
 Local smoke after step 6:
 

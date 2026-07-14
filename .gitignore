@@ -37,6 +37,9 @@ test-results/
 # Prisma
 prisma/*.db
 prisma/*.db-journal
+# Generated Prisma client output (packages/db/src/generated) - regenerated
+# via `prisma generate` / postinstall, not source.
+**/generated/prisma/
 
 # Misc
 *.tsbuildinfo

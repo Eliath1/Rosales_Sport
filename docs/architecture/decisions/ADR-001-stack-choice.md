@@ -46,6 +46,8 @@ Adopt **TypeScript + Next.js (App Router) + PostgreSQL (Neon)** as the primary s
 | Supabase as primary backend | Vendor lock-in on auth/realtime we don't need in Wave Zero |
 | MongoDB | Quote line items and reporting easier in SQL |
 
+**Note (2026-07, [ADR-014](./ADR-014-monorepo-two-apps.md)):** the storefront/CRM split into `apps/web` + `apps/admin` is *not* a return to the rejected "Separate React SPA + Express" option. Both apps are still Next.js (not a different framework), both import the same `@rs/db`/`@rs/shared` TypeScript packages (no duplicated business logic), and neither app's browser code makes cross-origin calls to the other (no CORS problem - `apps/web` only links to `apps/admin` for the staff-login button). See ADR-014 for the full "why this doesn't reintroduce the concerns ADR-001 rejected" breakdown.
+
 ## Consequences
 
 **Positive:** Single codebase, strong typing, large hiring pool, Netlify CI/CD.
@@ -59,3 +61,4 @@ Adopt **TypeScript + Next.js (App Router) + PostgreSQL (Neon)** as the primary s
 - ADR-002 (modular monolith within this stack)
 - ADR-003 (Netlify hosting)
 - ADR-005 (Neon PostgreSQL)
+- ADR-014 (this stack now runs as two Next.js apps - `apps/web`, `apps/admin` - in one npm-workspaces monorepo, not a change of stack)

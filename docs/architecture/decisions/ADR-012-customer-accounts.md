@@ -10,12 +10,12 @@
 
 Three customer stories drive this decision: (1) a first-time or occasional buyer wants to purchase without creating an account, (2) a logged-in customer wants to track order status, and (3) frequent distributor customers want a registered account with saved payment methods tied to their orders. The owner's stated priority order is *getting new customers* first, *payment management* second, and *registration/login* third - so the checkout path must work fully without an account before any account-gated feature is built.
 
-The existing [Customer](../../../app/prisma/schema.prisma) model already supports rows with no password (used today for quote/lead capture). Staff auth already exists in [app/src/lib/auth.ts](../../../app/src/lib/auth.ts), scoped to `/admin/*`. There is no customer-facing auth today.
+The existing [Customer](../../../packages/db/prisma/schema.prisma) model already supports rows with no password (used today for quote/lead capture). Staff auth already exists in [apps/admin/src/lib/auth.ts](../../../apps/admin/src/lib/auth.ts) (moved there from the former single `app/` by [ADR-014](./ADR-014-monorepo-two-apps.md); the whole `apps/admin` app is staff-only, so there's no `/admin/*` prefix anymore). There is no customer-facing auth today.
 
 ## Decision
 
 1. **Guest checkout is the default path and ships first.** Placing an `Order` never requires a `Customer` account - a guest fills contact info inline (same UX pattern as today's quote/lead forms) and a `Customer` row is created or matched by email with `passwordHash = null`.
-2. **A second, separate NextAuth instance** (`app/src/lib/customerAuth.ts`) handles customer login, distinct from staff auth. Different session cookie, different scope (`/mi-cuenta/*`), no shared role system with staff `UserRole`.
+2. **A second, separate NextAuth instance** (`apps/web/src/lib/customerAuth.ts`) handles customer login, distinct from staff auth. Different session cookie, different scope (`/mi-cuenta/*`), no shared role system with staff `UserRole` - and since ADR-014, physically in a different app/deployment, not just a different route prefix.
 3. **Registration is optional for retail customers, required for the distributor dashboard.** A guest can later "claim" their order history by registering with the same email (post-MVP nicety, not required for launch).
 4. **`Customer.isDistributor`** is a convenience boolean (in addition to the existing `customerType` enum) that gates the distributor-only UI: saved payment methods and any future wholesale-specific views.
 5. Order tracking (`/mi-cuenta/pedidos`) is **login-gated only** - guests get status updates by email instead, they do not get a token-based tracking link in this phase (that pattern exists for `DesignRequest` approval today and could be reused later if needed, but is out of scope here).

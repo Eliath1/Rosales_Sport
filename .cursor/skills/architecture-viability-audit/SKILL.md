@@ -12,7 +12,7 @@ description: >-
 ## Instructions
 
 1. Read `docs/architecture/03-staged-delivery-roadmap.md` first - it defines what "current stage" should look like (runtime, database, routes).
-2. Compare against the repo: is `netlify.toml` publishing `demo/` or `app/`? Does `app/prisma/schema.prisma` match the stage's modules? Are the routes in `app/src/app/api/*` consistent with the stage's "Routes added" table?
+2. Compare against the repo: is the root `netlify.toml` publishing `demo/`, and do `apps/web/netlify.toml`/`apps/admin/netlify.toml` exist and point at Netlify sites yet (see [ADR-014](../../../docs/architecture/decisions/ADR-014-monorepo-two-apps.md))? Does `packages/db/prisma/schema.prisma` match the stage's modules? Are the routes in `apps/web/src/app/api/*` and `apps/admin/src/app/api/*` consistent with the stage's "Routes added" table?
 3. Treat ADRs (`docs/architecture/decisions/ADR-*`) as the source of truth for past decisions - flag contradictions with current code instead of assuming the ADR is stale.
 4. Never recommend advancing a stage unless its "Decision gates between stages" row in the roadmap is met.
 5. The infra tier recommendation must match the *verified current* stage, not the stage being requested.

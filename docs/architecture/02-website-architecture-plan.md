@@ -1,15 +1,15 @@
 # Website Architecture Plan - Mexico Baseball Store CRM
 
-> **Status:** Target architecture for Wave 0+. A partial, undeployed `app/` scaffold exists (see note below); nothing in this plan is live yet.  
+> **Status:** Target architecture for Wave 0+. A local, undeployed monorepo scaffold exists (see note below); nothing in this plan is live yet.  
 > **Audience:** You (learner), future contributors, AI agents  
-> **Last updated:** 2026-07  
-> **Next step:** Wire and deploy `app/` per [03-staged-delivery-roadmap.md](./03-staged-delivery-roadmap.md) Stage 0 build order  
+> **Last updated:** 2026-07 (monorepo split, [ADR-014](./decisions/ADR-014-monorepo-two-apps.md))  
+> **Next step:** Deploy `apps/web` and `apps/admin` per [03-staged-delivery-roadmap.md](./03-staged-delivery-roadmap.md) Stage 0 build order and [docs/hosting/monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md)  
 > **Delivery stance:** Value first, fast - one custom stack, no parallel ERP platforms  
 > **Active stage:** [Stage D - Static demo](./stage-demo-static.md) is the only stage currently deployed
 
 This document is the **single source of truth** for how the website is structured: public storefront, admin CRM, APIs, data, integrations, and delivery waves. Read it before writing code or opening ADRs.
 
-**Reality check (2026-07):** `app/` (Next.js + Prisma) exists in the repo as local scaffolding - not deployed, not connected to a live database anywhere reachable by a customer. Its current storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md): no configurator UI, no `Design` domain. Everything below is the target design this scaffold is working toward, not a description of what runs today.
+**Reality check (2026-07):** the former single `app/` scaffold is now a monorepo with two Next.js apps - `apps/web` (public storefront + `/mi-cuenta`) and `apps/admin` (staff CRM) - plus `packages/db` (Prisma schema + shared client) and `packages/shared` (services, validators, email/PDF/payment logic), per [ADR-014](./decisions/ADR-014-monorepo-two-apps.md). Neither app is deployed yet or connected to a live database reachable by a customer. The storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md): no configurator UI, no `Design` domain. Everything below is the target design this scaffold is working toward, not a description of what runs today.
 
 ---
 
@@ -105,35 +105,37 @@ flowchart TB
 
 ## 3. C4 Level 2 - Containers
 
-One deployable **Next.js 15** application on Netlify. Logical containers inside the monolith:
+**Two deployable Next.js 15 apps** on two Netlify sites ([ADR-014](./decisions/ADR-014-monorepo-two-apps.md)), sharing modules through workspace packages instead of one process:
 
 ```mermaid
 flowchart TB
-  subgraph nextjs [Next.js App Netlify]
-    subgraph presentation [Presentation]
+  subgraph webapp ["apps/web - rosalessport.com"]
+    subgraph presentation_web [Presentation]
       SF[Storefront App Router pages]
-      AD[Admin CRM App Router pages]
+      MC[/mi-cuenta customer pages/]
       LEG[Legal pages ES EN]
     end
+    REST_WEB[REST route handlers]
+    SA_WEB[Server Actions selective]
+  end
 
-    subgraph application [Application modules]
-      CUST[Customers]
-      CAT[Catalog]
-      QUO[Quotes]
+  subgraph adminapp ["apps/admin - admin.rosalessport.com"]
+    AD[Admin CRM App Router pages]
+    REST_AD[REST route handlers staff-only]
+    SA_AD[Server Actions selective]
+  end
+
+  subgraph packages [Shared workspace packages]
+    subgraph dbpkg ["@rs/db"]
+      PRISMA[Prisma client singleton]
+    end
+    subgraph sharedpkg ["@rs/shared"]
+      CUST[Customers service]
+      CAT[Catalog service]
+      QUO[Quotes service]
       NOT[Notifications]
-      AUTH[Auth]
       PRV[Privacy]
-      PAY[Payments stub]
-    end
-
-    subgraph api [API surface]
-      REST[REST route handlers]
-      SA[Server Actions selective]
-      WH[Webhooks future]
-    end
-
-    subgraph infra [Infrastructure adapters]
-      PRISMA[Prisma client]
+      PAY[Payments]
       PDF[PDF generator]
       MAIL[Resend adapter]
     end
@@ -142,27 +144,32 @@ flowchart TB
   DB[(Neon PostgreSQL)]
   CDN[R2 plus Cloudflare cache]
 
-  SF --> REST
-  AD --> REST
-  SF --> SA
-  AD --> SA
-  REST --> application
-  SA --> application
-  application --> PRISMA
+  SF --> REST_WEB
+  MC --> SA_WEB
+  AD --> REST_AD
+  AD --> SA_AD
+  REST_WEB --> sharedpkg
+  REST_AD --> sharedpkg
+  SA_WEB --> sharedpkg
+  SA_AD --> sharedpkg
+  sharedpkg --> PRISMA
   PRISMA --> DB
   CAT --> CDN
   QUO --> PDF
   NOT --> MAIL
+  SF -. "staff login link only, no API calls" .-> AD
 ```
 
 ### Container responsibilities
 
-| Container | Users | Auth | Primary routes |
-|-----------|-------|------|----------------|
-| **Storefront** | Public | None (forms create leads) | `/`, `/collections/*`, `/products/[slug]`, `/quote`, `/contact` |
-| **Admin CRM** | Staff | Session cookie (Auth.js) | `/admin/*` |
-| **Legal** | Public | None | `/aviso-de-privacidad`, `/terminos`, `/cookies`, `/arco` |
-| **REST API** | Storefront, admin, future mobile | Session or public read | `/api/*` |
+| Container | Deployment | Users | Auth | Primary routes |
+|-----------|-----------|-------|------|----------------|
+| **Storefront + accounts** | `apps/web`, `rosalessport.com` | Public + registered customers | Customer NextAuth instance, scoped `/mi-cuenta/*`; guest checkout needs none | `/`, `/collections/*`, `/products/[slug]`, `/quote`, `/checkout`, `/mi-cuenta/*` |
+| **Admin CRM** | `apps/admin`, `admin.rosalessport.com` | Staff only | Staff NextAuth instance, session cookie, whole app gated except `/login` | `/`, `/customers`, `/products`, `/quotes`, `/orders`, `/payments`, `/testimonials` |
+| **Legal** | `apps/web` | Public | None | `/aviso-de-privacidad`, `/terminos`, `/cookies`, `/arco` |
+| **REST API** | Split per app - see [01-module-map.md](./01-module-map.md) | Storefront/customer or staff, never both from one app | Session or public read, per app | `apps/web`: `/api/{auth,leads,orders (POST),payments,webhooks,products (GET),health}`; `apps/admin`: `/api/{auth,customers,orders (GET/PATCH),products,quotes,testimonials,health}` |
+
+**No `/admin` prefix anymore:** since the CRM is its own app on its own subdomain, admin routes are just `/customers`, `/orders`, etc. - the `/admin` segment that used to disambiguate routes inside one app is redundant once the app itself is admin-only.
 
 ---
 
@@ -187,21 +194,25 @@ flowchart TB
 
 **i18n:** `next-intl` with `/es` default and `/en` optional prefix (or domain strategy - decide at scaffold; default **Spanish-first** per ADR-007).
 
-### Admin CRM (staff only)
+### Admin CRM (staff only, `apps/admin` on `admin.rosalessport.com`)
+
+> **Since [ADR-014](./decisions/ADR-014-monorepo-two-apps.md):** these routes live in their own app, not under `/admin/*` inside the storefront. The `/admin` path prefix is dropped since the whole app is staff-only.
 
 | Route | Wave | Purpose |
 |-------|------|---------|
-| `/admin/login` | 0 | Staff login |
-| `/admin` | 0 | Dashboard - pipeline KPIs |
-| `/admin/customers` | 0 | Customer list + detail |
-| `/admin/products` | 0 | Catalog CRUD |
-| `/admin/quotes` | 0 | Quote builder + list |
-| `/admin/quotes/[id]` | 0 | Detail, PDF preview, send |
-| `/admin/leads` | 0 | Inbound web form submissions |
-| `/admin/privacy/arco` | 0.2 | ARCO request queue |
-| `/admin/orders` | 1 | Orders post-checkout |
+| `/login` | 0 | Staff login |
+| `/` | 0 | Dashboard - pipeline KPIs |
+| `/customers` | 0 | Customer list + detail |
+| `/products` | 0 | Catalog CRUD |
+| `/quotes` | 0 | Quote builder + list |
+| `/quotes/[id]` | 0 | Detail, PDF preview, send |
+| `/leads` | 0 | Inbound web form submissions |
+| `/privacy/arco` | 0.2 | ARCO request queue |
+| `/orders` | 1 | Orders post-checkout |
+| `/payments` | 1 | Commission report |
+| `/testimonials` | 1 | Testimonial CRUD |
 
-Middleware: protect `/admin/*` except `/admin/login`; role checks in layout (`admin`, `sales`, `read-only`).
+Middleware (`apps/admin/src/middleware.ts`): protect every route except `/login`; role checks in layout (`admin`, `sales`, `read-only`).
 
 ### API (REST)
 
@@ -420,7 +431,7 @@ src/app/
   api/                    # Route handlers
 ```
 
-**As-built note (2026-07):** `app/src/app/` does not have a `[locale]` segment yet - routes are flat (`src/app/page.tsx`, `src/app/quote/page.tsx`, `src/app/admin/page.tsx`, etc.), and `next-intl` is a `package.json` dependency with no actual usage in the code. Bilingual routing per this layout has not been started; the only bilingual UI shipped so far is the Stage D demo's client-side toggle in `demo/js/i18n.js` / `demo/js/messages.js`, which is a different (non-Next.js) mechanism and won't carry over directly.
+**As-built note (2026-07, updated for [ADR-014](./decisions/ADR-014-monorepo-two-apps.md)):** neither `apps/web/src/app/` nor `apps/admin/src/app/` has a `[locale]` segment yet - routes are flat (`apps/web/src/app/page.tsx`, `apps/web/src/app/quote/page.tsx`, `apps/admin/src/app/page.tsx`, etc.), and `next-intl` is a `package.json` dependency with no actual usage in the code. Bilingual routing per this layout has not been started; the only bilingual UI shipped so far is the Stage D demo's client-side toggle in `demo/js/i18n.js` / `demo/js/messages.js`, which is a different (non-Next.js) mechanism and won't carry over directly.
 
 ### Storefront components (planned)
 
@@ -489,59 +500,77 @@ Security review skill/agent before Wave 1 payments go live.
 
 ## 13. Deployment topology
 
-> **Not deployed yet.** The only live Netlify site today publishes `demo/` as a static bundle - no Cloudflare, no Next.js runtime, no Neon, no Resend, no R2. This diagram is the target for when Stage 0 ships.
+> **Not deployed yet.** The only live Netlify site today publishes `demo/` as a static bundle - no Cloudflare, no Next.js runtime, no Neon, no Resend, no R2. This diagram is the target for when Stage 0 ships. Since [ADR-014](./decisions/ADR-014-monorepo-two-apps.md), the target is **two Netlify sites**, not one.
 
 ```mermaid
 flowchart LR
-  User[Browser] --> CF[Cloudflare DNS CDN WAF]
-  CF --> Netlify[Netlify Next.js runtime]
-  Netlify --> Neon[(Neon PostgreSQL)]
-  Netlify --> Resend[Resend API]
-  Netlify --> R2[R2 API]
+  User[Browser - public] --> CF[Cloudflare DNS CDN WAF]
+  Staff[Browser - staff] --> CF
+  CF --> NetWeb["Netlify Site 1: rosalessport.com<br/>apps/web"]
+  CF --> NetAdmin["Netlify Site 2: admin.rosalessport.com<br/>apps/admin"]
+  NetWeb --> Neon[(Neon PostgreSQL - shared)]
+  NetAdmin --> Neon
+  NetWeb --> Resend[Resend API]
+  NetAdmin --> Resend
+  NetWeb --> R2[R2 API]
   CF --> R2
 ```
 
 | Environment | Branch | Purpose |
 |-------------|--------|---------|
-| Production | `main` | Live store |
-| Preview | PR branches | QA per feature |
-| Local | - | `pnpm dev` + Neon branch or Docker Postgres |
+| Production | `main` | Live store (both sites deploy from the same branch, different base directories) |
+| Preview | PR branches | QA per feature, per site |
+| Local | - | `npm run web:dev` (port 3000) and `npm run admin:dev` (port 3001) against a Neon branch or local Postgres |
 
-Env vars (minimum): `DATABASE_URL`, `AUTH_SECRET`, `RESEND_API_KEY`, `R2_*`, `NEXT_PUBLIC_SITE_URL`.
+Env vars (minimum): `DATABASE_URL` (shared value, set in both sites), `AUTH_SECRET` (separate value per site - never reuse), `RESEND_API_KEY`, `R2_*`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_ADMIN_URL` (on `apps/web` only, for the staff-login link).
 
-Guide: [netlify-cloudflare-guide.md](../hosting/netlify-cloudflare-guide.md) (create at scaffold if missing).
+Guide: [monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md) for the two-site setup; [netlify-cloudflare-guide.md](../hosting/netlify-cloudflare-guide.md) for Cloudflare/WAF/cache config layered on top of either site.
 
 ---
 
-## 14. Repository layout (Phase 2 scaffold)
+## 14. Repository layout (monorepo, ADR-014)
 
 ```
 RS/
   docs/                    # Planning (this repo today)
-  templates/               # Legal, email, PDF templates
-  app/                     # Next.js project (Phase 2)
-    src/
-      app/                 # App Router
-      modules/
-        customers/
-        catalog/
-        quotes/
-        notifications/
-        auth/
-        privacy/
+  templates/                # Legal, email, PDF templates
+  demo/                     # Stage D static demo - untouched, still monolithic
+  apps/
+    web/                    # @rs/web - public storefront + /mi-cuenta
+      src/
+        app/                # App Router: /, /products, /quote, /checkout, /mi-cuenta/*, /api/*
+        components/
+        lib/                # customerAuth, middleware, utils.ts (cn helper)
+      netlify.toml           # base = apps/web, publish = .next
+    admin/                   # @rs/admin - staff CRM
+      src/
+        app/                # App Router: /, /customers, /orders, /quotes, /products, /api/*
+        components/
+        lib/                # staff auth, middleware, utils.ts (cn helper)
+      netlify.toml           # base = apps/admin, publish = .next
+  packages/
+    db/                     # @rs/db - schema + shared Prisma client
+      prisma/
+        schema.prisma
+        migrations/
+        seed.ts
+      src/
+        client.ts           # createPrismaClient() + shared singleton + re-exported types
+    shared/                  # @rs/shared - business logic, no UI
+      src/
+        services/           # customerService, productService, quoteService, orderService...
+        validators/          # Zod schemas
         payments/
-      shared/
-      lib/
-    prisma/
-      schema.prisma
-    public/
-    tests/
-  .cursor/                 # Agents, skills, rules
+        pdf/
+        email/
+  netlify.toml               # root config, still publishes demo/ (Stage D)
+  package.json                # npm workspaces root: apps/*, packages/*
+  .cursor/                    # Agents, skills, rules
 ```
 
-**Decision:** Keep `app/` as sibling to `docs/` so planning toolkit stays separate from runnable code.
+**Decision:** module ownership from [01-module-map.md](./01-module-map.md) maps to `packages/shared/src/services/*` regardless of which app calls it; `apps/*` only contain route handlers, pages, and app-specific auth/middleware - never the actual business logic, so neither app can drift into its own copy of a service.
 
-**As-built note (2026-07):** `app/` exists but does not follow the `modules/{customers,catalog,quotes,...}` domain-folder layout above - the actual tree is flatter (`src/lib/services/*Service.ts` per domain, `src/app/api/*` route handlers, no `src/modules/` directory, no `[locale]` route segment despite `next-intl` being a dependency). Reconcile this doc with the real layout once the module-folder structure is actually adopted, or update the doc to match the flatter layout if that's the accepted direction.
+**As-built note (2026-07):** this layout is implemented (`apps/web`, `apps/admin`, `packages/db`, `packages/shared` all exist and both apps build/typecheck cleanly). `next-intl` is still a `package.json` dependency with no actual usage in either app - the `[locale]` route segment described in section 10 has not been started. The only bilingual UI shipped so far is the Stage D demo's client-side toggle in `demo/js/i18n.js` / `demo/js/messages.js`, a different (non-Next.js) mechanism.
 
 ---
 
@@ -559,6 +588,10 @@ RS/
 | ADR-008 | Resend transactional email |
 | ADR-009 | REST + OpenAPI |
 | ADR-010 | Zod validation boundary |
+| ADR-011 | Configurator-first primary journey |
+| ADR-012 | Customer accounts (two NextAuth instances) |
+| ADR-013 | Split payments (deposit/balance, commission) |
+| ADR-014 | Monorepo split - two Next.js apps (`apps/web`, `apps/admin`) |
 
 All in [decisions/](./decisions/).
 

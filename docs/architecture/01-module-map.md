@@ -1,11 +1,13 @@
 # Module Map - Modular Monolith
 
-> **Pattern:** Single deployable application with clear internal module boundaries.  
-> **Stack reference:** ADR-001, ADR-002
+> **Pattern:** Clear internal module boundaries, shared through workspace packages.  
+> **Stack reference:** ADR-001, ADR-002, ADR-014
+
+> **Amendment (2026-07, [ADR-014](./decisions/ADR-014-monorepo-two-apps.md)):** "one deployment" below now means **one codebase, two deployable Next.js apps** (`apps/web` public/customer-facing, `apps/admin` staff CRM), sharing one database and one set of module services through `packages/db` and `packages/shared`. The module boundaries and cross-module rules are unchanged - only the physical deployment boundary moved, drawn along the `admin` vs public/customer-facing line.
 
 ## Overview
 
-The Baseball Store CRM is organized as a **modular monolith**: one codebase, one deployment, but modules communicate through defined interfaces - not direct database access across boundaries.
+The Baseball Store CRM is organized as a **modular monolith**: one codebase, modules communicate through defined interfaces - not direct database access across boundaries. Since ADR-014, that one codebase deploys as two apps (storefront + CRM) instead of one, but module ownership of tables and services is identical either way.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -108,16 +110,16 @@ The owner's stated priority order is (1) getting new customers, (2) payment mana
 | Delivery tracking | Resend webhooks, bounce handling |
 | **Order notifications (new)** | Priority 1: plain email to `sales@rosalessport.com` on order create. Priority 2: same email upgraded to PDF+Excel attachment with payment/commission detail, plus customer-facing status emails |
 
-### Auth Module (two independent instances)
+### Auth Module (two independent instances, now two independent apps)
 
 | Responsibility | Examples |
 |----------------|----------|
-| Staff login | Email + password, session cookies, scoped `/admin/*` |
+| Staff login | Email + password, session cookies, lives entirely in `apps/admin` (no `/admin/*` prefix needed - the whole app is staff-only, on `admin.rosalessport.com`) |
 | Role-based access | admin, sales, read-only |
 | API key auth (future) | Webhook verification |
-| **Customer login (new, Priority 3)** | Separate NextAuth instance, separate session cookie, scoped `/mi-cuenta/*`; optional for retail, required for the distributor dashboard - see [ADR-012](./decisions/ADR-012-customer-accounts.md) |
+| **Customer login (Priority 3, done)** | Separate NextAuth instance, separate session cookie, scoped `/mi-cuenta/*`, lives entirely in `apps/web` on `rosalessport.com`; optional for retail, required for the distributor dashboard - see [ADR-012](./decisions/ADR-012-customer-accounts.md) |
 
-**Rule:** staff and customer auth never share a session, cookie, or role table - a bug in one cannot escalate into the other.
+**Rule:** staff and customer auth never share a session, cookie, or role table - a bug in one cannot escalate into the other. **Since [ADR-014](./decisions/ADR-014-monorepo-two-apps.md), this is enforced at the deployment level too:** staff auth code physically doesn't exist in the `apps/web` bundle, and vice versa - there is no `/admin/*` route for a storefront bug to accidentally expose.
 
 ### Privacy Module
 

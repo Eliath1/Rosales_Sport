@@ -53,8 +53,13 @@ QuoteLineItemCustomization
 
 Public lead capture maps to `leads` with `customization_json` until staff converts to a formal quote.
 
+## Pricing
+
+This doc covers decoration *types* and the fields needed to quote, not prices. For the official price per garment tier and add-on (gorras, jerseys linea 1/2, pantalones, complementos, chamarras, sudaderas), see [custom-uniform-price-list-2026-07.md](../business/custom-uniform-price-list-2026-07.md).
+
 ## Related docs
 
+- [custom-uniform-price-list-2026-07.md](../business/custom-uniform-price-list-2026-07.md) - official decoration pricing
 - [user-journeys.md](./user-journeys.md) - Journey 6: custom uniform quote
 - [baseball-store-glossary.md](./baseball-store-glossary.md) - Bordado, DTF terms
 - [../architecture/wave-zero-quote-crm.md](../architecture/wave-zero-quote-crm.md) - CRM entities

@@ -138,17 +138,15 @@ Netlify build log should show "0 build steps" and publish `demo/`.
 
 ## When Stage 0 replaces demo
 
-1. Scaffold `app/` (Next.js).
-2. Update `netlify.toml`:
+Since [ADR-014](../architecture/decisions/ADR-014-monorepo-two-apps.md), Stage 0 is **two Next.js apps**, not one - the storefront (`apps/web`) and the staff CRM (`apps/admin`) deploy separately. Full checklist: [monorepo-netlify-setup.md](./monorepo-netlify-setup.md).
 
-```toml
-[build]
-  command = "cd app && npm run build"
-  publish = "app/.next"   # follow @netlify/plugin-nextjs docs
-```
+Summary for this site (becomes `apps/web`):
 
-3. Add env vars (`DATABASE_URL`, etc.) in Netlify UI.
-4. Same domain stays; content switches from static HTML to live app.
+1. In this Netlify project's **Build & deploy** settings, set **Base directory** to `apps/web`.
+2. `apps/web/netlify.toml` (already in the repo) sets the build command and publish directory - no manual `netlify.toml` edit needed here.
+3. Add env vars (`DATABASE_URL`, `AUTH_SECRET`, etc.) in Netlify UI - see the full table in [monorepo-netlify-setup.md](./monorepo-netlify-setup.md).
+4. Same domain (`rosalessport.com`) stays; content switches from static HTML to the live app.
+5. The staff CRM (`apps/admin`) is a **separate, new** Netlify site on `admin.rosalessport.com` - it is not part of this site's cutover.
 
 Keep `demo/` folder in repo for reference or retire to `demo/archive/`.
 
@@ -189,6 +187,8 @@ Add `demo/_redirects` for Netlify:
 
 ## Related
 
-- [netlify-cloudflare-guide.md](./netlify-cloudflare-guide.md) - full production setup (Stage 0+)
+- [monorepo-netlify-setup.md](./monorepo-netlify-setup.md) - two-site setup for `apps/web` + `apps/admin` (Stage 0+)
+- [netlify-cloudflare-guide.md](./netlify-cloudflare-guide.md) - Cloudflare/WAF layer on top of either site
 - [infrastructure-cost-tiers.md](./infrastructure-cost-tiers.md)
 - [03-staged-delivery-roadmap.md](../architecture/03-staged-delivery-roadmap.md)
+- [../architecture/decisions/ADR-014-monorepo-two-apps.md](../architecture/decisions/ADR-014-monorepo-two-apps.md)

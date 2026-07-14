@@ -1,6 +1,8 @@
 # Production Deployment Readiness - 2026-07-13
 
 > Companion to [Initial Production Deployment plan](../../.cursor/plans/initial_production_deployment_dc2d2745.plan.md) (Track 0 and part of Track B). Tracks what's actually done vs. still manual, so nothing gets assumed twice.
+>
+> **Update (later in 2026-07):** this log describes the repo as it was on 2026-07-13, when everything below still lived in a single `app/` directory. `app/` has since been split into a monorepo (`apps/web`, `apps/admin`, `packages/db`, `packages/shared`) per [ADR-014](../architecture/decisions/ADR-014-monorepo-two-apps.md) - see [monorepo-netlify-setup.md](./monorepo-netlify-setup.md) for the current deployment checklist. Paths like `app/prisma/seed.ts` below are historical; the equivalent file today is `packages/db/prisma/seed.ts`, and it now also seeds the custom-decoration product catalog.
 
 ## What's done (this session, 2026-07-13)
 

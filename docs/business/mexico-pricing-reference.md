@@ -89,8 +89,13 @@ payment leg), so the report sums across both.
 - CFDI invoicing separate from Wave Zero CRM - integrate Wave Two+
 - Prices in storefront typically **IVA incluido** for B2C clarity
 
+## Custom uniform decoration pricing (official, real numbers)
+
+The ranges above are illustrative retail estimates. For **actual** custom-uniform decoration pricing (gorras, jerseys, pantalones, complementos, chamarras, sudaderas), see [custom-uniform-price-list-2026-07.md](./custom-uniform-price-list-2026-07.md) - the client's official price list, seeded as real `Product` rows in the database.
+
 ## Related
 
+- [custom-uniform-price-list-2026-07.md](./custom-uniform-price-list-2026-07.md) - official custom-uniform decoration prices
 - [client-pricing-models.md](./client-pricing-models.md)
 - [payment-methods-roadmap.md](./payment-methods-roadmap.md)
 - [../domain/baseball-store-glossary.md](../domain/baseball-store-glossary.md)

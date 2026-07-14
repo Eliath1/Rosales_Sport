@@ -2,9 +2,11 @@
 
 | Field | Value |
 |-------|-------|
-| **Status** | Accepted |
+| **Status** | Accepted, amended by ADR-014 |
 | **Date** | 2026-07 |
 | **Deciders** | Project lead |
+
+> **Amendment (2026-07, [ADR-014](./ADR-014-monorepo-two-apps.md)):** the modules below still apply - module boundaries and the cross-module rules are unchanged - but "one deployable Next.js application" is no longer accurate for the CRM vs public storefront split. There are now two deployable Next.js apps (`apps/web`, `apps/admin`) in one npm-workspaces monorepo, sharing one Neon database through `packages/db` and shared business logic through `packages/shared`. Read ADR-014 alongside this ADR; it doesn't reverse the modular-monolith decision, it draws the deployment boundary at the `admin` vs public/customer-facing line instead of at "everything in one process."
 
 ## Context
 
@@ -53,3 +55,4 @@ See [../01-module-map.md](../01-module-map.md).
 
 - ADR-001 (Next.js stack)
 - ADR-008 (build vs buy - monolith supports gradual buy-in of SaaS)
+- ADR-014 (monorepo split into `apps/web` + `apps/admin` - amends the deployment topology, not the module rules)

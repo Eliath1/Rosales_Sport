@@ -1,6 +1,10 @@
 {
-  "name": "baseball-store-crm",
+  "name": "rosales-sport-monorepo",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "demo": "serve demo -l 3456",
     "demo:build-check": "node scripts/verify-demo.js",
@@ -18,10 +22,15 @@
     "demo:mockups": "node scripts/ingest-mockup-pack.js",
     "demo:mockups:white": "node scripts/prepare-white-jersey-mockup.js",
     "demo:mockups:vecteezy": "node scripts/prepare-vecteezy-mockup.js",
-    "app:dev": "npm run dev --prefix app",
-    "app:build": "npm run build --prefix app",
-    "app:install": "npm install --prefix app",
-    "install:all": "npm install && npm install --prefix app"
+    "web:dev": "npm run dev -w apps/web",
+    "web:build": "npm run build -w apps/web",
+    "admin:dev": "npm run dev -w apps/admin",
+    "admin:build": "npm run build -w apps/admin",
+    "db:generate": "npm run db:generate -w packages/db",
+    "db:migrate": "npm run db:migrate -w packages/db",
+    "db:migrate:deploy": "npm run db:migrate:deploy -w packages/db",
+    "db:seed": "npm run db:seed -w packages/db",
+    "db:studio": "npm run db:studio -w packages/db"
   },
   "devDependencies": {
     "serve": "^14.2.6",

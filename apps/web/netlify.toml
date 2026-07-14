@@ -1,0 +1,23 @@
+# Netlify config for the @rs/web app (public storefront).
+#
+# This site's "Base directory" must be set to `apps/web` in the Netlify UI
+# (or via `netlify.toml` link at site creation). Netlify detects the npm
+# workspaces root package.json and installs dependencies from the repo
+# root, then runs the commands below from `apps/web`.
+#
+# Deploy target: rosalessport.com (replaces the static demo/ when Stage 0
+# production goes live; see docs/hosting/monorepo-netlify-setup.md).
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

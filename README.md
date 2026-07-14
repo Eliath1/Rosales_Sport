@@ -2,7 +2,7 @@
 
 Local-first Cursor agentic operating system for building secure, bilingual (EN/ES) baseball-store CRM and e-commerce solutions for the **Mexico market**.
 
-**Phase 1:** Toolkit only - skills, rules, agents, docs, and templates. No runnable application yet.
+**Status (2026-07):** the Stage D static demo (`demo/`) is deployed and client-facing. A runnable monorepo also exists locally - two Next.js apps (`apps/web` public storefront, `apps/admin` staff CRM) sharing a Neon database, per [ADR-014](docs/architecture/decisions/ADR-014-monorepo-two-apps.md). Neither app is deployed yet - see [docs/hosting/monorepo-netlify-setup.md](docs/hosting/monorepo-netlify-setup.md) for the cutover checklist.
 
 ## What this repo does
 
@@ -29,25 +29,34 @@ Equips you (and Cursor agents) to:
 
 ```
 RS/
-  demo/         # Stage D static preview (deploy now)
-  docs/         # Architecture, legal, business, learning guides
-  templates/    # ADRs, legal drafts, feature specs, proposals
-  netlify.toml  # Publishes demo/ until Next app exists
-  AGENTS.md     # Orchestration pipeline
+  demo/           # Stage D static preview (deployed now)
+  apps/
+    web/          # @rs/web - public storefront + /mi-cuenta (Next.js)
+    admin/        # @rs/admin - staff CRM (Next.js)
+  packages/
+    db/           # @rs/db - Prisma schema + shared client
+    shared/       # @rs/shared - services, validators, email/PDF/payments
+  docs/           # Architecture, legal, business, learning guides
+  templates/      # ADRs, legal drafts, feature specs, proposals
+  netlify.toml    # Root config, still publishes demo/
+  package.json    # npm workspaces root (apps/*, packages/*)
+  AGENTS.md       # Orchestration pipeline
 ```
 
-## Target stack (Phase 2 app)
+Run locally: `npm install` at the repo root, then `npm run web:dev` (port 3000) and/or `npm run admin:dev` (port 3001). See each app's own README for details.
+
+## Target stack
 
 | Layer | Choice |
 |-------|--------|
-| Hosting | Netlify |
+| Hosting | Netlify (two sites - `apps/web`, `apps/admin`) |
 | Security/CDN | Cloudflare |
-| App | Next.js 15 + TypeScript |
-| Database | PostgreSQL (Neon/Supabase) |
+| App | Next.js 15+ + TypeScript, npm workspaces monorepo |
+| Database | PostgreSQL (Neon), shared by both apps |
 | ORM | Prisma |
 | Email | Resend |
-| i18n | next-intl (ES default, EN) |
-| Payments | Mercado Pago + PayPal (incremental waves) |
+| i18n | next-intl (ES default, EN) - not yet wired into either app |
+| Payments | Mercado Pago (mock provider by default; PayPal etc. incremental waves) |
 
 ## Incremental waves
 
@@ -66,6 +75,8 @@ RS/
 **All stages (D through 5):** [docs/architecture/03-staged-delivery-roadmap.md](docs/architecture/03-staged-delivery-roadmap.md)
 
 **Static demo (NOW):** Browse locally with `npx serve demo`, then deploy per [docs/hosting/demo-dns-netlify-setup.md](docs/hosting/demo-dns-netlify-setup.md)
+
+**Monorepo apps (next):** [docs/hosting/monorepo-netlify-setup.md](docs/hosting/monorepo-netlify-setup.md) for the two-Netlify-site deployment checklist
 
 Delivery stance: value first, fast - custom monolith only; Odoo/ERP deferred until a later wave gate.
 

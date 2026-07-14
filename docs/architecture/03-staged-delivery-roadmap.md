@@ -2,8 +2,8 @@
 
 > **Status:** Planning (active)  
 > **Audience:** Client validation, developers, AI agents  
-> **Last updated:** 2026-07  
-> **Companion docs:** [02-website-architecture-plan.md](./02-website-architecture-plan.md), [stage-demo-static.md](./stage-demo-static.md)
+> **Last updated:** 2026-07 (monorepo split, [ADR-014](./decisions/ADR-014-monorepo-two-apps.md))  
+> **Companion docs:** [02-website-architecture-plan.md](./02-website-architecture-plan.md), [stage-demo-static.md](./stage-demo-static.md), [docs/hosting/monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md)
 
 This document maps **every delivery stage** from the first customer-facing preview through production waves. Each stage has its own architecture slice: what runs, what connects, what ships, and how you know it is done.
 
@@ -97,7 +97,7 @@ Full spec: [stage-demo-static.md](./stage-demo-static.md).
 
 ## Stage 0 - Wave 0 (real CRM)
 
-> **Status (2026-07): scaffolded, not deployed.** `app/` has a local Next.js + Prisma + NextAuth scaffold (build order steps 1-4 partially done: routes, services, and schema exist for Customers/Products/Quotes/Leads), but it has never been deployed - no `netlify.toml` targets `app/`, and `demo/` remains the only live site. `quotePdf.ts` still has no caller. `app/`'s current storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md) - there is no configurator UI or `DesignRequest` model in `app/` yet, so the primary-journey pivot from that ADR has not been carried into Stage 0 work. Treat the rest of this section as the target design for Stage 0, not a description of what's running today - see Stage 1 below for what actually exists now.
+> **Status (2026-07): scaffolded as a monorepo, not deployed.** The former single `app/` scaffold is now split per [ADR-014](./decisions/ADR-014-monorepo-two-apps.md) into `apps/web` (public storefront + `/mi-cuenta`) and `apps/admin` (staff CRM), sharing `packages/db` (Prisma) and `packages/shared` (services). Both apps build and typecheck cleanly locally (build order steps 1-4 done: routes, services, and schema exist for Customers/Products/Quotes/Leads), but neither is deployed - no Netlify site targets `apps/web` or `apps/admin` yet, and `demo/` remains the only live site. `quotePdf.ts` still has no caller. The storefront and schema also predate [ADR-011-configurator-first](./decisions/ADR-011-configurator-first.md) - there is no configurator UI or `DesignRequest` model yet, so the primary-journey pivot from that ADR has not been carried into Stage 0 work. Treat the rest of this section as the target design for Stage 0, not a description of what's running today - see Stage 1 below for what actually exists now.
 
 ### Purpose
 
@@ -124,14 +124,14 @@ flowchart TB
 
 ### Build order (Stage 0)
 
-1. Bootstrap `app/` - Next.js 15, Prisma, Neon
+1. Bootstrap `app/` (Next.js 15, Prisma, Neon) - later split into `apps/web` + `apps/admin` + `packages/db`/`packages/shared` per ADR-014
 2. Admin auth + middleware
 3. Catalog admin CRUD + seed
 4. Quote builder + PDF + Resend
 5. Dashboard KPIs
 6. Storefront: home, jerseys collection, PDP
 7. Public quote + bulk forms -> leads API
-8. Deploy production branch
+8. Deploy `apps/web` and `apps/admin` as two Netlify sites - see [monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md)
 
 Detail: [wave-zero-quote-crm.md](./wave-zero-quote-crm.md), section 17 in [02-website-architecture-plan.md](./02-website-architecture-plan.md).
 
@@ -341,19 +341,21 @@ Items below are long-term product ideas with no ADR, no committed timeline, and 
 
 ## Deployment topology by stage
 
-| Stage | Netlify publish | Build command | DB | Email |
-|-------|-----------------|---------------|-----|-------|
-| D | `demo/` | none | - | - |
-| 0-5 | `app/` (Next output) | `npm run build` | Neon | Resend |
+| Stage | Netlify site(s) | Netlify publish | Build command | DB | Email |
+|-------|-----------------|------------------|---------------|-----|-------|
+| D | Site 1 (existing, `rosalessport.com`) | `demo/` | none | - | - |
+| 0-5 | Site 1 (`rosalessport.com`, repointed to `apps/web`) + Site 2 (new, `admin.rosalessport.com`) | `.next` per app | `npm run build` (per app, via each app's own `netlify.toml`) | Neon (shared) | Resend |
+
+Per [ADR-014](./decisions/ADR-014-monorepo-two-apps.md), Stage 0 is **two Netlify sites**, not one - see [monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md) for exact site-creation and base-directory steps.
 
 ### Domain strategy
 
 | Phase | URL pattern |
 |-------|-------------|
-| Demo | `demo.clientdomain.mx` or apex `clientdomain.mx` pointing to demo |
-| Stage 0+ | Same domain; swap Netlify publish from `demo/` to Next app when ready |
+| Demo | Apex `rosalessport.com` -> Netlify Site 1, publishing `demo/` (current, live) |
+| Stage 0+ | Apex `rosalessport.com` -> Netlify Site 1 repointed to `apps/web` (replaces demo when ready); new `admin.rosalessport.com` -> Netlify Site 2, `apps/admin` |
 
-Recommended: use **apex domain for demo now**; add `app.` subdomain later only if you need parallel demo + prod. Simpler: replace demo folder deploy with Next app on same domain when Stage 0 launches.
+Recommended cutover: keep the demo live on the apex until Stage 0 is fully verified against a staging deploy (Netlify deploy preview or a temporary subdomain), then flip Site 1's base directory from `demo/` to `apps/web` and redeploy. Site 2 (`admin.rosalessport.com`) can go live independently and earlier, since it doesn't touch the client-facing apex domain at all.
 
 ---
 
@@ -361,14 +363,19 @@ Recommended: use **apex domain for demo now**; add `app.` subdomain later only i
 
 ```
 RS/
-  demo/                 # Stage D (static) - ACTIVE NOW
-  app/                  # Stage 0+ (Next.js) - created at scaffold
+  demo/                 # Stage D (static) - ACTIVE NOW, still monolithic
+  apps/
+    web/                # Stage 0+ (Next.js) - public storefront, Netlify Site 1
+    admin/              # Stage 0+ (Next.js) - staff CRM, Netlify Site 2
+  packages/
+    db/                 # Shared Prisma schema + client
+    shared/             # Shared services, validators, email/PDF/payments
   docs/
   templates/
-  netlify.toml          # Points to demo/ until Stage 0
+  netlify.toml          # Root config, still points to demo/ - untouched by the split
 ```
 
-When Stage 0 ships, update `netlify.toml` build settings for `app/`.
+When Stage 0 ships: create/repoint Netlify Site 1's base directory to `apps/web` (see `apps/web/netlify.toml`), and create Netlify Site 2 with base directory `apps/admin` (see `apps/admin/netlify.toml`). The root `netlify.toml` keeps publishing `demo/` until that cutover.
 
 ---
 
@@ -403,6 +410,8 @@ When Stage 0 ships, update `netlify.toml` build settings for `app/`.
 | [02-website-architecture-plan.md](./02-website-architecture-plan.md) | Module and route detail |
 | [stage-demo-static.md](./stage-demo-static.md) | Demo page and interaction spec |
 | [demo-dns-netlify-setup.md](../hosting/demo-dns-netlify-setup.md) | DNS + Netlify for Stage D |
+| [monorepo-netlify-setup.md](../hosting/monorepo-netlify-setup.md) | Two-site Netlify + admin subdomain setup for Stage 0+ |
+| [decisions/ADR-014-monorepo-two-apps.md](./decisions/ADR-014-monorepo-two-apps.md) | Why the split, alternatives considered |
 | [wave-zero-quote-crm.md](./wave-zero-quote-crm.md) | Stage 0 features |
 | [hybrid-mvap-paths.md](../business/hybrid-mvap-paths.md) | Business path alignment |
 | [coach-roster-mobile-roadmap.md](./coach-roster-mobile-roadmap.md) | Long-term idea, not yet staged |
